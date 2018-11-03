@@ -19,9 +19,9 @@
 }
 .txtField{
     -fx-text-fill: white;
-    -fx-font-size:20px;
+    -fx-font-size:25px;
     -fx-font-weight: bold;
-    -fx-effect: dropshadow(three-pass-box, red, 2, 2, 1, 1);
+    -fx-effect: dropshadow(one-pass-box, blue, 2, 2, 1, 1);
 }
 .btn:hover{
     -fx-background-color: blue;

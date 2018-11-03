@@ -10,6 +10,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -58,7 +59,4 @@ public class FXMLTelaPrincipalController implements Initializable {
     private void fecharTelaPrincipal(ActionEvent event) {
        System.exit(0);
     }
-
-   
-
 }
