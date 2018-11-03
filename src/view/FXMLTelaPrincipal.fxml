@@ -23,6 +23,10 @@
             </items>
           </Menu>
           <Menu fx:id="mnSobre" mnemonicParsing="false" text="Sobre" />
+            <Menu fx:id="mnSair" mnemonicParsing="false" text="Sair">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#fecharTelaPrincipal" text="Fechar Aplicação" />
+               </items></Menu>
         </menus>
       </MenuBar>
    </top>

@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.application.Application;
@@ -7,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -45,6 +48,7 @@ public class LoginMain extends Application {
         Parent fxmlPrincipal = FXMLLoader.load(getClass().getResource("/view/FXMLTelaPrincipal.fxml"));
         cenaPrincipal = new Scene(fxmlPrincipal);
 
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(cenaLogin);
         primaryStage.show();
     }
