@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="680.0" maxWidth="1200.0" minHeight="680.0" minWidth="1200.0" prefHeight="680.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLTelaPrincipalController">
+   <top>
+      <MenuBar fx:id="mnInicio" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu fx:id="menuIniciar" mnemonicParsing="false" text="Inicio">
+            <items>
+                  <MenuItem fx:id="mnCadUsu" mnemonicParsing="false" text="Cadastrar Usuário" />
+                  <MenuItem fx:id="mnCadCli" mnemonicParsing="false" text="Cadastrar Cliente" />
+              <MenuItem fx:id="mnCadOS" mnemonicParsing="false" text="Cadastrar O.S." />
+            </items>
+          </Menu>
+          <Menu fx:id="mnConsultar" mnemonicParsing="false" text="Consultar">
+            <items>
+              <MenuItem fx:id="mnConsCli" mnemonicParsing="false" text="Cliente" />
+                  <MenuItem fx:id="mnConsOS" mnemonicParsing="false" text="O.S." />
+            </items>
+          </Menu>
+          <Menu fx:id="mnSobre" mnemonicParsing="false" text="Sobre" />
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>

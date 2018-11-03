@@ -1,0 +1,51 @@
+package controller;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+
+/**
+ * FXML Controller class
+ *
+ * @author Idelfonso
+ */
+public class FXMLTelaPrincipalController implements Initializable {
+
+    /**
+     * 
+     */
+    @FXML
+    private MenuBar mnInicio;
+    @FXML
+    private MenuItem mnCadUsu;
+    @FXML
+    private MenuItem mnCadCli;
+    @FXML
+    private MenuItem mnCadOS;
+    @FXML
+    private Menu mnConsultar;
+    @FXML
+    private MenuItem mnConsCli;
+    @FXML
+    private MenuItem mnConsOS;
+    @FXML
+    private Menu mnSobre;
+
+    /**
+     * Initializes the controller class.
+     * @param url
+     * @param rb
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+       
+    }
+    
+     
+  
+}

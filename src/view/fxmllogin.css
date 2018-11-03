@@ -1,0 +1,33 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass{
+
+}
+.root{
+    -fx-background-color: linear-gradient(from 0% 0% to 80% 80%, blue 0%, silver 100%);
+}
+.btn{
+    -fx-background-color: #0066FF;
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+    -fx-font-family: sans-serif; 
+    -fx-font-size: 20px; 
+    -fx-font-style: normal; 
+    -fx-font-weight: bold;  
+}
+.txtField{
+    -fx-text-fill: white;
+    -fx-font-size:20px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(three-pass-box, red, 2, 2, 1, 1);
+}
+.btn:hover{
+    -fx-background-color: blue;
+}
+
+
+
+
+
