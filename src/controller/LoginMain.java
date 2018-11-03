@@ -62,6 +62,7 @@ public class LoginMain extends Application {
                 break;
             case "principal":
                 stage.setScene(cenaPrincipal);
+                stage.setMaximized(true);
                 notifyAllListeners("principal", userData);
         }
 
