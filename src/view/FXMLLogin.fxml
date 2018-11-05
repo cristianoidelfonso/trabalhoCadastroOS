@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="600.0" maxWidth="400.0" minHeight="600.0" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" styleClass="root" stylesheets="@fxmllogin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLLoginController">
+<BorderPane fx:id="borderPane" maxHeight="600.0" maxWidth="400.0" minHeight="600.0" minWidth="400.0" prefHeight="600.0" prefWidth="400.0" styleClass="root" stylesheets="@css/fxmllogin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLLoginController">
    <top>
       <HBox prefHeight="50.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </top>
@@ -26,25 +26,25 @@
    <center>
       <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="150.0" spacing="25.0" BorderPane.alignment="TOP_CENTER">
          <children>
-            <Label alignment="TOP_CENTER" text="Label" />
-            <JFXTextField fx:id="txtLogin" labelFloat="true" promptText="Login" styleClass="txtField" stylesheets="@fxmllogin.css">
+            <Label alignment="TOP_CENTER" stylesheets="@css/fxmllogin.css" text="Label" />
+            <JFXTextField fx:id="txtLogin" labelFloat="true" promptText="Login" styleClass="txtField" stylesheets="@css/fxmllogin.css">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="txtSenha" cache="true" labelFloat="true" promptText="Senha" styleClass="txtField" stylesheets="@fxmllogin.css">
+            <JFXTextField fx:id="txtSenha" cache="true" labelFloat="true" promptText="Senha" styleClass="txtField" stylesheets="@css/fxmllogin.css">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
                <children>
-                  <JFXButton fx:id="btnEntrar" onAction="#btnEntrarAction" prefHeight="30.0" prefWidth="100.0" styleClass="btn" stylesheets="@fxmllogin.css" text="Entrar">
+                  <JFXButton fx:id="btnEntrar" onAction="#btnEntrarAction" onKeyPressed="#entrarComEnter" prefHeight="30.0" prefWidth="100.0" styleClass="btn" stylesheets="@css/fxmllogin.css" text="Entrar">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="btnSair" onAction="#btnSairAction" prefHeight="30.0" prefWidth="100.0" styleClass="btn" stylesheets="@fxmllogin.css" text="Sair">
+                  <JFXButton fx:id="btnSair" onAction="#btnSairAction" onKeyPressed="#sairComEnter" prefHeight="30.0" prefWidth="100.0" styleClass="btn" stylesheets="@css/fxmllogin.css" text="Sair">
                      <font>
                         <Font size="14.0" />
                      </font>

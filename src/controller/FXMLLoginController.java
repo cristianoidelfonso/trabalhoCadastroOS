@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -40,7 +42,7 @@ public class FXMLLoginController implements Initializable {
     private BorderPane borderPane;
 
     /**
-     * 
+     *
      */
     public FXMLLoginController() {
         this.user = "admin";
@@ -59,38 +61,47 @@ public class FXMLLoginController implements Initializable {
     }
 
     /**
-     * 
-     * @param e 
+     *
+     * @param e
      */
     @FXML
     private void btnEntrarAction(ActionEvent e) {
-        if ((txtLogin.getText().equals(user)) && (txtSenha.getText().equals(pass))) {
-
-        LoginMain.changeScreen("principal");
-
-        } else {
-            Alert alert = new Alert(AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Acesso negado");
-            String s = "Dados nao foram informados corretamente.";
-            alert.setContentText(s);
-            alert.show();
-            
-            limparCampos();
-        }
+        logar();
     }
 
     /**
      * 
-     * @param e 
+     * @param event 
+     */
+    @FXML
+    private void entrarComEnter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            logar();
+        }
+    }
+
+    /**
+     *
+     * @param e
      */
     @FXML
     private void btnSairAction(ActionEvent e) {
         System.exit(0);
     }
-
+    
     /**
      * 
+     * @param event 
+     */
+    @FXML
+    private void sairComEnter(KeyEvent event){
+        if(event.getCode() == KeyCode.ENTER){
+            System.exit(0);
+        }
+    }
+
+    /**
+     *
      */
     private void limparCampos() {
         txtLogin.setText("");
@@ -98,8 +109,8 @@ public class FXMLLoginController implements Initializable {
     }
 
     /**
-     * 
-     * @throws IOException 
+     *
+     * @throws IOException
      */
     private void chamarTelaPrincipal() throws IOException {
         Parent novaTela = FXMLLoader.load(getClass().getResource("FXMLTelaPrincipal.fxml"));
@@ -110,5 +121,25 @@ public class FXMLLoginController implements Initializable {
         st.initModality(Modality.APPLICATION_MODAL);
         st.show();
     }
+
+    //--------------------------------------------------------------------------
+    private void logar() {
+        if ((txtLogin.getText().equals(user)) && (txtSenha.getText().equals(pass))) {
+
+            LoginMain.changeScreen("principal");
+
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Acesso negado");
+            String s = "Dados nao foram informados corretamente.";
+            alert.setContentText(s);
+            alert.show();
+
+            limparCampos();
+            txtLogin.requestFocus();
+        }
+    }
+    //--------------------------------------------------------------------------
 
 }

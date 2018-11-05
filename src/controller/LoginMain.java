@@ -1,7 +1,5 @@
 package controller;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.ArrayList;
 import javafx.application.Application;
