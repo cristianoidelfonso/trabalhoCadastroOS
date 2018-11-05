@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -20,27 +21,40 @@
       <VBox prefHeight="385.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
    </right>
    <top>
-      <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="TOP_RIGHT">
+         <children>
+            <Label fx:id="lblSair" onMouseClicked="#lblSairAction" onMouseEntered="#lblSairMouseEntered" onMouseExited="#lblSairMouseExited" text="X" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children></HBox>
    </top>
    <bottom>
       <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="btnSalvarUsu" styleClass="btn" stylesheets="@css/fxmllogin.css" text="Salvar">
+            <JFXButton fx:id="btnSalvarUsu" styleClass="btn" stylesheets="@css/fxmlcadastrousuario.css" text="Salvar">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnEditarUsu" styleClass="btn" stylesheets="@css/fxmllogin.css" text="Editar">
+            <JFXButton fx:id="btnEditarUsu" styleClass="btn" stylesheets="@css/fxmlcadastrousuario.css" text="Editar">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnApagarUsu" styleClass="btn" stylesheets="@css/fxmllogin.css" text="Apagar">
+            <JFXButton fx:id="btnApagarUsu" styleClass="btn" stylesheets="@css/fxmlcadastrousuario.css" text="Apagar">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnCancelar" styleClass="btn" stylesheets="@css/fxmllogin.css" text="Cancelar">
+            <JFXButton fx:id="btnCancelar" styleClass="btn" stylesheets="@css/fxmlcadastrousuario.css" text="Sair">
                <font>
                   <Font size="14.0" />
                </font>

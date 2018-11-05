@@ -10,7 +10,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -41,6 +48,8 @@ public class FXMLCadastroUsuarioController implements Initializable {
     private JFXButton btnCancelar;
     @FXML
     private JFXComboBox<String> cbPerfil;
+    @FXML
+    private Label lblSair;
 
     /**
      * Initializes the controller class.
@@ -51,6 +60,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        lblSair.setFont(Font.font("Verdana", FontWeight.NORMAL, 16));
 
         carregarCombo();
     }
@@ -64,4 +74,28 @@ public class FXMLCadastroUsuarioController implements Initializable {
         cbPerfil.getItems().addAll(lista);
     }
 
+    /**
+     * Recupera o stage atual e fecha em seguida
+     * @param event 
+     */
+    @FXML
+    private void lblSairAction(MouseEvent event) {
+        // Recuperando o stage atual
+        Stage stageAtual = (Stage) lblSair.getScene().getWindow();
+        // Fecha o stage atual
+        stageAtual.close();
+    }
+
+    @FXML
+    private void lblSairMouseExited(MouseEvent event) {
+        lblSair.setTextFill(Paint.valueOf("#000000"));
+        lblSair.setFont(Font.font("Verdana", FontWeight.NORMAL, 16));
+    }
+
+    @FXML
+    private void lblSairMouseEntered(MouseEvent event) {
+        lblSair.setTextFill(Paint.valueOf("#FF0000"));
+        lblSair.setFont(Font.font("Verdana", FontWeight.BOLD, 16));
+        
+    }
 }

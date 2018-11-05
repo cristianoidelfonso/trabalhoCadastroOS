@@ -73,11 +73,10 @@ public class FXMLTelaPrincipalController implements Initializable {
         Parent cadUsu = FXMLLoader.load(getClass().getResource("/view/FXMLCadastroUsuario.fxml"));
 
         Scene cenaCadUsu = new Scene(cadUsu);
-        Stage stage = new Stage(StageStyle.UTILITY);
+        Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.setTitle("Cadastro de Usuário");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(cenaCadUsu);
-        stage.getWidth();
         stage.show();
         
         //bdPrincipal.getChildren().setAll(cadUsu);

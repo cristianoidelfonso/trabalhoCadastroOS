@@ -15,7 +15,9 @@
     -fx-font-family: sans-serif; 
     -fx-font-size: 20px; 
     -fx-font-style: normal; 
-    -fx-font-weight: bold;  
+    -fx-font-weight: bold;
+    -fx-pref-height: 30;
+    -fx-pref-width: 100;
 }
 .txtField{
     -fx-text-fill: white;

@@ -6,6 +6,23 @@
     -fx-font-size: 15px;
     -fx-text-fill: blue;
 }
+
 .comboBox{
     -fx-font-size: 15px;
+}
+
+.btn{
+    -fx-background-color: #0066FF;
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+    -fx-font-family: sans-serif; 
+    -fx-font-size: 20px; 
+    -fx-font-style: normal; 
+    -fx-font-weight: bold;
+    -fx-pref-height: 30;
+    -fx-pref-width: 100;
+}
+
+.btn:hover{
+    -fx-background-color: blue;
 }
