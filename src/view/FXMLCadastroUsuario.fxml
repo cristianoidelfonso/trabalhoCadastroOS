@@ -1,14 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLCadastroUsuarioController">
-    <stylesheets>
-        <URL value="@fxmlcadastrousuario.css"/>
-    </stylesheets>
-</AnchorPane>
+<BorderPane fx:id="bpCadUsu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLCadastroUsuarioController">
+   <left>
+      <VBox prefHeight="200.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <VBox prefHeight="200.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+   </right>
+   <top>
+      <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </top>
+   <bottom>
+      <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXButton styleClass="btn" stylesheets="@css/fxmllogin.css" text="Salvar">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton styleClass="btn" stylesheets="@css/fxmllogin.css" text="Editar">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton styleClass="btn" stylesheets="@css/fxmllogin.css" text="Apagar">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton styleClass="btn" stylesheets="@css/fxmllogin.css" text="Cancelar">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets right="15.0" />
+         </padding></HBox>
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXTextField fx:id="txtNome" labelFloat="true" layoutX="14.0" layoutY="14.0" maxHeight="30.0" maxWidth="480.0" minHeight="30.0" minWidth="480.0" prefHeight="30.0" prefWidth="480.0" promptText="Nome">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <Label layoutX="14.0" layoutY="74.0" text="Data de nascimento" />
+            <JFXTextField fx:id="txtLogin" labelFloat="true" layoutX="14.0" layoutY="165.0" maxHeight="30.0" maxWidth="240.0" minHeight="30.0" minWidth="240.0" prefHeight="30.0" prefWidth="240.0" promptText="Login">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="txtSenha" labelFloat="true" layoutX="14.0" layoutY="232.0" maxHeight="30.0" maxWidth="240.0" minHeight="30.0" minWidth="240.0" prefHeight="30.0" prefWidth="240.0" promptText="Senha">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <HBox alignment="BOTTOM_LEFT" layoutX="11.0" layoutY="82.0" prefHeight="34.0" prefWidth="479.0" spacing="20.0">
+               <children>
+                  <JFXDatePicker fx:id="dtDataNasc" prefHeight="30.0" prefWidth="190.0" />
+                  <JFXTextField fx:id="txtCpf" labelFloat="true" prefHeight="30.0" prefWidth="275.0" promptText="CPF">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXTextField>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
