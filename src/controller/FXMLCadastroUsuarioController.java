@@ -8,12 +8,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -45,7 +47,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
     @FXML
     private JFXButton btnApagarUsu;
     @FXML
-    private JFXButton btnCancelar;
+    private JFXButton btnSair;
     @FXML
     private JFXComboBox<String> cbPerfil;
     @FXML
@@ -60,9 +62,12 @@ public class FXMLCadastroUsuarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+       
         lblSair.setFont(Font.font("Verdana", FontWeight.NORMAL, 16));
 
         carregarCombo();
+        
     }
 
     private void carregarCombo() {
@@ -76,7 +81,8 @@ public class FXMLCadastroUsuarioController implements Initializable {
 
     /**
      * Recupera o stage atual e fecha em seguida
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void lblSairAction(MouseEvent event) {
@@ -96,6 +102,20 @@ public class FXMLCadastroUsuarioController implements Initializable {
     private void lblSairMouseEntered(MouseEvent event) {
         lblSair.setTextFill(Paint.valueOf("#FF0000"));
         lblSair.setFont(Font.font("Verdana", FontWeight.BOLD, 16));
-        
+
+    }
+
+    @FXML
+    private void btnSairAction(ActionEvent event) {
+        Stage stageAtual = (Stage) btnSair.getScene().getWindow();
+        stageAtual.close();
+    }
+
+    @FXML
+    private void sairComEnter(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            Stage stageAtual = (Stage) btnSair.getScene().getWindow();
+            stageAtual.close();
+        }
     }
 }
