@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Window;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -10,10 +11,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -67,6 +72,42 @@ public class FXMLTelaPrincipalController implements Initializable {
 
         Parent cadUsu = FXMLLoader.load(getClass().getResource("/view/FXMLCadastroUsuario.fxml"));
 
-        bdPrincipal.getChildren().setAll(cadUsu);
+        Scene cenaCadUsu = new Scene(cadUsu);
+        Stage stage = new Stage(StageStyle.UTILITY);
+        stage.setTitle("Cadastro de Usuário");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(cenaCadUsu);
+        stage.getWidth();
+        stage.show();
+        
+        //bdPrincipal.getChildren().setAll(cadUsu);
+    }
+
+    @FXML
+    private void chamarTelaCadCli(ActionEvent event) throws IOException {
+        
+         Parent cadUsu = FXMLLoader.load(getClass().getResource("/view/FXMLCadastroCliente.fxml"));
+
+        Scene cenaCadUsu = new Scene(cadUsu);
+        Stage stage = new Stage(StageStyle.UTILITY);
+        stage.setTitle("Cadastro de Usuário");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(cenaCadUsu);
+        stage.getWidth();
+        stage.show();
+    }
+
+    @FXML
+    private void chamarTelaCadOS(ActionEvent event) throws IOException {
+        
+         Parent cadUsu = FXMLLoader.load(getClass().getResource("/view/FXMLCadastroOS.fxml"));
+
+        Scene cenaCadUsu = new Scene(cadUsu);
+        Stage stage = new Stage(StageStyle.UTILITY);
+        stage.setTitle("Cadastro de Usuário");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(cenaCadUsu);
+        stage.getWidth();
+        stage.show();
     }
 }

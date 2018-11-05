@@ -12,8 +12,8 @@
           <Menu fx:id="menuIniciar" mnemonicParsing="false" text="Inicio">
             <items>
                   <MenuItem fx:id="mnCadUsu" mnemonicParsing="false" onAction="#chamarTelaCadUsu" text="Cadastrar Usuário" />
-                  <MenuItem fx:id="mnCadCli" mnemonicParsing="false" text="Cadastrar Cliente" />
-              <MenuItem fx:id="mnCadOS" mnemonicParsing="false" text="Cadastrar O.S." />
+                  <MenuItem fx:id="mnCadCli" mnemonicParsing="false" onAction="#chamarTelaCadCli" text="Cadastrar Cliente" />
+              <MenuItem fx:id="mnCadOS" mnemonicParsing="false" onAction="#chamarTelaCadOS" text="Cadastrar O.S." />
             </items>
           </Menu>
           <Menu fx:id="mnConsultar" mnemonicParsing="false" text="Consultar">

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
@@ -11,12 +12,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bpCadUsu" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="446.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLCadastroUsuarioController">
+<BorderPane fx:id="bpCadUsu" prefHeight="500.0" prefWidth="700.0" stylesheets="@css/fxmlcadastrousuario.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLCadastroUsuarioController">
    <left>
       <VBox prefHeight="200.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
    </left>
    <right>
-      <VBox prefHeight="200.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+      <VBox prefHeight="385.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
    </right>
    <top>
       <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
@@ -24,22 +25,22 @@
    <bottom>
       <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton styleClass="btn" stylesheets="@css/fxmllogin.css" text="Salvar">
+            <JFXButton fx:id="btnSalvarUsu" styleClass="btn" stylesheets="@css/fxmllogin.css" text="Salvar">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton styleClass="btn" stylesheets="@css/fxmllogin.css" text="Editar">
+            <JFXButton fx:id="btnEditarUsu" styleClass="btn" stylesheets="@css/fxmllogin.css" text="Editar">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton styleClass="btn" stylesheets="@css/fxmllogin.css" text="Apagar">
+            <JFXButton fx:id="btnApagarUsu" styleClass="btn" stylesheets="@css/fxmllogin.css" text="Apagar">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton styleClass="btn" stylesheets="@css/fxmllogin.css" text="Cancelar">
+            <JFXButton fx:id="btnCancelar" styleClass="btn" stylesheets="@css/fxmllogin.css" text="Cancelar">
                <font>
                   <Font size="14.0" />
                </font>
@@ -47,38 +48,49 @@
          </children>
          <padding>
             <Insets right="15.0" />
-         </padding></HBox>
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </BorderPane.margin></HBox>
    </bottom>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <JFXTextField fx:id="txtNome" labelFloat="true" layoutX="14.0" layoutY="14.0" maxHeight="30.0" maxWidth="480.0" minHeight="30.0" minWidth="480.0" prefHeight="30.0" prefWidth="480.0" promptText="Nome">
+            <Label layoutX="14.0" layoutY="74.0" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" text="Data de nascimento" />
+            <JFXTextField fx:id="txtLogin" labelFloat="true" layoutX="14.0" layoutY="184.0" maxHeight="35.0" maxWidth="271.0" minHeight="35.0" minWidth="240.0" prefHeight="35.0" prefWidth="270.0" promptText="Login" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <Label layoutX="14.0" layoutY="74.0" text="Data de nascimento" />
-            <JFXTextField fx:id="txtLogin" labelFloat="true" layoutX="14.0" layoutY="165.0" maxHeight="30.0" maxWidth="240.0" minHeight="30.0" minWidth="240.0" prefHeight="30.0" prefWidth="240.0" promptText="Login">
+            <JFXTextField fx:id="txtSenha" labelFloat="true" layoutX="14.0" layoutY="255.0" maxHeight="35.0" maxWidth="271.0" minHeight="35.0" minWidth="240.0" prefHeight="35.0" prefWidth="270.0" promptText="Senha" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="txtSenha" labelFloat="true" layoutX="14.0" layoutY="232.0" maxHeight="30.0" maxWidth="240.0" minHeight="30.0" minWidth="240.0" prefHeight="30.0" prefWidth="240.0" promptText="Senha">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXTextField>
-            <HBox alignment="BOTTOM_LEFT" layoutX="11.0" layoutY="82.0" prefHeight="34.0" prefWidth="479.0" spacing="20.0">
+            <HBox alignment="BOTTOM_CENTER" layoutX="10.0" layoutY="14.0" />
+            <HBox alignment="BOTTOM_LEFT" layoutX="14.0" layoutY="95.0" prefHeight="34.0" prefWidth="525.0" spacing="20.0">
                <children>
-                  <JFXDatePicker fx:id="dtDataNasc" prefHeight="30.0" prefWidth="190.0" />
-                  <JFXTextField fx:id="txtCpf" labelFloat="true" prefHeight="30.0" prefWidth="275.0" promptText="CPF">
+                  <JFXDatePicker fx:id="dtDataNasc" editable="false" prefHeight="30.0" prefWidth="190.0" styleClass="comboBox" stylesheets="@css/fxmlcadastrousuario.css" HBox.hgrow="ALWAYS" />
+                  <JFXTextField fx:id="txtCpf" labelFloat="true" maxHeight="35.0" maxWidth="275.0" minHeight="35.0" minWidth="275.0" prefHeight="35.0" prefWidth="275.0" promptText="CPF" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </JFXTextField>
                </children>
             </HBox>
+            <JFXComboBox fx:id="cbPerfil" labelFloat="true" layoutX="349.0" layoutY="183.0" prefHeight="35.0" prefWidth="190.0" promptText="Perfil" styleClass="comboBox" stylesheets="@css/fxmlcadastrousuario.css" visibleRowCount="12" />
+            <JFXTextField fx:id="txtNome" cache="true" labelFloat="true" layoutX="14.0" layoutY="-1.0" maxHeight="35.0" maxWidth="525.0" minHeight="35.0" minWidth="500.0" prefHeight="35.0" prefWidth="525.0" promptText="Nome" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
          </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </BorderPane.margin>
       </AnchorPane>
    </center>
 </BorderPane>

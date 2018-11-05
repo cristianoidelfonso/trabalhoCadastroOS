@@ -2,6 +2,10 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
-
+.textField{
+    -fx-font-size: 15px;
+    -fx-text-fill: blue;
+}
+.comboBox{
+    -fx-font-size: 15px;
 }
