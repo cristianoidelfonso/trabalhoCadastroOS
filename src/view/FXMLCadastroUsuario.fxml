@@ -22,7 +22,7 @@
     <center>
         <AnchorPane BorderPane.alignment="CENTER">
             <children>
-                <JFXTextField fx:id="txtNome" labelFloat="true" prefHeight="30.0" prefWidth="500.0" promptText="Nome" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" />
+                <JFXTextField fx:id="txtNome" labelFloat="true" layoutX="14.0" layoutY="-1.0" prefHeight="30.0" prefWidth="500.0" promptText="Nome" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" />
                 <Label layoutX="14.0" layoutY="74.0" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" text="Data de nascimento" />
                 <HBox alignment="BOTTOM_LEFT" layoutX="14.0" layoutY="95.0" prefHeight="34.0" prefWidth="525.0" spacing="20.0">
                     <children>
@@ -62,17 +62,17 @@
     <bottom>
         <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
             <children>
-                <JFXButton fx:id="btnSalvarUsu" styleClass="btn" stylesheets="@css/fxmlcadastrousuario.css" text="Salvar">
+                <JFXButton fx:id="btnSalvarUsu" onAction="#btnSalvarAction" styleClass="btn" stylesheets="@css/fxmlcadastrousuario.css" text="Salvar">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="btnEditarUsu" styleClass="btn" stylesheets="@css/fxmlcadastrousuario.css" text="Editar">
+                <JFXButton fx:id="btnEditarUsu" onAction="#btnEditarAction" styleClass="btn" stylesheets="@css/fxmlcadastrousuario.css" text="Editar">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="btnApagarUsu" styleClass="btn" stylesheets="@css/fxmlcadastrousuario.css" text="Apagar">
+                <JFXButton fx:id="btnApagarUsu" onAction="#btnApagarAction" styleClass="btn" stylesheets="@css/fxmlcadastrousuario.css" text="Apagar">
                     <font>
                         <Font size="14.0" />
                     </font>

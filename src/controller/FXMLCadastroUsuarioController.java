@@ -20,6 +20,8 @@ import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import model.DAOUsuario;
+import model.Usuario;
 
 /**
  * FXML Controller class
@@ -53,6 +55,8 @@ public class FXMLCadastroUsuarioController implements Initializable {
     @FXML
     private Label lblSair;
 
+    private DAOUsuario dao;
+
     /**
      * Initializes the controller class.
      *
@@ -62,12 +66,11 @@ public class FXMLCadastroUsuarioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-       
+
         lblSair.setFont(Font.font("Verdana", FontWeight.NORMAL, 16));
 
         carregarCombo();
-        
+
     }
 
     private void carregarCombo() {
@@ -117,5 +120,31 @@ public class FXMLCadastroUsuarioController implements Initializable {
             Stage stageAtual = (Stage) btnSair.getScene().getWindow();
             stageAtual.close();
         }
+    }
+
+    @FXML
+    private void btnSalvarAction(ActionEvent event) {
+
+        Usuario usuario = new Usuario();
+
+        usuario.setLogin(txtLogin.getText());
+        usuario.setSenha(txtSenha.getText());
+        usuario.setNome(txtNome.getText());
+        usuario.setCpf(txtCpf.getText());
+        usuario.setPerfil(cbPerfil.getValue());
+        usuario.setDataNasc(dtDataNasc.getValue());
+
+        System.out.println(usuario);
+
+        dao.salvar(usuario);
+
+    }
+
+    @FXML
+    private void btnEditarAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void btnApagarAction(ActionEvent event) {
     }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author Idelfonso
@@ -11,7 +13,8 @@ public class Usuario {
     private String senha;
     private String nome;
     private String cpf;
-    private Tipo perfil;
+    private String perfil;
+    private LocalDate dataNasc;
 
     public Usuario() {
 
@@ -57,12 +60,25 @@ public class Usuario {
         this.cpf = cpf;
     }
 
-    public Tipo getPerfil() {
+    public String getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(Tipo perfil) {
+    public void setPerfil(String perfil) {
         this.perfil = perfil;
     }
 
+    public LocalDate getDataNasc() {
+        return dataNasc;
+    }
+
+    public void setDataNasc(LocalDate dataNasc) {
+        this.dataNasc = dataNasc;
+    }
+    
+    @Override
+    public String toString(){
+        return "[" + id +"]\t["+nome+"\t"+dataNasc+"\t"+login+"\t"+senha+"\t"+perfil+"]";
+    }
+ 
 }

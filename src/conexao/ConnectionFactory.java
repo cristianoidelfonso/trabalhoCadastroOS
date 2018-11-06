@@ -41,10 +41,10 @@ public class ConnectionFactory {
         }
     }
 //------------------------------------------------------------------------------
-    public static void fecharConexao(Connection conn, PreparedStatement stmt) {
-        if (stmt != null) {
+    public static void fecharConexao(Connection conn, PreparedStatement pst) {
+        if (pst != null) {
             try {
-                stmt.close();
+                pst.close();
             } catch (SQLException e) {
                 throw new RuntimeException("Ocorreu um  erro inesperado" + e);
             }
@@ -52,7 +52,7 @@ public class ConnectionFactory {
         fecharConexao(conn);
     }
 //------------------------------------------------------------------------------
-    public static void fecharConexao(Connection conn, PreparedStatement stmt, ResultSet rs) {
+    public static void fecharConexao(Connection conn, PreparedStatement pst, ResultSet rs) {
         if (rs != null) {
             try {
                 rs.close();
@@ -60,7 +60,7 @@ public class ConnectionFactory {
                 throw new RuntimeException("Ocorreu um  erro inesperado" + e);
             }
         }
-        fecharConexao(conn, stmt);
+        fecharConexao(conn, pst);
     }
 }
 //==============================================================================
