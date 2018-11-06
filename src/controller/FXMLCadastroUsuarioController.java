@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -122,22 +123,199 @@ public class FXMLCadastroUsuarioController implements Initializable {
         }
     }
 
+    
+    /**
+     * Validação de todos os campos de entrada de dados do novo usuário
+     * 
+     * @param event 
+     */
     @FXML
     private void btnSalvarAction(ActionEvent event) {
 
         Usuario usuario = new Usuario();
 
-        usuario.setLogin(txtLogin.getText());
-        usuario.setSenha(txtSenha.getText());
-        usuario.setNome(txtNome.getText());
-        usuario.setCpf(txtCpf.getText());
-        usuario.setPerfil(cbPerfil.getValue());
-        usuario.setDataNasc(dtDataNasc.getValue());
+        // Validação do txtNome
+        //----------------------------------------------------------------------
+        if (!txtNome.getText().equals("")) {
+            if (txtNome.getText().matches("([A-Z]{1}[A-Za-z\\s]+)")) {
+                usuario.setNome(txtNome.getText());
+            } else {
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("INFORMAÇÂO");
+                alerta.setHeaderText("INFORMAÇÂO");
+                alerta.setContentText("O campo NOME não está preenchido com o padrão correto.");
+                alerta.show();
+                txtNome.setText("");
+                txtNome.requestFocus();
+                return;
+            }
+        } else {
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("INFORMAÇÂO");
+            alerta.setHeaderText("INFORMAÇÂO");
+            alerta.setContentText("O campo NOME não está preenchido corretamente.");
+            alerta.show();
+            txtNome.setText("");
+            txtNome.requestFocus();
+            return;
+        }
+
+        // Validação da dtDataNasc
+        //----------------------------------------------------------------------
+        if (dtDataNasc.getValue() != null) {
+            //System.out.println(dtDataNasc.getValue());
+            
+            if (dtDataNasc.getValue().toString().matches("(\\d{4}\\-\\d{2}\\-\\d{2})")) {
+                usuario.setDataNasc(dtDataNasc.getValue());
+            } else {
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("INFORMAÇÂO");
+                alerta.setHeaderText("INFORMAÇÂO");
+                alerta.setContentText("O campo DATA DE NASCIMENTO não está preenchido corretamente.");
+                alerta.show();
+                dtDataNasc.setValue(null);
+                dtDataNasc.requestFocus();
+                return;
+            }
+        } else {
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("INFORMAÇÂO");
+            alerta.setHeaderText("Preencha o campo Data de Nascimento.");
+            alerta.setContentText(" O campo DATA DE NASCIMENTO não pode ser vazio.");
+            alerta.show();
+            dtDataNasc.setValue(null);
+            dtDataNasc.requestFocus();
+            return;
+
+        }
+
+        // Validação do txtCpf
+        //----------------------------------------------------------------------
+        if (!txtCpf.getText().equals("")) {
+            if (txtCpf.getText().matches("(\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2})")) {
+                usuario.setCpf(txtCpf.getText());
+            } else {
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("INFORMAÇÂO");
+                alerta.setHeaderText("INFORMAÇÂO");
+                alerta.setContentText("O campo CPF não esta preenchido com o padrão correto para o CPF.");
+                alerta.show();
+                txtCpf.setText("");
+                txtCpf.requestFocus();
+                return;
+            }
+        } else {
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("INFORMAÇÂO");
+            alerta.setHeaderText("INFORMAÇÂO");
+            alerta.setContentText("O campo CPF não esta preenchido corretamente.");
+            alerta.show();
+            txtCpf.setText("");
+            txtCpf.requestFocus();
+            return;
+        }
+
+        // Validação do txtLogin
+        //----------------------------------------------------------------------
+        if (!txtLogin.getText().equals("")) {
+            if (txtLogin.getText().matches("[\\w]{3,12}")) {
+                usuario.setLogin(txtLogin.getText());
+            } else {
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("INFORMAÇÂO");
+                alerta.setHeaderText("INFORMAÇÂO");
+                alerta.setContentText("O campo LOGIN nao aceita caracteres especiais");
+                alerta.show();
+                txtLogin.setText("");
+                txtLogin.requestFocus();
+                return;
+            }
+        } else {
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("INFORMAÇÂO");
+            alerta.setHeaderText("INFORMAÇÂO");
+            alerta.setContentText("O campo LOGIN não esta preenchido corretamente.");
+            alerta.show();
+            txtLogin.setText("");
+            txtLogin.requestFocus();
+            return;
+        }
+
+        // Validação do txtSenha
+        //----------------------------------------------------------------------    
+        if (!txtSenha.getText().equals("")) {
+            if (txtSenha.getText().matches("(\\w{5,10})")) {
+                usuario.setSenha(txtSenha.getText());
+            } else {
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("INFORMAÇÂO");
+                alerta.setHeaderText("INFORMAÇÂO");
+                alerta.setContentText("O campo SENHA não esta preenchido corretamente.");
+                alerta.show();
+                txtSenha.setText("");
+                txtSenha.requestFocus();
+                return;
+            }
+        } else {
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("INFORMAÇÂO");
+            alerta.setHeaderText("INFORMAÇÂO");
+            alerta.setContentText("O campo SENHA não esta preenchido corretamente.");
+            alerta.show();
+            txtSenha.setText("");
+            txtSenha.requestFocus();
+            return;
+        }
+        
+         // Validação do cbPerfil
+        //----------------------------------------------------------------------
+        if (cbPerfil.getValue() != null) {
+            //System.out.println(cbPerfil.getValue());
+            
+            if (cbPerfil.getValue().matches("[a-zA-Z]+")) {
+                usuario.setPerfil(cbPerfil.getValue());
+            } else {
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("INFORMAÇÂO");
+                alerta.setHeaderText("INFORMAÇÂO");
+                alerta.setContentText("O campo PERFIL não está preenchido corretamente.");
+                alerta.show();
+                cbPerfil.setValue("");
+                cbPerfil.requestFocus();
+                return;
+            }
+        } else {
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("INFORMAÇÂO");
+            alerta.setHeaderText("Preencha o campo PERFIL.");
+            alerta.setContentText(" O campo PERFIL não pode ser vazio.");
+            alerta.show();
+            cbPerfil.setValue("");
+            cbPerfil.requestFocus();
+            return;
+        }
 
         System.out.println(usuario);
 
         dao.salvar(usuario);
-
+        limparCampos();
+        
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("SUCESSO");
+        alerta.setHeaderText("Salvo com sucesso");
+        alerta.setContentText("Novo usuário foi cadastrado com sucesso");
+        alerta.show();
+        
+    }
+    
+    
+    private void limparCampos(){
+        txtNome.setText("");
+        txtCpf.setText("");
+        txtLogin.setText("");
+        txtSenha.setText("");
+        dtDataNasc.setValue(null);
+        cbPerfil.setValue("");
     }
 
     @FXML
