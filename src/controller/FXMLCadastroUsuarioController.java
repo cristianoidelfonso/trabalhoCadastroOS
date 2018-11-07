@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,6 +59,8 @@ public class FXMLCadastroUsuarioController implements Initializable {
     private Label lblSair;
 
     private DAOUsuario dao;
+    @FXML
+    private Label lblId;
 
     /**
      * Initializes the controller class.
@@ -69,10 +72,15 @@ public class FXMLCadastroUsuarioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
+        
         MascarasFX.mascaraCPF(txtCpf);
+        MascarasFX.mascaraData(dtDataNasc);
+        
+        lblId.setVisible(false);
         lblSair.setFont(Font.font("Verdana", FontWeight.NORMAL, 16));
 
         carregarCombo();
+        cbPerfil.setValue("Admin");
 
     }
 
@@ -108,7 +116,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
     private void lblSairMouseEntered(MouseEvent event) {
         lblSair.setTextFill(Paint.valueOf("#FF0000"));
         lblSair.setFont(Font.font("Verdana", FontWeight.BOLD, 16));
-
     }
 
     @FXML
@@ -127,7 +134,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
 
     
     /**
-     * Validação de todos os campos de entrada de dados do novo usuário
+     * Validação de todos os campos de entrada de dados do novo usuário.
      * 
      * @param event 
      */
@@ -143,9 +150,10 @@ public class FXMLCadastroUsuarioController implements Initializable {
                 usuario.setNome(txtNome.getText());
             } else {
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("INFORMAÇÂO");
-                alerta.setHeaderText("INFORMAÇÂO");
-                alerta.setContentText("O campo NOME não está preenchido com o padrão correto.");
+                alerta.setTitle("INFORMAÇÃO");
+                alerta.setHeaderText("NOME");
+                alerta.setContentText("O campo NOME não está preenchido corretamente."
+                        + "\n(Utilize apenas letras, iniciando por letra maiúscula)");
                 alerta.show();
                 txtNome.setText("");
                 txtNome.requestFocus();
@@ -153,9 +161,10 @@ public class FXMLCadastroUsuarioController implements Initializable {
             }
         } else {
             Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-            alerta.setTitle("INFORMAÇÂO");
-            alerta.setHeaderText("INFORMAÇÂO");
-            alerta.setContentText("O campo NOME não está preenchido corretamente.");
+            alerta.setTitle("INFORMAÇÃO");
+            alerta.setHeaderText("NOME");
+            alerta.setContentText("O campo NOME não pode ser vazio."
+                    + "\n(Utilize apenas letras, iniciando por letra maiúscula)");
             alerta.show();
             txtNome.setText("");
             txtNome.requestFocus();
@@ -171,9 +180,10 @@ public class FXMLCadastroUsuarioController implements Initializable {
                 usuario.setDataNasc(dtDataNasc.getValue());
             } else {
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("INFORMAÇÂO");
-                alerta.setHeaderText("INFORMAÇÂO");
-                alerta.setContentText("O campo DATA DE NASCIMENTO não está preenchido corretamente.");
+                alerta.setTitle("INFORMAÇÃO");
+                alerta.setHeaderText("DATA DE NASCIMENTO");
+                alerta.setContentText("O campo DATA DE NASCIMENTO não está preenchido corretamente."
+                        + "\n(utilize o padrão (dd/MM/aaaa))");
                 alerta.show();
                 dtDataNasc.setValue(null);
                 dtDataNasc.requestFocus();
@@ -181,9 +191,10 @@ public class FXMLCadastroUsuarioController implements Initializable {
             }
         } else {
             Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-            alerta.setTitle("INFORMAÇÂO");
-            alerta.setHeaderText("Preencha o campo Data de Nascimento.");
-            alerta.setContentText(" O campo DATA DE NASCIMENTO não pode ser vazio.");
+            alerta.setTitle("INFORMAÇÃO");
+            alerta.setHeaderText("DATA DE NASCIMENTO");
+            alerta.setContentText(" O campo DATA DE NASCIMENTO não pode ser vazio."
+                    + "\n(utilize o padrão (dd/MM/aaaa))");
             alerta.show();
             dtDataNasc.setValue(null);
             dtDataNasc.requestFocus();
@@ -198,9 +209,10 @@ public class FXMLCadastroUsuarioController implements Initializable {
                 usuario.setCpf(txtCpf.getText());
             } else {
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("INFORMAÇÂO");
-                alerta.setHeaderText("INFORMAÇÂO");
-                alerta.setContentText("O campo CPF não esta preenchido com o padrão correto para o CPF.");
+                alerta.setTitle("INFORMAÇÃO");
+                alerta.setHeaderText("CPF");
+                alerta.setContentText("O campo CPF não esta preenchido com o padrão correto."
+                        + "\n(Digite apenas números.)");
                 alerta.show();
                 txtCpf.setText("");
                 txtCpf.requestFocus();
@@ -208,9 +220,10 @@ public class FXMLCadastroUsuarioController implements Initializable {
             }
         } else {
             Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-            alerta.setTitle("INFORMAÇÂO");
-            alerta.setHeaderText("INFORMAÇÂO");
-            alerta.setContentText("O campo CPF não esta preenchido corretamente.");
+            alerta.setTitle("INFORMAÇÃO");
+            alerta.setHeaderText("CPF");
+            alerta.setContentText("O campo CPF não pode ser vazio."
+                    + "\n(Digite apenas números.)");
             alerta.show();
             txtCpf.setText("");
             txtCpf.requestFocus();
@@ -224,9 +237,10 @@ public class FXMLCadastroUsuarioController implements Initializable {
                 usuario.setLogin(txtLogin.getText());
             } else {
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("INFORMAÇÂO");
-                alerta.setHeaderText("INFORMAÇÂO");
-                alerta.setContentText("O campo LOGIN nao aceita caracteres especiais");
+                alerta.setTitle("INFORMAÇÃO");
+                alerta.setHeaderText("LOGIN");
+                alerta.setContentText("O campo LOGIN nao esta preenchido corretamente."
+                        + "\n(Utilize min:3 / max:12 caracteres alfanuméricos)");
                 alerta.show();
                 txtLogin.setText("");
                 txtLogin.requestFocus();
@@ -234,9 +248,10 @@ public class FXMLCadastroUsuarioController implements Initializable {
             }
         } else {
             Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-            alerta.setTitle("INFORMAÇÂO");
-            alerta.setHeaderText("INFORMAÇÂO");
-            alerta.setContentText("O campo LOGIN não esta preenchido corretamente.");
+            alerta.setTitle("INFORMAÇÃO");
+            alerta.setHeaderText("LOGIN");
+            alerta.setContentText("O campo LOGIN não pode ser vazio."
+                    + "\n(Utilize min:3 / max:12 caracteres alfanuméricos)");
             alerta.show();
             txtLogin.setText("");
             txtLogin.requestFocus();
@@ -250,9 +265,10 @@ public class FXMLCadastroUsuarioController implements Initializable {
                 usuario.setSenha(txtSenha.getText());
             } else {
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("INFORMAÇÂO");
-                alerta.setHeaderText("INFORMAÇÂO");
-                alerta.setContentText("O campo SENHA não esta preenchido corretamente.");
+                alerta.setTitle("INFORMAÇÃO");
+                alerta.setHeaderText("SENHA");
+                alerta.setContentText("O campo SENHA não esta preenchido corretamente."
+                        + "\n(Utilize min:5 / max:10 caracteres alfanuméricos)");
                 alerta.show();
                 txtSenha.setText("");
                 txtSenha.requestFocus();
@@ -260,9 +276,10 @@ public class FXMLCadastroUsuarioController implements Initializable {
             }
         } else {
             Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-            alerta.setTitle("INFORMAÇÂO");
-            alerta.setHeaderText("INFORMAÇÂO");
-            alerta.setContentText("O campo SENHA não esta preenchido corretamente.");
+            alerta.setTitle("INFORMAÇÃO");
+            alerta.setHeaderText("SENHA");
+            alerta.setContentText("O campo SENHA não pode ser vazio."
+                    + "\n(Utilize min:5 / max:10 caracteres alfanuméricos)");
             alerta.show();
             txtSenha.setText("");
             txtSenha.requestFocus();
@@ -278,8 +295,8 @@ public class FXMLCadastroUsuarioController implements Initializable {
                 usuario.setPerfil(cbPerfil.getValue());
             } else {
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("INFORMAÇÂO");
-                alerta.setHeaderText("INFORMAÇÂO");
+                alerta.setTitle("INFORMAÇÃO");
+                alerta.setHeaderText("PERFIL");
                 alerta.setContentText("O campo PERFIL não está preenchido corretamente.");
                 alerta.show();
                 cbPerfil.setValue("");
@@ -288,7 +305,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
             }
         } else {
             Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-            alerta.setTitle("INFORMAÇÂO");
+            alerta.setTitle("INFORMAÇÃO");
             alerta.setHeaderText("Preencha o campo PERFIL.");
             alerta.setContentText(" O campo PERFIL não pode ser vazio.");
             alerta.show();
@@ -299,18 +316,16 @@ public class FXMLCadastroUsuarioController implements Initializable {
 
         System.out.println(usuario);
 
-        dao.salvar(usuario);
-        limparCampos();
-        
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("SUCESSO");
-        alerta.setHeaderText("Salvo com sucesso");
-        alerta.setContentText("Novo usuário foi cadastrado com sucesso");
-        alerta.show();
-        
+        if(dao.salvar(usuario)){
+            
+            System.out.println(usuario.getId());
+            limparCampos();
+        }
     }
     
-    
+    /**
+     * Método que limpa todos os campos do formulário de cadastro de usuário.
+     */
     private void limparCampos(){
         txtNome.setText("");
         txtCpf.setText("");
@@ -319,11 +334,30 @@ public class FXMLCadastroUsuarioController implements Initializable {
         dtDataNasc.setValue(null);
         cbPerfil.setValue("");
     }
-
+    
+    
+    /**
+     * 
+     * @param event 
+     */
     @FXML
-    private void btnEditarAction(ActionEvent event) {
+    private void btnEditarAction(ActionEvent event) throws SQLException {
+        
+        Usuario usuario = dao.pesquisarNoBD(txtNome.getText());
+        
+        txtNome.setText(usuario.getNome());
+        dtDataNasc.setValue(usuario.getDataNasc());
+        txtCpf.setText(usuario.getCpf());
+        txtLogin.setText(usuario.getLogin());
+        txtSenha.setText(usuario.getSenha());
+        cbPerfil.setValue(usuario.getPerfil());
+       
     }
 
+    /**
+     * 
+     * @param event 
+     */
     @FXML
     private void btnApagarAction(ActionEvent event) {
     }

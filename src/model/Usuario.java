@@ -20,6 +20,18 @@ public class Usuario {
 
     }
 
+    public Usuario(int id, String nome, LocalDate dataNasc, String cpf, String login,  String senha , String perfil ) {
+        this.id = id;
+        this.login = login;
+        this.senha = senha;
+        this.nome = nome;
+        this.cpf = cpf;
+        this.perfil = perfil;
+        this.dataNasc = dataNasc;
+    }
+    
+    
+
     public int getId() {
         return id;
     }
