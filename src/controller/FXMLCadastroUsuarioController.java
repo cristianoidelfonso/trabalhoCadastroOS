@@ -22,6 +22,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import model.DAOUsuario;
+import model.MascarasFX;
 import model.Usuario;
 
 /**
@@ -68,6 +69,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
+        MascarasFX.mascaraCPF(txtCpf);
         lblSair.setFont(Font.font("Verdana", FontWeight.NORMAL, 16));
 
         carregarCombo();
