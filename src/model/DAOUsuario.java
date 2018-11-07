@@ -13,30 +13,29 @@ import javafx.scene.control.Alert;
  */
 public class DAOUsuario {
 
-    public static boolean salvar(Usuario usuario) {
+    public static boolean salvar(Usuario usuario) throws SQLException {
         Connection conn = ConnectionFactory.getConexao();
         try {
-            String sql = "INSERT INTO tbl_usuario(nome, dataNasc, cpf, login, senha, perfil) VALUES(?,?,?,?,?,?) ";
+            String sql = "INSERT INTO (nome, dataNasc, cpf, login, senha, perfil)tbl_usuario VALUES(?,?,?,?,?,?)";
 
-            try (PreparedStatement pst = conn.prepareStatement(sql)) {
-                pst.setString(1, usuario.getNome());
-                pst.setDate(2, java.sql.Date.valueOf(usuario.getDataNasc()));
-                pst.setString(3, usuario.getCpf());
-                pst.setString(4, usuario.getLogin());
-                pst.setString(5, usuario.getSenha());
-                pst.setString(6, usuario.getPerfil());
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, usuario.getNome());
+            pst.setDate(2, java.sql.Date.valueOf(usuario.getDataNasc()));
+            pst.setString(3, usuario.getCpf());
+            pst.setString(4, usuario.getLogin());
+            pst.setString(5, usuario.getSenha());
+            pst.setString(6, usuario.getPerfil());
 
-                pst.executeUpdate();
+            pst.executeUpdate();
 
-                // Se salvar com sucesso, imprime esta mensagem.
-                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("SUCESSO");
-                alerta.setHeaderText("Salvo com sucesso");
-                alerta.setContentText("Novo usuário foi cadastrado com sucesso");
-                alerta.show();
-                
-                return true;
-            }
+            // Se salvar com sucesso, imprime esta mensagem.
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("SUCESSO");
+            alerta.setHeaderText("Salvo com sucesso");
+            alerta.setContentText("Novo usuário foi cadastrado com sucesso");
+            alerta.show();
+
+            return true;
 
         } catch (SQLException e) {
             Alert alerta = new Alert(Alert.AlertType.WARNING);
@@ -48,16 +47,16 @@ public class DAOUsuario {
         } finally {
             ConnectionFactory.fecharConexao(conn);
         }
-        
+
         return false;
-        
+
     }
 
-    private void editar(Usuario usuario) {
+    public void atualizar(Usuario usuario) {
         Connection conn = ConnectionFactory.getConexao();
         try {
             String sql = "UPDATE tbl_usuario SET nome = ?, dataNasc = ?, cpf = ?, "
-                    + "login = ?, senha = ?, perfil = ?) WHERE id = ?";
+                    + "login = ?, senha = ?, perfil = ? WHERE id = ?";
 
             try (PreparedStatement pst = conn.prepareStatement(sql)) {
                 pst.setString(1, usuario.getNome());
@@ -100,11 +99,11 @@ public class DAOUsuario {
         String sql = "SELECT * FROM tbl_usuario WHERE nome = ?";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setString(1, n);
-
+        
         ResultSet rs = pst.executeQuery();
-
+        
         if (rs.next()) {
-            Usuario usuario = new Usuario(
+            Usuario usu = new Usuario(
                     rs.getInt("id"),
                     rs.getString("nome"),
                     rs.getDate("dataNasc").toLocalDate(),
@@ -113,7 +112,7 @@ public class DAOUsuario {
                     rs.getString("senha"),
                     rs.getString("perfil")
             );
-            return usuario;
+            return usu;
         }
         return null;
     }

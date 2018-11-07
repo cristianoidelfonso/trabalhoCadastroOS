@@ -26,6 +26,7 @@ import model.DAOUsuario;
 import model.MascarasFX;
 import model.Usuario;
 
+
 /**
  * FXML Controller class
  *
@@ -59,6 +60,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
     private Label lblSair;
 
     private DAOUsuario dao;
+    private Usuario usuario;
     @FXML
     private Label lblId;
 
@@ -72,10 +74,9 @@ public class FXMLCadastroUsuarioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
-        
         MascarasFX.mascaraCPF(txtCpf);
         MascarasFX.mascaraData(dtDataNasc);
-        
+
         lblId.setVisible(false);
         lblSair.setFont(Font.font("Verdana", FontWeight.NORMAL, 16));
 
@@ -132,17 +133,15 @@ public class FXMLCadastroUsuarioController implements Initializable {
         }
     }
 
-    
     /**
      * Validação de todos os campos de entrada de dados do novo usuário.
-     * 
-     * @param event 
+     *
+     * @param event
      */
     @FXML
-    private void btnSalvarAction(ActionEvent event) {
+    private void btnSalvarAction(ActionEvent event) throws SQLException {
 
-        Usuario usuario = new Usuario();
-
+        //usuario = new Usuario();
         // Validação do txtNome
         //----------------------------------------------------------------------
         if (!txtNome.getText().equals("")) {
@@ -175,7 +174,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         //----------------------------------------------------------------------
         if (dtDataNasc.getValue() != null) {
             //System.out.println(dtDataNasc.getValue());
-            
+
             if (dtDataNasc.getValue().toString().matches("(\\d{4}\\-\\d{2}\\-\\d{2})")) {
                 usuario.setDataNasc(dtDataNasc.getValue());
             } else {
@@ -285,12 +284,12 @@ public class FXMLCadastroUsuarioController implements Initializable {
             txtSenha.requestFocus();
             return;
         }
-        
-         // Validação do cbPerfil
+
+        // Validação do cbPerfil
         //----------------------------------------------------------------------
         if (cbPerfil.getValue() != null) {
             //System.out.println(cbPerfil.getValue());
-            
+
             if (cbPerfil.getValue().matches("[a-zA-Z]+")) {
                 usuario.setPerfil(cbPerfil.getValue());
             } else {
@@ -316,17 +315,21 @@ public class FXMLCadastroUsuarioController implements Initializable {
 
         System.out.println(usuario);
 
-        if(dao.salvar(usuario)){
-            
-            System.out.println(usuario.getId());
-            limparCampos();
+        if (usuario.getId() != null) {
+            dao.atualizar(usuario);
+        } else {
+            usuario = new Usuario();
+            if (dao.salvar(usuario)) {
+                System.out.println(usuario.getId());
+                limparCampos();
+            }
         }
     }
-    
+
     /**
      * Método que limpa todos os campos do formulário de cadastro de usuário.
      */
-    private void limparCampos(){
+    private void limparCampos() {
         txtNome.setText("");
         txtCpf.setText("");
         txtLogin.setText("");
@@ -334,29 +337,49 @@ public class FXMLCadastroUsuarioController implements Initializable {
         dtDataNasc.setValue(null);
         cbPerfil.setValue("");
     }
-    
-    
+
     /**
-     * 
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void btnEditarAction(ActionEvent event) throws SQLException {
-        
-        Usuario usuario = dao.pesquisarNoBD(txtNome.getText());
-        
-        txtNome.setText(usuario.getNome());
-        dtDataNasc.setValue(usuario.getDataNasc());
-        txtCpf.setText(usuario.getCpf());
-        txtLogin.setText(usuario.getLogin());
-        txtSenha.setText(usuario.getSenha());
-        cbPerfil.setValue(usuario.getPerfil());
-       
+
+        if (!txtNome.getText().equals("")) {
+            if ((usuario = dao.pesquisarNoBD(txtNome.getText())) != null) {
+                txtNome.setText(usuario.getNome());
+                dtDataNasc.setValue(usuario.getDataNasc());
+                txtCpf.setText(usuario.getCpf());
+                txtLogin.setText(usuario.getLogin());
+                txtSenha.setText(usuario.getSenha());
+                cbPerfil.setValue(usuario.getPerfil());
+
+            } else {
+                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+                alerta.setTitle("INFORMAÇÃO");
+                alerta.setHeaderText("Usuario ainda nao cadastrado.");
+                alerta.setContentText("Para cadastrar "+txtNome.getText()+" , complete o formulário.");
+                alerta.show();
+                txtNome.setText("");
+                txtNome.requestFocus();
+
+            }
+
+        } else {
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("INFORMAÇÃO");
+            alerta.setHeaderText("Informe um nome de usuario");
+            alerta.setContentText(" Um NOME precisa ser informado.");
+            alerta.show();
+            txtNome.setText("");
+            txtNome.requestFocus();
+        }
+
     }
 
     /**
-     * 
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void btnApagarAction(ActionEvent event) {

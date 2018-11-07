@@ -8,31 +8,32 @@ import java.time.LocalDate;
  */
 public class Usuario {
 
-    private int id;
+    private Integer id;
+    private String nome;
+    private LocalDate dataNasc;
+    private String cpf;
     private String login;
     private String senha;
-    private String nome;
-    private String cpf;
     private String perfil;
-    private LocalDate dataNasc;
 
     public Usuario() {
 
     }
 
-    public Usuario(int id, String nome, LocalDate dataNasc, String cpf, String login,  String senha , String perfil ) {
+    public Usuario(Integer id, String nome, LocalDate dataNasc, String cpf, String login,  String senha , String perfil ) {
         this.id = id;
+        this.nome = nome;
+        this.dataNasc = dataNasc;
+        this.cpf = cpf;
         this.login = login;
         this.senha = senha;
-        this.nome = nome;
-        this.cpf = cpf;
         this.perfil = perfil;
-        this.dataNasc = dataNasc;
+        
     }
     
     
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
