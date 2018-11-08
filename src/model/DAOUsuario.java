@@ -1,32 +1,45 @@
 package model;
 
 import conexao.ConnectionFactory;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import javafx.scene.control.Alert;
 
 /**
  *
  * @author Idelfonso
  */
-public class DAOUsuario {
+public class DAOUsuario extends ConnectionFactory {
 
-    public static boolean salvar(Usuario usuario) throws SQLException {
-        Connection conn = ConnectionFactory.getConexao();
+    private static PreparedStatement pst;
+    private static ResultSet rs;
+
+    public Integer create(Usuario usuario) {
+
+        Integer generatedId = null;
+        getConexao();
+
         try {
-            String sql = "INSERT INTO (nome, dataNasc, cpf, login, senha, perfil)tbl_usuario VALUES(?,?,?,?,?,?)";
+            //String sql = "INSERT INTO tbl_usuario (nome, dataNasc, cpf, login, senha, perfil) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO tbl_usuario VALUES (?,?,?,?,?,?,?)";
 
-            PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, usuario.getNome());
-            pst.setDate(2, java.sql.Date.valueOf(usuario.getDataNasc()));
-            pst.setString(3, usuario.getCpf());
-            pst.setString(4, usuario.getLogin());
-            pst.setString(5, usuario.getSenha());
-            pst.setString(6, usuario.getPerfil());
+            pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            pst.setString(2, usuario.getNome());
+            pst.setDate(3, java.sql.Date.valueOf(usuario.getDataNasc()));
+            pst.setString(4, usuario.getCpf());
+            pst.setString(5, usuario.getLogin());
+            pst.setString(6, usuario.getSenha());
+            pst.setString(7, usuario.getPerfil());
 
             pst.executeUpdate();
+            
+            rs = pst.getGeneratedKeys();
+            if(rs.next()){
+                generatedId = rs.getInt("id");
+            }
 
             // Se salvar com sucesso, imprime esta mensagem.
             Alert alerta = new Alert(Alert.AlertType.INFORMATION);
@@ -34,8 +47,6 @@ public class DAOUsuario {
             alerta.setHeaderText("Salvo com sucesso");
             alerta.setContentText("Novo usuário foi cadastrado com sucesso");
             alerta.show();
-
-            return true;
 
         } catch (SQLException e) {
             Alert alerta = new Alert(Alert.AlertType.WARNING);
@@ -45,37 +56,34 @@ public class DAOUsuario {
             alerta.show();
 
         } finally {
-            ConnectionFactory.fecharConexao(conn);
+            ConnectionFactory.fecharConexao(conn, pst, rs);
         }
-
-        return false;
-
+        return generatedId;
     }
 
     public void atualizar(Usuario usuario) {
-        Connection conn = ConnectionFactory.getConexao();
+        getConexao();
         try {
             String sql = "UPDATE tbl_usuario SET nome = ?, dataNasc = ?, cpf = ?, "
                     + "login = ?, senha = ?, perfil = ? WHERE id = ?";
 
-            try (PreparedStatement pst = conn.prepareStatement(sql)) {
-                pst.setString(1, usuario.getNome());
-                pst.setDate(2, java.sql.Date.valueOf(usuario.getDataNasc()));
-                pst.setString(3, usuario.getCpf());
-                pst.setString(4, usuario.getLogin());
-                pst.setString(5, usuario.getSenha());
-                pst.setString(6, usuario.getPerfil());
-                pst.setInt(7, usuario.getId());
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, usuario.getNome());
+            pst.setDate(2, java.sql.Date.valueOf(usuario.getDataNasc()));
+            pst.setString(3, usuario.getCpf());
+            pst.setString(4, usuario.getLogin());
+            pst.setString(5, usuario.getSenha());
+            pst.setString(6, usuario.getPerfil());
+            //pst.setInt(7, usuario.getId());
 
-                pst.executeUpdate();
+            pst.executeUpdate();
 
-                // Se salvar com sucesso, imprime esta mensagem.
-                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("SUCESSO");
-                alerta.setHeaderText("Alterado com sucesso!");
-                alerta.setContentText("Novo usuário foi cadastrado com sucesso");
-                alerta.show();
-            }
+            // Se salvar com sucesso, imprime esta mensagem.
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("SUCESSO");
+            alerta.setHeaderText("Alterado com sucesso!");
+            alerta.setContentText("Novo usuário foi cadastrado com sucesso");
+            alerta.show();
 
         } catch (SQLException e) {
             Alert alerta = new Alert(Alert.AlertType.WARNING);
@@ -85,7 +93,7 @@ public class DAOUsuario {
             alerta.show();
 
         } finally {
-            ConnectionFactory.fecharConexao(conn);
+            fecharConexao(conn, pst);
         }
     }
 
@@ -93,27 +101,31 @@ public class DAOUsuario {
 
     }
 
-    public static Usuario pesquisarNoBD(String n) throws SQLException {
-        Connection conn = ConnectionFactory.getConexao();
+    public Usuario find(String n) {
+        Usuario resultado = null;
+        getConexao();
+        try {
+            String sql = "SELECT * FROM tbl_usuario WHERE nome = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, n);
 
-        String sql = "SELECT * FROM tbl_usuario WHERE nome = ?";
-        PreparedStatement pst = conn.prepareStatement(sql);
-        pst.setString(1, n);
-        
-        ResultSet rs = pst.executeQuery();
-        
-        if (rs.next()) {
-            Usuario usu = new Usuario(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getDate("dataNasc").toLocalDate(),
-                    rs.getString("cpf"),
-                    rs.getString("login"),
-                    rs.getString("senha"),
-                    rs.getString("perfil")
-            );
-            return usu;
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                Usuario usu = new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getDate("dataNasc").toLocalDate(),
+                        rs.getString("cpf"),
+                        rs.getString("login"),
+                        rs.getString("senha"),
+                        rs.getString("perfil"));
+                resultado = usu;
+            }
+        } catch (SQLException e) {
+        } finally {
+            fecharConexao(conn, pst, rs);
         }
-        return null;
+        return resultado;
     }
 }

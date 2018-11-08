@@ -18,14 +18,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import model.DAOUsuario;
 import model.MascarasFX;
 import model.Usuario;
-
 
 /**
  * FXML Controller class
@@ -59,8 +54,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
     @FXML
     private Label lblSair;
 
-    private DAOUsuario dao;
-    private Usuario usuario;
     @FXML
     private Label lblId;
 
@@ -78,13 +71,16 @@ public class FXMLCadastroUsuarioController implements Initializable {
         MascarasFX.mascaraData(dtDataNasc);
 
         lblId.setVisible(false);
-        lblSair.setFont(Font.font("Verdana", FontWeight.NORMAL, 16));
+        //lblSair.setFont(Font.font("Verdana", FontWeight.NORMAL, 16));
 
         carregarCombo();
         cbPerfil.setValue("Admin");
 
     }
 
+    /**
+     * Cria a lista de perfis e povoa o comboBox.
+     */
     private void carregarCombo() {
 
         //Criar uma lista
@@ -107,17 +103,17 @@ public class FXMLCadastroUsuarioController implements Initializable {
         stageAtual.close();
     }
 
-    @FXML
-    private void lblSairMouseExited(MouseEvent event) {
-        lblSair.setTextFill(Paint.valueOf("#000000"));
-        lblSair.setFont(Font.font("Verdana", FontWeight.NORMAL, 16));
-    }
-
-    @FXML
-    private void lblSairMouseEntered(MouseEvent event) {
-        lblSair.setTextFill(Paint.valueOf("#FF0000"));
-        lblSair.setFont(Font.font("Verdana", FontWeight.BOLD, 16));
-    }
+//    @FXML
+//    private void lblSairMouseExited(MouseEvent event) {
+//        lblSair.setTextFill(Paint.valueOf("#000000"));
+//        lblSair.setFont(Font.font("Verdana", FontWeight.NORMAL, 16));
+//    }
+//    
+//    @FXML
+//    private void lblSairMouseEntered(MouseEvent event) {
+//        lblSair.setTextFill(Paint.valueOf("#FF0000"));
+//        lblSair.setFont(Font.font("Verdana", FontWeight.BOLD, 16));
+//    }
 
     @FXML
     private void btnSairAction(ActionEvent event) {
@@ -141,7 +137,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
     @FXML
     private void btnSalvarAction(ActionEvent event) throws SQLException {
 
-        //usuario = new Usuario();
+        Usuario usuario = new Usuario();
         // Validação do txtNome
         //----------------------------------------------------------------------
         if (!txtNome.getText().equals("")) {
@@ -232,7 +228,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         // Validação do txtLogin
         //----------------------------------------------------------------------
         if (!txtLogin.getText().equals("")) {
-            if (txtLogin.getText().matches("[\\w]{3,12}")) {
+            if (txtLogin.getText().matches("[\\w]{5,12}")) {
                 usuario.setLogin(txtLogin.getText());
             } else {
                 Alert alerta = new Alert(Alert.AlertType.INFORMATION);
@@ -312,18 +308,9 @@ public class FXMLCadastroUsuarioController implements Initializable {
             cbPerfil.requestFocus();
             return;
         }
-
-        System.out.println(usuario);
-
-        if (usuario.getId() != null) {
-            dao.atualizar(usuario);
-        } else {
-            usuario = new Usuario();
-            if (dao.salvar(usuario)) {
-                System.out.println(usuario.getId());
-                limparCampos();
-            }
-        }
+        
+       
+       limparCampos();
     }
 
     /**
@@ -343,37 +330,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
      * @param event
      */
     @FXML
-    private void btnEditarAction(ActionEvent event) throws SQLException {
-
-        if (!txtNome.getText().equals("")) {
-            if ((usuario = dao.pesquisarNoBD(txtNome.getText())) != null) {
-                txtNome.setText(usuario.getNome());
-                dtDataNasc.setValue(usuario.getDataNasc());
-                txtCpf.setText(usuario.getCpf());
-                txtLogin.setText(usuario.getLogin());
-                txtSenha.setText(usuario.getSenha());
-                cbPerfil.setValue(usuario.getPerfil());
-
-            } else {
-                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("INFORMAÇÃO");
-                alerta.setHeaderText("Usuario ainda nao cadastrado.");
-                alerta.setContentText("Para cadastrar "+txtNome.getText()+" , complete o formulário.");
-                alerta.show();
-                txtNome.setText("");
-                txtNome.requestFocus();
-
-            }
-
-        } else {
-            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-            alerta.setTitle("INFORMAÇÃO");
-            alerta.setHeaderText("Informe um nome de usuario");
-            alerta.setContentText(" Um NOME precisa ser informado.");
-            alerta.show();
-            txtNome.setText("");
-            txtNome.requestFocus();
-        }
+    private void btnEditarAction(ActionEvent event) {
 
     }
 

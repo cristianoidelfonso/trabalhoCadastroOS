@@ -6,6 +6,18 @@
     -fx-font-size: 15px;
 }
 
+.label{
+    -fx-text-fill: black;
+    -fx-font-weight: normal;
+    -fx-font-size: 20px;  
+}
+
+.label:hover{
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px; 
+}
+
 .comboBox{
     -fx-font-size: 15px;
 }

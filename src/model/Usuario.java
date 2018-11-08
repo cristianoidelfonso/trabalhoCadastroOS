@@ -6,7 +6,7 @@ import java.time.LocalDate;
  *
  * @author Idelfonso
  */
-public class Usuario {
+public class Usuario extends DAOUsuario{
 
     private Integer id;
     private String nome;
@@ -16,10 +16,12 @@ public class Usuario {
     private String senha;
     private String perfil;
 
+    // Construtor sem parametros.
     public Usuario() {
 
     }
 
+    // Construtor com todos os parametros.
     public Usuario(Integer id, String nome, LocalDate dataNasc, String cpf, String login,  String senha , String perfil ) {
         this.id = id;
         this.nome = nome;
@@ -31,15 +33,26 @@ public class Usuario {
         
     }
     
+    // Construtor com parametros, exceto id. 
+    public Usuario( String nome, LocalDate dataNasc, String cpf, String login,  String senha , String perfil ) {
+        this.nome = nome;
+        this.dataNasc = dataNasc;
+        this.cpf = cpf;
+        this.login = login;
+        this.senha = senha;
+        this.perfil = perfil;
+        
+    }
+    //--------------------------------------------------------------------------
+    //Getters e Setters
     
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public String getNome() {
         return nome;
@@ -89,6 +102,7 @@ public class Usuario {
         this.dataNasc = dataNasc;
     }
     
+    // Reesrita do toString()
     @Override
     public String toString(){
         return "[" + id +"]\t["+nome+"\t"+dataNasc+"\t"+login+"\t"+senha+"\t"+perfil+"]";
