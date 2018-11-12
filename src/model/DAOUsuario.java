@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javafx.scene.control.Alert;
 
 /**
@@ -22,31 +23,27 @@ public class DAOUsuario extends ConnectionFactory {
         getConexao();
 
         try {
-            //String sql = "INSERT INTO tbl_usuario (nome, dataNasc, cpf, login, senha, perfil) VALUES (?,?,?,?,?,?)";
-            String sql = "INSERT INTO tbl_usuario VALUES (?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO tbl_usuario (nome, dataNasc, cpf, login, senha, perfil) VALUES (?,?,?,?,?,?)";
+            //String sql = "INSERT INTO tbl_usuario VALUES (?,?,?,?,?,?,?)";
 
             pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            pst.setString(2, usuario.getNome());
-            pst.setDate(3, java.sql.Date.valueOf(usuario.getDataNasc()));
-            pst.setString(4, usuario.getCpf());
-            pst.setString(5, usuario.getLogin());
-            pst.setString(6, usuario.getSenha());
-            pst.setString(7, usuario.getPerfil());
+            pst.setString(1, usuario.getNome());
+            pst.setDate(2, java.sql.Date.valueOf(usuario.getDataNasc()));
+            pst.setString(3, usuario.getCpf());
+            pst.setString(4, usuario.getLogin());
+            pst.setString(5, usuario.getSenha());
+            pst.setString(6, usuario.getPerfil());
 
-            pst.executeUpdate();
-            
-            rs = pst.getGeneratedKeys();
-            if(rs.next()){
-                generatedId = rs.getInt("id");
+            if (pst.executeUpdate() != 0) {
+                System.out.println("Salvo com sucesso");
             }
 
-            // Se salvar com sucesso, imprime esta mensagem.
-            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-            alerta.setTitle("SUCESSO");
-            alerta.setHeaderText("Salvo com sucesso");
-            alerta.setContentText("Novo usuário foi cadastrado com sucesso");
-            alerta.show();
+            rs = pst.getGeneratedKeys();
+            if (rs.next()) {
+                generatedId = rs.getInt(1);
+                System.out.println("ID gerado: " + generatedId);
+            }
 
         } catch (SQLException e) {
             Alert alerta = new Alert(Alert.AlertType.WARNING);
@@ -61,7 +58,7 @@ public class DAOUsuario extends ConnectionFactory {
         return generatedId;
     }
 
-    public void atualizar(Usuario usuario) {
+    public void update(Usuario usuario) {
         getConexao();
         try {
             String sql = "UPDATE tbl_usuario SET nome = ?, dataNasc = ?, cpf = ?, "
@@ -74,40 +71,45 @@ public class DAOUsuario extends ConnectionFactory {
             pst.setString(4, usuario.getLogin());
             pst.setString(5, usuario.getSenha());
             pst.setString(6, usuario.getPerfil());
-            //pst.setInt(7, usuario.getId());
+            pst.setInt(7, usuario.getId());
 
             pst.executeUpdate();
 
-            // Se salvar com sucesso, imprime esta mensagem.
-            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-            alerta.setTitle("SUCESSO");
-            alerta.setHeaderText("Alterado com sucesso!");
-            alerta.setContentText("Novo usuário foi cadastrado com sucesso");
-            alerta.show();
-
         } catch (SQLException e) {
-            Alert alerta = new Alert(Alert.AlertType.WARNING);
-            alerta.setTitle("WARNING");
-            alerta.setHeaderText("Não foi possivel alterar os dados desse usuário no banco de dados.");
-            alerta.setContentText(e.getMessage());
-            alerta.show();
+//            Alert alerta = new Alert(Alert.AlertType.WARNING);
+//            alerta.setTitle("WARNING");
+//            alerta.setHeaderText("Não foi possivel alterar os dados desse usuário no banco de dados.");
+//            alerta.setContentText(e.getMessage());
+//            alerta.show();
+            throw new RuntimeException(e.getMessage());
 
         } finally {
             fecharConexao(conn, pst);
         }
     }
 
-    private void apagar() {
+    public void delete(Usuario usuario) {
+        getConexao();
+        try {
+            String sql = "DELETE FROM tbl_usuario WHERE id = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, usuario.getId());
+
+            pst.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
 
     }
 
-    public Usuario find(String n) {
+    public Usuario find(String pk) {
         Usuario resultado = null;
         getConexao();
         try {
             String sql = "SELECT * FROM tbl_usuario WHERE nome = ?";
             pst = conn.prepareStatement(sql);
-            pst.setString(1, n);
+            pst.setString(1, pk);
 
             rs = pst.executeQuery();
 
@@ -127,5 +129,71 @@ public class DAOUsuario extends ConnectionFactory {
             fecharConexao(conn, pst, rs);
         }
         return resultado;
+    }
+
+    public Usuario find(int pk) {
+        Usuario resultado = null;
+        getConexao();
+        try {
+            String sql = "SELECT * FROM tbl_usuario WHERE id = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, pk);
+
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                Usuario usu = new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getDate("dataNasc").toLocalDate(),
+                        rs.getString("cpf"),
+                        rs.getString("login"),
+                        rs.getString("senha"),
+                        rs.getString("perfil"));
+                resultado = usu;
+            }
+        } catch (SQLException e) {
+        } finally {
+            fecharConexao(conn, pst, rs);
+        }
+        return resultado;
+    }
+
+    /**
+     * Retorna todos os produtos do banco de dados
+     *
+     * @return
+     */
+    public ArrayList<Usuario> listar(){
+        ArrayList<Usuario> lista = new ArrayList<>();
+        getConexao();
+        try{
+        //Comando
+        String sql = "SELECT * FROM tbl_usuario";
+        //Preparar o SQL
+        pst = conn.prepareStatement(sql);
+        //Executa consulta no bd
+        rs = pst.executeQuery();
+
+        //Enquanto tiver resultado no BD
+        while (rs.next()) {
+            //Cria o produto a partir do resultado do banco
+            Usuario usuario = new Usuario(
+                    rs.getInt("id"),
+                    rs.getString("nome"),
+                    rs.getDate("dataNasc").toLocalDate(),
+                    rs.getString("cpf"),
+                    rs.getString("login"),
+                    rs.getString("senha"),
+                    rs.getString("perfil"));
+
+            //adiciona o resultado na lista
+            lista.add(usuario);
+
+        }//while
+        }catch(SQLException e){
+            
+        }
+        return lista;
     }
 }

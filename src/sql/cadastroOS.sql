@@ -7,7 +7,7 @@ create table if not exists tbl_usuario
 	id int not null primary key auto_increment,
     nome varchar(50) not null, 
     dataNasc Date not null,
-    cpf varchar(15) not null unique,
+    cpf varchar(15) not null,
 	login varchar(20) not null unique,
 	senha varchar(15) not null unique,
 	perfil varchar(25) not null

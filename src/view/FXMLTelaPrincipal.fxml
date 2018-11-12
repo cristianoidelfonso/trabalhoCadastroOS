@@ -26,10 +26,13 @@
                   <MenuItem fx:id="mnConsOS" mnemonicParsing="false" text="O.S." />
             </items>
           </Menu>
-          <Menu fx:id="mnSobre" mnemonicParsing="false" text="Sobre" />
+          <Menu fx:id="mnSobre" mnemonicParsing="false" text="Sobre">
+               <items>
+                  <MenuItem fx:id="info" mnemonicParsing="false" onAction="#infoSobreAction" text="Informações" />
+               </items></Menu>
             <Menu fx:id="mnSair" mnemonicParsing="false" text="Sair">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#fecharTelaPrincipal" text="Fechar Aplicação" />
+                  <MenuItem fx:id="fecharAplicacao" mnemonicParsing="false" onAction="#fecharAplicacaoAction" text="Fechar Aplicação" />
                </items></Menu>
         </menus>
       </MenuBar>

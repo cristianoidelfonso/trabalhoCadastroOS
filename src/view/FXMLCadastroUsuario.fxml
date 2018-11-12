@@ -7,6 +7,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -16,18 +17,19 @@
 <BorderPane fx:id="bpCadUsu" maxHeight="550.0" maxWidth="750.0" minHeight="550.0" minWidth="750.0" prefHeight="550.0" prefWidth="750.0" stylesheets="@css/fxmlcadastrousuario.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLCadastroUsuarioController">
     <!-- Esquerda -->
     <left>
-        <VBox prefHeight="200.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+        <VBox prefHeight="200.0" prefWidth="25.0" BorderPane.alignment="CENTER" />
     </left>
     <!-- Centro -->
     <center>
-        <AnchorPane BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="410.0" prefWidth="670.0" BorderPane.alignment="CENTER">
             <children>
-                <JFXTextField fx:id="txtNome" labelFloat="true" layoutX="22.0" layoutY="99.0" prefHeight="31.0" prefWidth="500.0" promptText="Nome" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" />
-                <Label layoutX="22.0" layoutY="157.0" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" text="Data de nascimento" />
-                <HBox alignment="BOTTOM_LEFT" layoutX="22.0" layoutY="178.0" prefHeight="35.0" prefWidth="593.0" spacing="30.0">
+            <Label fx:id="lblId" layoutX="22.0" layoutY="14.0" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" text="ID :" />
+                <JFXTextField fx:id="txtNome" labelFloat="true" layoutX="154.0" layoutY="9.0" prefHeight="31.0" prefWidth="483.0" promptText="Nome" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" />
+                <Label layoutX="22.0" layoutY="54.0" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" text="Data de nascimento" />
+                <HBox alignment="BOTTOM_LEFT" layoutX="22.0" layoutY="75.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="616.0" spacing="30.0">
                     <children>
-                        <JFXDatePicker fx:id="dtDataNasc" editable="false" prefHeight="30.0" prefWidth="190.0" styleClass="comboBox" stylesheets="@css/fxmlcadastrousuario.css" HBox.hgrow="ALWAYS" />
-                        <JFXTextField fx:id="txtCpf" labelFloat="true" maxHeight="35.0" maxWidth="275.0" minHeight="35.0" minWidth="275.0" prefHeight="35.0" prefWidth="275.0" promptText="CPF" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" HBox.hgrow="ALWAYS">
+                        <JFXDatePicker fx:id="dtDataNasc" editable="false" prefHeight="31.0" prefWidth="146.0" styleClass="comboBox" stylesheets="@css/fxmlcadastrousuario.css" HBox.hgrow="ALWAYS" />
+                        <JFXTextField fx:id="txtCpf" labelFloat="true" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="35.0" prefWidth="256.0" promptText="CPF" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" HBox.hgrow="ALWAYS">
                             <font>
                                 <Font size="14.0" />
                             </font>
@@ -35,20 +37,20 @@
                         <Insets left="10.0" />
                      </padding>
                         </JFXTextField>
+                      <JFXComboBox fx:id="cbPerfil" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="154.0" promptText="Perfil" styleClass="comboBox" stylesheets="@css/fxmlcadastrousuario.css" visibleRowCount="12" />
                     </children>
                 </HBox>
-                <JFXTextField fx:id="txtLogin" labelFloat="true" layoutX="22.0" layoutY="243.0" maxHeight="35.0" maxWidth="271.0" minHeight="35.0" minWidth="240.0" prefHeight="35.0" prefWidth="270.0" promptText="Login" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css">
+                <JFXTextField fx:id="txtLogin" labelFloat="true" layoutX="22.0" layoutY="136.0" maxHeight="35.0" maxWidth="271.0" minHeight="35.0" minWidth="240.0" prefHeight="35.0" prefWidth="270.0" promptText="Login" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </JFXTextField>
-                <JFXTextField fx:id="txtSenha" labelFloat="true" layoutX="22.0" layoutY="313.0" maxHeight="35.0" maxWidth="271.0" minHeight="35.0" minWidth="240.0" prefHeight="35.0" prefWidth="270.0" promptText="Senha" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css">
+                <JFXTextField fx:id="txtSenha" labelFloat="true" layoutX="368.0" layoutY="136.0" maxHeight="35.0" maxWidth="271.0" minHeight="35.0" minWidth="240.0" prefHeight="35.0" prefWidth="270.0" promptText="Senha" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </JFXTextField>
-                <JFXComboBox fx:id="cbPerfil" labelFloat="true" layoutX="324.0" layoutY="243.0" prefHeight="35.0" prefWidth="190.0" promptText="Perfil" styleClass="comboBox" stylesheets="@css/fxmlcadastrousuario.css" visibleRowCount="12" />
-            <Label fx:id="lblId" layoutX="22.0" layoutY="42.0" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" text="ID :" />
+            <TableView fx:id="tableView" layoutX="20.0" layoutY="218.0" prefHeight="175.0" prefWidth="618.0" />
             </children>
             <padding>
                 <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
@@ -60,7 +62,7 @@
     </center>
     <!-- Direita -->
     <right>
-        <VBox prefHeight="385.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
+        <VBox prefHeight="385.0" prefWidth="25.0" BorderPane.alignment="CENTER" />
     </right>
     <!-- Base -->
     <bottom>
@@ -97,9 +99,9 @@
     </bottom>
     <!-- Topo -->
     <top>
-        <HBox alignment="TOP_RIGHT" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="TOP_RIGHT">
+        <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="TOP_RIGHT">
             <children>
-                <Label fx:id="lblSair" onMouseClicked="#lblSairAction" onMouseEntered="#lblSairMouseEntered" onMouseExited="#lblSairMouseExited" stylesheets="@css/fxmlcadastrousuario.css" text="X" HBox.hgrow="ALWAYS">
+                <Label fx:id="lblSair" onMouseClicked="#lblSairAction" styleClass="labelSair" stylesheets="@css/fxmlcadastrousuario.css" text="X" HBox.hgrow="ALWAYS">
                     <font>
                         <Font size="18.0" />
                     </font>

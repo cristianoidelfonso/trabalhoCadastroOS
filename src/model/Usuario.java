@@ -1,12 +1,13 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
  * @author Idelfonso
  */
-public class Usuario extends DAOUsuario{
+public class Usuario {
 
     private Integer id;
     private String nome;
@@ -22,7 +23,7 @@ public class Usuario extends DAOUsuario{
     }
 
     // Construtor com todos os parametros.
-    public Usuario(Integer id, String nome, LocalDate dataNasc, String cpf, String login,  String senha , String perfil ) {
+    public Usuario(Integer id, String nome, LocalDate dataNasc, String cpf, String login, String senha, String perfil) {
         this.id = id;
         this.nome = nome;
         this.dataNasc = dataNasc;
@@ -30,29 +31,29 @@ public class Usuario extends DAOUsuario{
         this.login = login;
         this.senha = senha;
         this.perfil = perfil;
-        
+
     }
-    
+
     // Construtor com parametros, exceto id. 
-    public Usuario( String nome, LocalDate dataNasc, String cpf, String login,  String senha , String perfil ) {
+    public Usuario(String nome, LocalDate dataNasc, String cpf, String login, String senha, String perfil) {
         this.nome = nome;
         this.dataNasc = dataNasc;
         this.cpf = cpf;
         this.login = login;
         this.senha = senha;
         this.perfil = perfil;
-        
+
     }
     //--------------------------------------------------------------------------
     //Getters e Setters
-    
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -101,11 +102,37 @@ public class Usuario extends DAOUsuario{
     public void setDataNasc(LocalDate dataNasc) {
         this.dataNasc = dataNasc;
     }
-    
-    // Reesrita do toString()
+
+    // Método toString() personalizado
     @Override
-    public String toString(){
-        return "[" + id +"]\t["+nome+"\t"+dataNasc+"\t"+login+"\t"+senha+"\t"+perfil+"]";
+    public String toString() {
+        return "[" + id + "]\t[" + nome + "\t" + dataNasc + "\t" + login + "\t" + senha + "\t" + perfil + "]";
     }
- 
+
+    //--------------------------------------------------------------------------
+    // Padrão de projeto DAO
+    private static DAOUsuario dao = new DAOUsuario();
+
+    public void save() {
+        if (id != null && dao.find(id) != null) {
+            dao.update(this);
+        } else {
+            Integer generatedKey = dao.create(this);
+            this.id = generatedKey;
+        }
+    }
+
+    public void delete() {
+        if (dao.find(nome) != null) {
+            dao.delete(this);
+        }
+    }
+
+    public static ArrayList<Usuario> listar(){
+        return dao.listar();
+    }
+
+    public static Usuario find(String nome) {
+        return dao.find(nome);
+    }
 }
