@@ -2,6 +2,38 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
+.textField{
+    -fx-font-size: 15px;
+}
 
+.labelSair{
+    -fx-text-fill: black;
+    -fx-font-weight: normal;
+    -fx-font-size: 20px;  
+}
+
+.labelSair:hover{
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px; 
+}
+
+.comboBox{
+    -fx-font-size: 15px;
+}
+
+.btn{
+    -fx-background-color: #0066FF;
+    -fx-cursor: hand;
+    -fx-text-fill: white;
+    -fx-font-family: sans-serif; 
+    -fx-font-size: 20px; 
+    -fx-font-style: normal; 
+    -fx-font-weight: bold;
+    -fx-pref-height: 30;
+    -fx-pref-width: 100;
+}
+
+.btn:hover{
+    -fx-background-color: blue;
 }

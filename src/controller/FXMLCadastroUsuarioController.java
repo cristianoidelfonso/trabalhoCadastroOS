@@ -80,7 +80,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
         MascarasFX.mascaraData(dtDataNasc);
 
         lblId.setVisible(false);
-        //lblSair.setFont(Font.font("Verdana", FontWeight.NORMAL, 16));
 
         carregarCombo();
         cbPerfil.setValue("Admin");
