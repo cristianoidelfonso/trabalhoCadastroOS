@@ -17,7 +17,7 @@
 <BorderPane fx:id="bpCadUsu" maxHeight="550.0" maxWidth="750.0" minHeight="550.0" minWidth="750.0" prefHeight="550.0" prefWidth="750.0" stylesheets="@css/fxmlcadastrousuario.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLCadastroUsuarioController">
     <!-- Esquerda -->
     <left>
-        <VBox prefHeight="200.0" prefWidth="25.0" BorderPane.alignment="CENTER" />
+        <VBox prefWidth="25.0" BorderPane.alignment="CENTER" />
     </left>
     <!-- Centro -->
     <center>
