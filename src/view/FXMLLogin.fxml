@@ -24,7 +24,7 @@
       <VBox prefWidth="50.0" BorderPane.alignment="CENTER" />
    </right>
    <center>
-      <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="150.0" spacing="25.0" BorderPane.alignment="TOP_CENTER">
+      <VBox fx:id="vb" alignment="BOTTOM_CENTER" prefHeight="348.0" prefWidth="300.0" spacing="25.0" styleClass="vb" stylesheets="@css/fxmllogin.css" BorderPane.alignment="TOP_CENTER">
          <children>
             <Label alignment="TOP_CENTER" stylesheets="@css/fxmllogin.css" text="Label" />
             <JFXTextField fx:id="txtLogin" labelFloat="true" promptText="Login" styleClass="txtField" stylesheets="@css/fxmllogin.css">

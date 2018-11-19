@@ -16,6 +16,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -40,6 +41,9 @@ public class FXMLLoginController implements Initializable {
     private JFXButton btnEntrar;
     @FXML
     private BorderPane borderPane;
+    @FXML
+    private VBox vb;
+   
 
     /**
      *
