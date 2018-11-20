@@ -196,6 +196,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
     private void btnSalvarAction(ActionEvent event) throws SQLException {
 
         Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("INFORMAÇÃO");
 
         try {
             if (txtNome.getText().isEmpty() || !txtNome.getText().matches("([A-Z]{1}[A-Za-z\\s]+)")) {
@@ -246,7 +247,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
                     if (txtNome.getText().matches("([A-Z]{1}[A-Za-z\\s]+)")) {
                         usuario.setNome(txtNome.getText());
                     } else {
-                        alerta.setTitle("INFORMAÇÃO");
                         alerta.setHeaderText("NOME");
                         alerta.setContentText("O campo NOME não está preenchido corretamente."
                                 + "\n(Utilize apenas letras, iniciando por letra maiúscula)");
@@ -256,7 +256,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
                         return;
                     }
                 } else {
-                    alerta.setTitle("INFORMAÇÃO");
                     alerta.setHeaderText("NOME");
                     alerta.setContentText("O campo NOME não pode ser vazio."
                             + "\n(Utilize apenas letras, iniciando por letra maiúscula)");
@@ -274,7 +273,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
                     if (dtDataNasc.getValue().toString().matches("(\\d{4}\\-\\d{2}\\-\\d{2})")) {
                         usuario.setDataNasc(dtDataNasc.getValue());
                     } else {
-                        alerta.setTitle("INFORMAÇÃO");
                         alerta.setHeaderText("DATA DE NASCIMENTO");
                         alerta.setContentText("O campo DATA DE NASCIMENTO não está preenchido corretamente."
                                 + "\n(utilize o padrão (dd/MM/aaaa))");
@@ -284,7 +282,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
                         return;
                     }
                 } else {
-                    alerta.setTitle("INFORMAÇÃO");
                     alerta.setHeaderText("DATA DE NASCIMENTO");
                     alerta.setContentText(" O campo DATA DE NASCIMENTO não pode ser vazio."
                             + "\n(utilize o padrão (dd/MM/aaaa))");
@@ -311,7 +308,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
                         return;
                     }
                 } else {
-                    alerta.setTitle("INFORMAÇÃO");
                     alerta.setHeaderText("CPF");
                     alerta.setContentText("O campo CPF não pode ser vazio."
                             + "\n(Digite apenas números.)");
@@ -327,7 +323,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
                     if (txtLogin.getText().matches("[\\w]{5,12}")) {
                         usuario.setLogin(txtLogin.getText());
                     } else {
-                        alerta.setTitle("INFORMAÇÃO");
                         alerta.setHeaderText("LOGIN");
                         alerta.setContentText("O campo LOGIN nao esta preenchido corretamente."
                                 + "\n(Utilize min:3 / max:12 caracteres alfanuméricos)");
@@ -337,7 +332,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
                         return;
                     }
                 } else {
-                    alerta.setTitle("INFORMAÇÃO");
                     alerta.setHeaderText("LOGIN");
                     alerta.setContentText("O campo LOGIN não pode ser vazio."
                             + "\n(Utilize min:3 / max:12 caracteres alfanuméricos)");
@@ -353,7 +347,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
                     if (txtSenha.getText().matches("(\\w{5,10})")) {
                         usuario.setSenha(txtSenha.getText());
                     } else {
-                        alerta.setTitle("INFORMAÇÃO");
                         alerta.setHeaderText("SENHA");
                         alerta.setContentText("O campo SENHA não esta preenchido corretamente."
                                 + "\n(Utilize min:5 / max:10 caracteres alfanuméricos)");
@@ -363,7 +356,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
                         return;
                     }
                 } else {
-                    alerta.setTitle("INFORMAÇÃO");
                     alerta.setHeaderText("SENHA");
                     alerta.setContentText("O campo SENHA não pode ser vazio."
                             + "\n(Utilize min:5 / max:10 caracteres alfanuméricos)");
@@ -381,7 +373,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
                     if (cbPerfil.getValue().matches("[a-zA-Z]+")) {
                         usuario.setPerfil(cbPerfil.getValue());
                     } else {
-                        alerta.setTitle("INFORMAÇÃO");
                         alerta.setHeaderText("PERFIL");
                         alerta.setContentText("O campo PERFIL não está preenchido corretamente.");
                         alerta.show();
@@ -390,7 +381,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
                         return;
                     }
                 } else {
-                    alerta.setTitle("INFORMAÇÃO");
                     alerta.setHeaderText("Preencha o campo PERFIL.");
                     alerta.setContentText(" O campo PERFIL não pode ser vazio.");
                     alerta.show();
@@ -413,7 +403,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
             }
 
         } catch (RuntimeException e) {
-            alerta.setTitle("INFORMAÇÃO");
+
             alerta.setContentText(e.getMessage());
             alerta.show();
         }
@@ -438,41 +428,31 @@ public class FXMLCadastroUsuarioController implements Initializable {
      */
     @FXML
     private void btnEditarAction(ActionEvent event) {
-
-        try { 
-            if (tableView.getSelectionModel().getSelectedItems() != null) {
-                usuarioAtual.find(tableView.getSelectionModel().getSelectedItem().getNome());
-            }   
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            txtNome.setText(tableView.getSelectionModel().getSelectedItem().getNome());
+            if (Usuario.find(txtNome.getText()) != null) {
+                usuarioAtual = Usuario.find(txtNome.getText());
+                preencherTela();
+            }
+        } else {
             if (txtNome.getText().equals("")) {
                 txtNome.requestFocus();
-                throw new RuntimeException("Informe um nome de usuário.");
-            }
-            if (usuarioAtual.find(txtNome.getText()) != null) {
-                usuarioAtual = usuarioAtual.find(txtNome.getText());
-                txtNome.setText(usuarioAtual.getNome());
-                dtDataNasc.setValue(usuarioAtual.getDataNasc());
-                txtCpf.setText(usuarioAtual.getCpf());
-                txtLogin.setText(usuarioAtual.getLogin());
-                txtSenha.setText(usuarioAtual.getSenha());
-                cbPerfil.setValue(usuarioAtual.getPerfil());
+                throw new RuntimeException("Campo vazio");
             } else {
-                Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-                alerta.setTitle("INFORMAÇÃO");
-                alerta.setHeaderText("USUÁRIO NÃO CADASTRADO.");
-                alerta.setContentText(" Para cadastrar " + txtNome.getText() + " preencha todos os campos.");
-                alerta.show();
-
-                limparCampos();
-                txtNome.setText("");
-                txtNome.requestFocus();
+                if (Usuario.find(txtNome.getText()) != null) {
+                    usuarioAtual = Usuario.find(txtNome.getText());
+                    preencherTela();
+                } else {
+                    Alert info = new Alert(Alert.AlertType.ERROR);
+                    info.setTitle("Error");
+                    info.setHeaderText("Usuario nao cadastrado");
+                    info.setContentText("Para cadastrar " + txtNome.getText() + " preencha todos os campos.");
+                    info.showAndWait();
+                    limparCampos();
+                    txtNome.setText("");
+                    txtNome.requestFocus();
+                }
             }
-        } catch (RuntimeException e) {
-            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-            alerta.setTitle("INFORMAÇÃO");
-            alerta.setHeaderText("Teste");
-            alerta.setContentText(e.getMessage());
-            alerta.showAndWait();
-
         }
     }
 
@@ -482,5 +462,15 @@ public class FXMLCadastroUsuarioController implements Initializable {
      */
     @FXML
     private void btnApagarAction(ActionEvent event) {
+    }
+
+    private void preencherTela() {
+        txtNome.setText(usuarioAtual.getNome());
+        dtDataNasc.setValue(usuarioAtual.getDataNasc());
+        txtCpf.setText(usuarioAtual.getCpf());
+        txtLogin.setText(usuarioAtual.getLogin());
+        txtSenha.setText(usuarioAtual.getSenha());
+        cbPerfil.setValue(usuarioAtual.getPerfil());
+
     }
 }

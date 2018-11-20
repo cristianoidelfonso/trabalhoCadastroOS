@@ -1,12 +1,14 @@
 package model;
 
 import conexao.ConnectionFactory;
+import controller.FXMLCadastroUsuarioController;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.scene.control.Alert;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -196,4 +198,25 @@ public class DAOUsuario extends ConnectionFactory {
         }
         return lista;
     }
+    
+    //--------------------------------------------------------------------------
+    /**
+     * Pesquisar em tempo real, pelo nome que esta sendo digitado no campo de texto "NOME";
+     */
+    public void pesquisarUsuario(){
+        getConexao();
+        
+        try {
+            String sql = "SELECT * FROM tbl_usuario WHERE nome LIKE ?";
+            pst = conn.prepareStatement(sql);
+            //pst.setString(1, FXMLCadastroUsuarioController.txtNome.getText() + "%" );
+            rs = pst.executeQuery();
+            
+            //tbl_usuario.setModel(DbUtils.resultSetToTableModel(rs));
+            
+        } catch (SQLException e) {
+        }
+        
+    }
+    //--------------------------------------------------------------------------
 }
