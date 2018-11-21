@@ -1,5 +1,6 @@
 package model;
 
+import com.jfoenix.controls.JFXTextField;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -8,13 +9,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.IndexRange;
-import javafx.scene.control.TextField;
 
 /**
  *
  * @author Idelfonso
  */
-public class MaskedTextField extends TextField{
+public class MaskedTextField extends JFXTextField{
     
     // Available properties
     private StringProperty mask;

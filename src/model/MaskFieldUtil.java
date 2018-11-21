@@ -5,11 +5,12 @@
  */
 package model;
 
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,6 +47,7 @@ public abstract class MaskFieldUtil {
     }
 //------------------------------------------------------------------------------ 
     //xxxxx-xxxxx-xxxxx-xxxxx
+
     public static void serialTextField(final TextField textField) {
         MaskFieldUtil.maxField(textField, 23);
         textField.lengthProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
@@ -60,7 +62,7 @@ public abstract class MaskFieldUtil {
             }
         });
     }
-    
+
     public static void serialTextField(final JFXTextField textField) {
         MaskFieldUtil.maxField(textField, 23);
         textField.lengthProperty().addListener((ObservableValue<? extends Number> observable, Number oldValue, Number newValue) -> {
@@ -76,6 +78,7 @@ public abstract class MaskFieldUtil {
         });
     }
 //------------------------------------------------------------------------------ 
+
     public static void dateField(final TextField textField) {
         MaskFieldUtil.maxField(textField, 10);
         textField.lengthProperty().addListener((ChangeListener) new ChangeListener<Number>() {
@@ -93,7 +96,7 @@ public abstract class MaskFieldUtil {
             }
         });
     }
-    
+
     public static void dateField(final JFXTextField textField) {
         MaskFieldUtil.maxField(textField, 10);
         textField.lengthProperty().addListener((ChangeListener) new ChangeListener<Number>() {
@@ -111,7 +114,6 @@ public abstract class MaskFieldUtil {
             }
         });
     }
-    
 //------------------------------------------------------------------------------ 
     public static void numericField(final TextField textField) {
         textField.lengthProperty().addListener((ChangeListener) new ChangeListener<Number>() {
@@ -125,8 +127,8 @@ public abstract class MaskFieldUtil {
             }
         });
     }
-    
-     public static void numericField(final JFXTextField textField) {
+
+    public static void numericField(final JFXTextField textField) {
         textField.lengthProperty().addListener((ChangeListener) new ChangeListener<Number>() {
 
             @Override
@@ -139,6 +141,7 @@ public abstract class MaskFieldUtil {
         });
     }
 //------------------------------------------------------------------------------ 
+
     public static void monetaryField(final TextField textField) {
         textField.setAlignment(Pos.CENTER_RIGHT);
         textField.lengthProperty().addListener((observable, oldValue, newValue) -> {
@@ -169,7 +172,7 @@ public abstract class MaskFieldUtil {
         }
         );
     }
-    
+
     public static void monetaryField(final JFXTextField textField) {
         textField.setAlignment(Pos.CENTER_RIGHT);
         textField.lengthProperty().addListener((observable, oldValue, newValue) -> {
@@ -201,6 +204,7 @@ public abstract class MaskFieldUtil {
         );
     }
 //------------------------------------------------------------------------------ 
+
     public static BigDecimal monetaryValueFromField(TextField textField) {
         if (textField.getText().isEmpty()) {
             return null;
@@ -215,7 +219,7 @@ public abstract class MaskFieldUtil {
         }
         return retorno;
     }
-    
+
     public static BigDecimal monetaryValueFromField(JFXTextField textField) {
         if (textField.getText().isEmpty()) {
             return null;
@@ -231,6 +235,7 @@ public abstract class MaskFieldUtil {
         return retorno;
     }
 //------------------------------------------------------------------------------ 
+
     public static void cpfCnpjField(TextField textField) {
         MaskFieldUtil.maxField(textField, 18);
         textField.lengthProperty().addListener((observableValue, number, number2) -> {
@@ -252,7 +257,7 @@ public abstract class MaskFieldUtil {
         }
         );
     }
-    
+
     public static void cpfCnpjField(JFXTextField textField) {
         MaskFieldUtil.maxField(textField, 18);
         textField.lengthProperty().addListener((observableValue, number, number2) -> {
@@ -275,6 +280,7 @@ public abstract class MaskFieldUtil {
         );
     }
 //------------------------------------------------------------------------------ 
+
     public static void cepField(TextField textField) {
         MaskFieldUtil.maxField(textField, 9);
         textField.lengthProperty().addListener((observableValue, number, number2) -> {
@@ -286,8 +292,8 @@ public abstract class MaskFieldUtil {
         }
         );
     }
-    
-     public static void cepField(JFXTextField textField) {
+
+    public static void cepField(JFXTextField textField) {
         MaskFieldUtil.maxField(textField, 9);
         textField.lengthProperty().addListener((observableValue, number, number2) -> {
             String value = textField.getText();
@@ -299,6 +305,7 @@ public abstract class MaskFieldUtil {
         );
     }
 //------------------------------------------------------------------------------ 
+
     public static void foneField(TextField textField) {
         MaskFieldUtil.maxField(textField, 14);
         textField.lengthProperty().addListener((observableValue, number, number2) -> {
@@ -320,8 +327,8 @@ public abstract class MaskFieldUtil {
         }
         );
     }
-    
-     public static void foneField(JFXTextField textField) {
+
+    public static void foneField(JFXTextField textField) {
         MaskFieldUtil.maxField(textField, 14);
         textField.lengthProperty().addListener((observableValue, number, number2) -> {
             try {
@@ -343,6 +350,7 @@ public abstract class MaskFieldUtil {
         );
     }
 //------------------------------------------------------------------------------ 
+
     public static void cpfField(TextField textField) {
         MaskFieldUtil.maxField(textField, 14);
         textField.lengthProperty().addListener((observableValue, number, number2) -> {
@@ -359,7 +367,7 @@ public abstract class MaskFieldUtil {
         }
         );
     }
-    
+
     public static void cpfField(JFXTextField textField) {
         MaskFieldUtil.maxField(textField, 14);
         textField.lengthProperty().addListener((observableValue, number, number2) -> {
@@ -377,6 +385,7 @@ public abstract class MaskFieldUtil {
         );
     }
 //------------------------------------------------------------------------------   
+
     public static void cnpjField(TextField textField) {
         MaskFieldUtil.maxField(textField, 18);
         textField.lengthProperty().addListener((observableValue, number, number2) -> {
@@ -407,6 +416,7 @@ public abstract class MaskFieldUtil {
         );
     }
 //------------------------------------------------------------------------------ 
+
     private static void positionCaret(TextField textField) {
         Platform.runLater(() -> {
             if (textField.getText().length() != 0) {
@@ -415,8 +425,8 @@ public abstract class MaskFieldUtil {
         }
         );
     }
-    
-     private static void positionCaret(JFXTextField textField) {
+
+    private static void positionCaret(JFXTextField textField) {
         Platform.runLater(() -> {
             if (textField.getText().length() != 0) {
                 textField.positionCaret(textField.getText().length());
@@ -425,6 +435,7 @@ public abstract class MaskFieldUtil {
         );
     }
 //------------------------------------------------------------------------------ 
+
     public static void maxField(TextField textField, Integer length) {
         textField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue == null || newValue.length() > length) {
@@ -433,7 +444,7 @@ public abstract class MaskFieldUtil {
         }
         );
     }
-    
+
     public static void maxField(JFXTextField textField, Integer length) {
         textField.textProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue == null || newValue.length() > length) {
@@ -442,6 +453,9 @@ public abstract class MaskFieldUtil {
         }
         );
     }
+
+//******************************************************************************
+//******************************************************************************
 //------------------------------------------------------------------------------ 
     public static String onlyDigitsValue(TextField field) {
         String result = field.getText();
@@ -450,8 +464,8 @@ public abstract class MaskFieldUtil {
         }
         return result.replaceAll("[^0-9]", "");
     }
-    
-      public static String onlyDigitsValue(JFXTextField field) {
+
+    public static String onlyDigitsValue(JFXTextField field) {
         String result = field.getText();
         if (result == null) {
             return null;
@@ -459,6 +473,7 @@ public abstract class MaskFieldUtil {
         return result.replaceAll("[^0-9]", "");
     }
 //------------------------------------------------------------------------------ 
+
     public static String onlyAlfaNumericValue(TextField field) {
         String result = field.getText();
         if (result == null) {
@@ -466,7 +481,7 @@ public abstract class MaskFieldUtil {
         }
         return result.replaceAll("[^0-9]", "");
     }
-    
+
     public static String onlyAlfaNumericValue(JFXTextField field) {
         String result = field.getText();
         if (result == null) {
@@ -475,36 +490,33 @@ public abstract class MaskFieldUtil {
         return result.replaceAll("[^0-9]", "");
     }
 //------------------------------------------------------------------------------ 
+
     static {
         Collections.addAll(ignoreKeyCodes, new KeyCode[]{KeyCode.F1, KeyCode.F2, KeyCode.F3, KeyCode.F4, KeyCode.F5, KeyCode.F6, KeyCode.F7, KeyCode.F8, KeyCode.F9, KeyCode.F10, KeyCode.F11, KeyCode.F12});
     }
 }
 //------------------------------------------------------------------------------
-/***************** Exemplo de como utilizar ************************************
-
-//imports omitdos
-public class EmpresaController implements Initializable {
-    @FXML
-    private TextField fieldCpf;
-    @FXML
-    private TextField fieldFone1;
-    @FXML
-    private TextField fieldCepResp;
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        MaskFieldUtil.foneField(this.fieldFone1);
-        MaskFieldUtil.cepField(this.fieldCepResp);
-        MaskFieldUtil.cpfField(this.fieldCpf);
-    }
-
-    public void getValores() {
-        //A funcao onlyDigitsValue retorna apenas os digitos do TextField passado como parâmetro.
-        // Seria a mesma situação para CEP, FONE, CNPJ
-        System.out.println("cpf informado: "+ MaskFieldUtil.onlyDigitsValue(this.fieldCpf));
-
-    }
-
-}
-*/
+/**
+ * *************** Exemplo de como utilizar ************************************
+ *
+ * //imports omitdos public class EmpresaController implements Initializable {
+ *
+ * @FXML private TextField fieldCpf;
+ * @FXML private TextField fieldFone1;
+ * @FXML private TextField fieldCepResp;
+ *
+ * @Override public void initialize(URL url, ResourceBundle rb) {
+ * MaskFieldUtil.foneField(this.fieldFone1);
+ * MaskFieldUtil.cepField(this.fieldCepResp);
+ * MaskFieldUtil.cpfField(this.fieldCpf); }
+ *
+ * public void getValores() { //A funcao onlyDigitsValue retorna apenas os
+ * digitos do TextField passado como parâmetro. // Seria a mesma situação para
+ * CEP, FONE, CNPJ System.out.println("cpf informado: "+
+ * MaskFieldUtil.onlyDigitsValue(this.fieldCpf));
+ *
+ * }
+ *
+ * }
+ */
 //------------------------------------------------------------------------------

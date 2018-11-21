@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import com.jfoenix.controls.JFXTextField;
@@ -17,66 +12,44 @@ public class MaskTextField extends JFXTextField {
     private String mask;
     private final ArrayList<String> patterns;
 
-    public MaskTextField() {
-        super();
-        patterns = new ArrayList<>();
-    }
+    public MaskTextField() { super(); patterns = new ArrayList<>(); }
 
-    public MaskTextField(String text) {
-        super(text);
-        patterns = new ArrayList<>();
-    }
+    public MaskTextField(String text) { super(text); patterns = new ArrayList<>(); }
 
     @Override
     public void replaceText(int start, int end, String text) {
-
-       
         String tempText = this.getText() + text;
-
         if(mask == null || mask.length() == 0){
             super.replaceText(start, end, text);
         }else if (tempText.matches(this.mask) || tempText.length() == 0) {        //text.length == 0 representa o delete ou backspace
-
             super.replaceText(start, end, text);
-
         } else {
-
             String tempP = "^";
-
             for (String patt : this.patterns) {
-
                 tempP += patt;
-
                 if (tempText.matches(tempP)) {
-
                     super.replaceText(start, end, text);
                     break;
                 }
             }
         }
     }
-
     /**
      * @return the Regex Mask
      */
     public String getMask() {
         return mask;
     }
-
     /**
      * @param mask the mask to set
      */
     public void setMask(String mask) {
-
         String tempMask = "^";
-
         for (int i = 0; i < mask.length(); ++i) {
-
             char temp = mask.charAt(i);
             String regex;
             int counter = 1;
             int step = 0;
-
             if (i < mask.length() - 1) {
                 for (int j = i + 1; j < mask.length(); ++j) {
                     if (temp == mask.charAt(j)) {
@@ -126,7 +99,6 @@ public class MaskTextField extends JFXTextField {
                     regex = Character.toString(temp);
                     break;
             }
-
             if (counter != 1) {
 
                 this.patterns.add(regex);
@@ -141,13 +113,10 @@ public class MaskTextField extends JFXTextField {
                         this.patterns.add(tempRegex);
                     }
                 }
-
                 i = step;
-
             } else {
                 this.patterns.add(regex);
             }
-
             tempMask += regex;
         }
         this.mask = tempMask + "$";

@@ -227,6 +227,7 @@ public class MascarasFX {
             }
         });
     }
+    
 //------------------------------------------------------------------------------
 
     public static void mascaraData(JFXDatePicker datePicker) {

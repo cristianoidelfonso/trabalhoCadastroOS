@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.MascarasFX;
-import model.MaskedTextField;
 
 /**
  * FXML Controller class
@@ -27,27 +26,32 @@ public class ClienteController implements Initializable {
     @FXML
     private JFXTextField txtNomeCliente;
     @FXML
-    private JFXDatePicker dtNascCliente;
-    @FXML
     private JFXTextField txtRgCliente;
     @FXML
     private JFXTextField txtTelCliente;
     @FXML
-    private DatePicker data;
+    private DatePicker dtNascimento;
+    @FXML
+    private JFXDatePicker jfxData;
+    
+   
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+
         MascarasFX.mascaraCPF(txtCpfCliente);
-        MascarasFX.mascaraTelefone(txtTelCliente);    
-        
-    }    
+        MascarasFX.mascaraTelefone(txtTelCliente);
+        MascarasFX.mascaraData(dtNascimento);
+        MascarasFX.mascaraData(jfxData);
+
+    }
 
     @FXML
     private void onMouseClickedSair(MouseEvent event) {
@@ -56,5 +60,5 @@ public class ClienteController implements Initializable {
         // Fecha o stage atual
         stageAtual.close();
     }
-    
+
 }
