@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import model.MaskFieldUtil;
 
 /**
  * FXML Controller class
@@ -21,7 +22,6 @@ public class ClienteController implements Initializable {
     @FXML
     private JFXTextField txtCpfCliente;
 
-    private final String maskCPF = "NNN.NNN.NNN-NN";
     /**
      * Initializes the controller class.
      * @param url
@@ -30,6 +30,7 @@ public class ClienteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        MaskFieldUtil.cpfField(txtCpfCliente);
         
     }    
 
