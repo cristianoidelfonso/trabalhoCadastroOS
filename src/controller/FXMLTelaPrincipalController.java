@@ -71,11 +71,11 @@ public class FXMLTelaPrincipalController implements Initializable {
     @FXML
     private void chamarTelaCadUsu(ActionEvent event) throws IOException {
 
-        Parent cadUsu = FXMLLoader.load(getClass().getResource("/view/FXMLCadastroUsuario.fxml"));
+        Parent cadUsuario = FXMLLoader.load(getClass().getResource("/view/FXMLCadastroUsuario.fxml"));
 
-        Scene cenaCadUsu = new Scene(cadUsu);
+        Scene cenaCadUsu = new Scene(cadUsuario);
         Stage stage = new Stage(StageStyle.UNDECORATED);
-        stage.setTitle("Cadastro de Usuário");
+        stage.setTitle("Usuários");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(cenaCadUsu);
         stage.show();
@@ -91,13 +91,13 @@ public class FXMLTelaPrincipalController implements Initializable {
     @FXML
     private void chamarTelaCadCli(ActionEvent event) throws IOException {
 
-        Parent cadUsu = FXMLLoader.load(getClass().getResource("/view/FXMLCadastroCliente.fxml"));
+        Parent cadCliente = FXMLLoader.load(getClass().getResource("/view/Cliente.fxml"));
 
-        Scene cenaCadUsu = new Scene(cadUsu);
-        Stage stage = new Stage(StageStyle.UTILITY);
-        stage.setTitle("Cadastro de Usuário");
+        Scene cenaCadCli = new Scene(cadCliente);
+        Stage stage = new Stage(StageStyle.UNDECORATED);
+        stage.setTitle("Clientes");
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(cenaCadUsu);
+        stage.setScene(cenaCadCli);
         stage.getWidth();
         stage.show();
     }
@@ -110,13 +110,13 @@ public class FXMLTelaPrincipalController implements Initializable {
     @FXML
     private void chamarTelaCadOS(ActionEvent event) throws IOException {
 
-        Parent cadUsu = FXMLLoader.load(getClass().getResource("/view/FXMLCadastroOS.fxml"));
+        Parent cadOS = FXMLLoader.load(getClass().getResource("/view/FXMLCadastroOS.fxml"));
 
-        Scene cenaCadUsu = new Scene(cadUsu);
-        Stage stage = new Stage(StageStyle.UTILITY);
-        stage.setTitle("Cadastro de Usuário");
+        Scene cenaCadOs = new Scene(cadOS);
+        Stage stage = new Stage(StageStyle.UNDECORATED);
+        stage.setTitle("Ordens de Serviços");
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(cenaCadUsu);
+        stage.setScene(cenaCadOs);
         stage.getWidth();
         stage.show();
     }
@@ -131,11 +131,11 @@ public class FXMLTelaPrincipalController implements Initializable {
 
         Parent telaSobre = FXMLLoader.load(getClass().getResource("/view/FXMLSobre.fxml"));
 
-        Scene cenaCadUsu = new Scene(telaSobre);
+        Scene cenaTelaSobre = new Scene(telaSobre);
         Stage stage = new Stage(StageStyle.UTILITY);
-        stage.setTitle("Cadastro de Usuário");
+        stage.setTitle("Sobre");
         stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(cenaCadUsu);
+        stage.setScene(cenaTelaSobre);
         stage.show();
 
     }

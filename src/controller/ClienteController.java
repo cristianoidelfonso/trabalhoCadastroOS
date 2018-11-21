@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import java.net.URL;
@@ -18,10 +13,10 @@ import javafx.stage.Stage;
  *
  * @author Idelfonso
  */
-public class FXMLCadastroOSController implements Initializable {
+public class ClienteController implements Initializable {
 
     @FXML
-    private Label lblSairOS;
+    private Label lblSairCliente;
 
     /**
      * Initializes the controller class.
@@ -34,9 +29,9 @@ public class FXMLCadastroOSController implements Initializable {
     }    
 
     @FXML
-    private void onMouseClickedSairOS(MouseEvent event) {
+    private void onMouseClickedSair(MouseEvent event) {
         // Recuperando o stage atual
-        Stage stageAtual = (Stage) lblSairOS.getScene().getWindow();
+        Stage stageAtual = (Stage) lblSairCliente.getScene().getWindow();
         // Fecha o stage atual
         stageAtual.close();
     }

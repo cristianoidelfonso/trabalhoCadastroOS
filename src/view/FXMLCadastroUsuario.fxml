@@ -132,7 +132,7 @@
     </bottom>
     <!-- Topo -->
     <top>
-        <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="TOP_RIGHT">
+        <HBox alignment="TOP_RIGHT" prefHeight="25.0" BorderPane.alignment="TOP_RIGHT">
             <children>
                 <Label fx:id="lblSair" onMouseClicked="#lblSairAction" styleClass="labelSair" stylesheets="@css/fxmlcadastrousuario.css" text="X">
                     <font>
