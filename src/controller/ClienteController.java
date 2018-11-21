@@ -1,5 +1,6 @@
 package controller;
 
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -17,7 +18,10 @@ public class ClienteController implements Initializable {
 
     @FXML
     private Label lblSairCliente;
+    @FXML
+    private JFXTextField txtCpfCliente;
 
+    private final String maskCPF = "NNN.NNN.NNN-NN";
     /**
      * Initializes the controller class.
      * @param url
@@ -26,6 +30,7 @@ public class ClienteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
     }    
 
     @FXML
