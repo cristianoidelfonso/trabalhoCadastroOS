@@ -378,17 +378,17 @@ public class MascarasFX {
 
             if (event.getCharacter().trim().length() == 0) { // apagando
 
-                if (textField.getText().length() == 4) {
-                    textField.setText(textField.getText().substring(0, 3));
-                    textField.positionCaret(textField.getText().length());
+                if (textField.getText().length() == 4) { // se for igual a 4
+                    textField.setText(textField.getText().substring(0, 3)); // deixa apenas os 3 primeiros digitos
+                    textField.positionCaret(textField.getText().length()); // posiciona o cursor na ultima posição
                 }
-                if (textField.getText().length() == 8) {
-                    textField.setText(textField.getText().substring(0, 7));
-                    textField.positionCaret(textField.getText().length());
+                if (textField.getText().length() == 8) {  //se for igual a 8
+                    textField.setText(textField.getText().substring(0, 7));  // deixa apenas os 7 primeiros digitos
+                    textField.positionCaret(textField.getText().length());  // posiciona o cursor na ultima posição
                 }
-                if (textField.getText().length() == 12) {
-                    textField.setText(textField.getText().substring(0, 11));
-                    textField.positionCaret(textField.getText().length());
+                if (textField.getText().length() == 12) {  //se for igual a 12
+                    textField.setText(textField.getText().substring(0, 11));  // deixa apenas os 11 primeiros digitos
+                    textField.positionCaret(textField.getText().length());  // posiciona o cursor na ultima posição
                 }
 
             } else { // escrevendo
@@ -420,6 +420,68 @@ public class MascarasFX {
             }
         });
     }
+//------------------------------------------------------------------------------
+    // Criando a mascara para RG
+    //Autor: Cristiano Idelfonso da Silva  --  22/11/2018
+    
+    public static void mascaraRG(JFXTextField textField) {
+
+        textField.setOnKeyTyped((KeyEvent event) -> {
+            if ("0123456789".contains(event.getCharacter()) == false) {
+                event.consume();
+            }
+
+            // RG  ->  12.123.123 
+            // CPF ->  123.123.123-12
+            if (event.getCharacter().trim().length() == 0) { // apagando
+
+                if (textField.getText().length() == 3) {
+                    textField.setText(textField.getText().substring(0, 2));
+                    textField.positionCaret(textField.getText().length());
+                }
+                if (textField.getText().length() == 7) {
+                    textField.setText(textField.getText().substring(0, 6));
+                    textField.positionCaret(textField.getText().length());
+                }
+                /*
+                if (textField.getText().length() == 10) {
+                    textField.setText(textField.getText().substring(0, 9));
+                    textField.positionCaret(textField.getText().length());
+                }
+                */
+
+            } else { // escrevendo
+
+                if (textField.getText().length() == 10) {
+                    event.consume();
+                }
+
+                if (textField.getText().length() == 2) {
+                    textField.setText(textField.getText() + ".");
+                    textField.positionCaret(textField.getText().length());
+                }
+                if (textField.getText().length() == 6) {
+                    textField.setText(textField.getText() + ".");
+                    textField.positionCaret(textField.getText().length());
+                }
+                /*
+                if (textField.getText().length() == 11) {
+                    textField.setText(textField.getText() + "-");
+                    textField.positionCaret(textField.getText().length());
+                }
+                */
+            }
+        });
+
+        textField.setOnKeyReleased((KeyEvent evt) -> {
+
+            if (!textField.getText().matches("\\d.*")) {
+                textField.setText(textField.getText().replaceAll("[^\\d.]", ""));
+                textField.positionCaret(textField.getText().length());
+            }
+        });
+    }
+    
 //------------------------------------------------------------------------------
 
     public static void mascaraCNPJ(JFXTextField textField) {

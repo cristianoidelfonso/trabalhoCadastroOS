@@ -1,6 +1,5 @@
 package controller;
 
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,8 +30,6 @@ public class ClienteController implements Initializable {
     private JFXTextField txtTelCliente;
     @FXML
     private DatePicker dtNascimento;
-    @FXML
-    private JFXDatePicker jfxData;
     
    
 
@@ -48,8 +45,10 @@ public class ClienteController implements Initializable {
 
         MascarasFX.mascaraCPF(txtCpfCliente);
         MascarasFX.mascaraTelefone(txtTelCliente);
-        MascarasFX.mascaraData(dtNascimento);
-        MascarasFX.mascaraData(jfxData);
+        MascarasFX.mascaraData(dtNascimento);  
+        MascarasFX.mascaraRG(txtRgCliente);
+        
+       
 
     }
 

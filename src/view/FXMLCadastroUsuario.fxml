@@ -2,10 +2,10 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableView?>
@@ -41,7 +41,7 @@
                   </HBox>
                       <HBox alignment="BOTTOM_LEFT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="616.0" spacing="25.0">
                           <children>
-                              <JFXDatePicker fx:id="dtDataNasc" overLay="true" prefHeight="25.0" prefWidth="177.0" promptText="Data de nascimento" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" HBox.hgrow="ALWAYS" />
+                        <DatePicker fx:id="dtDataNasc" prefHeight="25.0" prefWidth="180.0" promptText="Data de nascimento" />
                               <JFXTextField fx:id="txtCpf" labelFloat="true" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="25.0" prefWidth="228.0" promptText="CPF" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" HBox.hgrow="ALWAYS">
                                   <font>
                                       <Font size="14.0" />

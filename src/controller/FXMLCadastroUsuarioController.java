@@ -2,7 +2,6 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
@@ -13,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -41,7 +41,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
     @FXML
     private JFXTextField txtSenha;
     @FXML
-    private JFXDatePicker dtDataNasc;
+    private DatePicker dtDataNasc;
     @FXML
     private JFXTextField txtCpf;
     @FXML
@@ -155,9 +155,9 @@ public class FXMLCadastroUsuarioController implements Initializable {
 
     private void updateList() {
         tableView.getItems().clear();
-        for (Usuario u : Usuario.listar()) {
+        Usuario.listar().forEach((u) -> {
             tableView.getItems().add(u);
-        }
+        });
     }
 
     /**

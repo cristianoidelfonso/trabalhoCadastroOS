@@ -68,7 +68,7 @@ public class MaskFormatter {
      */
     public MaskFormatter(JFXDatePicker datePicker) {
         this.datePicker = datePicker;
-        /*Informa que foi passado um DatePicker*/
+        /*Informa que foi passado um JFXDatePicker*/
         this.usarDatePicker = true;
     }
     public MaskFormatter(DatePicker data) {
