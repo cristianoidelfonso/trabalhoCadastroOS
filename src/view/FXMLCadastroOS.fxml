@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
@@ -18,7 +19,19 @@
          </children></HBox>
    </top>
    <bottom>
-      <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="15.0" left="15.0" top="15.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets right="50.0" />
+         </padding>
+         <children>
+            <JFXButton fx:id="btnSalvar" onAction="#onActionSalvar" styleClass="btn" text="Salvar" />
+            <JFXButton fx:id="btnEditar" onAction="#onActionEditar" styleClass="btn" text="Editar" />
+            <JFXButton fx:id="btnApagar" onAction="#onActionApagar" styleClass="btn" text="Apagar" />
+            <JFXButton fx:id="btnSair" onAction="#onActionSair" onKeyPressed="#sairComEnter" styleClass="btn" text="Sair" />
+         </children></HBox>
    </bottom>
    <left>
       <VBox prefHeight="200.0" prefWidth="50.0" BorderPane.alignment="CENTER" />

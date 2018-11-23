@@ -20,6 +20,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.DAOUsuario;
+import model.Usuario;
 
 /**
  * FXML Controller class
@@ -35,8 +37,8 @@ public class FXMLLoginController implements Initializable {
     @FXML
     private JFXButton btnSair;
 
-    private final String user;
-    private final String pass;
+    private String user;
+    private String pass;
     @FXML
     private JFXButton btnEntrar;
     @FXML
@@ -49,8 +51,7 @@ public class FXMLLoginController implements Initializable {
      *
      */
     public FXMLLoginController() {
-        this.user = "admin";
-        this.pass = "admin";
+ 
     }
 
     /**
@@ -125,18 +126,22 @@ public class FXMLLoginController implements Initializable {
         st.initModality(Modality.APPLICATION_MODAL);
         st.show();
     }
+    
 
     //--------------------------------------------------------------------------
     private void logar() {
-        if ((txtLogin.getText().equals(user)) && (txtSenha.getText().equals(pass))) {
-
-            LoginMain.changeScreen("principal");
+        this.user = txtLogin.getText();
+        this.pass = txtSenha.getText();
+        
+        if(DAOUsuario.logarUsuario(user, pass) != null){
+            Usuario u = DAOUsuario.logarUsuario(user, user);
+            LoginMain.changeScreen("principal", u );
 
         } else {
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("ERROR");
             alert.setHeaderText("Acesso negado");
-            String s = "Dados nao foram informados corretamente.";
+            String s = "Login / Senha inválidos.";
             alert.setContentText(s);
             alert.show();
 
@@ -146,4 +151,5 @@ public class FXMLLoginController implements Initializable {
     }
     //--------------------------------------------------------------------------
 
+    
 }

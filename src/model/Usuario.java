@@ -123,7 +123,7 @@ public class Usuario {
     }
 
     public void delete() {
-        if (dao.find(nome) != null) {
+        if (dao.find(id) != null) {
             dao.delete(this);
         }
     }

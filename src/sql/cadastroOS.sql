@@ -20,3 +20,5 @@ desc tbl_usuario;
 select * from tbl_usuario;
 
 delete from tbl_usuario where id = 1;
+
+select * from tbl_usuario where login like binary 'admin' and senha like binary 'admin';

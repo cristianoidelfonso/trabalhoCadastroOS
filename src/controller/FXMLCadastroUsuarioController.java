@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -32,7 +34,7 @@ import model.Usuario;
  */
 public class FXMLCadastroUsuarioController implements Initializable {
 
-    private Usuario usuarioAtual = null;
+    private Usuario usuarioAtual;
 
     @FXML
     private JFXTextField txtNome;
@@ -76,6 +78,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 
+        usuarioAtual = null;
         MascarasFX.mascaraCPF(txtCpf);
         MascarasFX.mascaraData(dtDataNasc);
 
@@ -199,22 +202,22 @@ public class FXMLCadastroUsuarioController implements Initializable {
         alerta.setTitle("INFORMAÇÃO");
 
         try {
-            if (txtNome.getText().isEmpty() || !txtNome.getText().matches("([A-Z]{1}[A-Za-z\\s]+)")) {
+            if (txtNome.getText() == null || txtNome.getText().isEmpty() || !txtNome.getText().matches("([A-Z]{1}[A-Za-z\\s]+)")) {
                 txtNome.requestFocus();
-                throw new RuntimeException("O campo NOME nao pode ser vazio.");
+                throw new RuntimeException("O campo NOME nao pode ser vazio. teste 01");
             } else if (dtDataNasc.getValue() == null) {
                 dtDataNasc.requestFocus();
                 throw new RuntimeException("O campo DATA DE NASCIMENTO nao pode ser vazio.");
-            } else if (txtCpf.getText().isEmpty()) {
+            } else if (txtCpf.getText() == null || txtCpf.getText().isEmpty()) {
                 txtCpf.requestFocus();
                 throw new RuntimeException("O campo CPF nao pode ser vazio.");
-            } else if (txtLogin.getText().isEmpty()) {
+            } else if (txtLogin.getText() == null || txtLogin.getText().isEmpty() || txtLogin.getText().matches("[\\w]{5,12}")) {
                 txtLogin.requestFocus();
                 throw new RuntimeException("O campo LOGIN nao pode ser vazio.");
-            } else if (txtSenha.getText().isEmpty()) {
+            } else if (txtSenha.getText() == null || txtSenha.getText().isEmpty() || txtSenha.getText().matches("(\\w{5,10})")) {
                 txtSenha.requestFocus();
                 throw new RuntimeException("O campo SENHA nao pode ser vazio.");
-            } else if (cbPerfil.getValue().isEmpty()) {
+            } else if (cbPerfil.getValue() == null || cbPerfil.getValue().isEmpty()) {
                 cbPerfil.requestFocus();
                 throw new RuntimeException("O campo PERFIL nao pode ser vazio.");
             }
@@ -228,6 +231,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
                 usuarioAtual.setPerfil(cbPerfil.getValue());
 
                 usuarioAtual.save();
+                //usuarioAtual = null;
                 updateList();
 
                 // Se salvar com sucesso, imprime esta mensagem.
@@ -241,7 +245,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
 
             } else {
                 Usuario usuario = new Usuario();
-                // Validação do txtNome
+                // Validação do txtNome  
                 //----------------------------------------------------------------------
                 if (!txtNome.getText().equals("")) {
                     if (txtNome.getText().matches("([A-Z]{1}[A-Za-z\\s]+)")) {
@@ -407,7 +411,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
             alerta.setContentText(e.getMessage());
             alerta.show();
         }
-
+        usuarioAtual = null;
     }
 
     /**
@@ -437,7 +441,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         } else {
             if (txtNome.getText().equals("")) {
                 txtNome.requestFocus();
-                throw new RuntimeException("Campo vazio");
+                //throw new RuntimeException("Campo vazio");
             } else {
                 if (Usuario.find(txtNome.getText()) != null) {
                     usuarioAtual = Usuario.find(txtNome.getText());
@@ -462,6 +466,38 @@ public class FXMLCadastroUsuarioController implements Initializable {
      */
     @FXML
     private void btnApagarAction(ActionEvent event) {
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            usuarioAtual = Usuario.find(tableView.getSelectionModel().getSelectedItem().getNome());
+            if (usuarioAtual != null) {
+                System.out.println(usuarioAtual + "Botao Apagar");
+                //Pegando o botao que foi pressionado
+                Alert conf = new Alert(Alert.AlertType.CONFIRMATION);
+                conf.setTitle("EXCLUIR");
+                conf.setHeaderText(null);
+                conf.setContentText("Deseja excluir esse usuario?");
+                Optional<ButtonType> btn = conf.showAndWait();
+                //Verificar qual botão foi pressionado
+                if (btn.get() == ButtonType.OK) { //Manda a classe de negocio excluir
+                    usuarioAtual.delete();
+                    //Atualizar a tabela
+                    updateList();
+                    //Mensagem de excluído com sucesso
+                    Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
+                    sucesso.setTitle("SUCESSO");
+                    sucesso.setHeaderText("Concluido com sucesso!");
+                    sucesso.setContentText("O usuário foi excluido");
+                    sucesso.showAndWait();
+                    usuarioAtual = null;
+                }
+            }
+        } else {
+            System.out.println("Usuario nao selecionado");
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("INFORMAÇÂO");
+            a.setHeaderText(null);
+            a.setContentText("Selecione o usuário a ser excluído.");
+            a.showAndWait();
+        }
     }
 
     private void preencherTela() {

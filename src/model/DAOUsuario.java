@@ -1,14 +1,12 @@
 package model;
 
 import conexao.ConnectionFactory;
-import controller.FXMLCadastroUsuarioController;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.scene.control.Alert;
-import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -105,13 +103,13 @@ public class DAOUsuario extends ConnectionFactory {
 
     }
 
-    public Usuario find(String pk) {
+    public Usuario find(String nome) {
         Usuario resultado = null;
         getConexao();
         try {
-            String sql = "SELECT * FROM tbl_usuario WHERE nome = ?";
+            String sql = "SELECT * FROM tbl_usuario WHERE nome LIKE BINARY ?";
             pst = conn.prepareStatement(sql);
-            pst.setString(1, pk);
+            pst.setString(1, nome);
 
             rs = pst.executeQuery();
 
@@ -160,6 +158,37 @@ public class DAOUsuario extends ConnectionFactory {
         }
         return resultado;
     }
+     
+//------------------------------------------------------------------------------
+     public static Usuario logarUsuario(String login, String senha) {
+        Usuario resultado = null;
+        getConexao();
+        try {
+            String sql = "SELECT * FROM tbl_usuario WHERE login LIKE BINARY ? and senha LIKE BINARY ?";
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, login);
+            pst.setString(2, senha);
+
+            rs = pst.executeQuery();
+
+            if (rs.next()) {
+                Usuario usu = new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getDate("dataNasc").toLocalDate(),
+                        rs.getString("cpf"),
+                        rs.getString("login"),
+                        rs.getString("senha"),
+                        rs.getString("perfil"));
+                resultado = usu;
+            }
+        } catch (SQLException e) {
+        } finally {
+            fecharConexao(conn, pst, rs);
+        }
+        return resultado;
+    }
+//------------------------------------------------------------------------------    
 
     /**
      * Retorna todos os produtos do banco de dados
