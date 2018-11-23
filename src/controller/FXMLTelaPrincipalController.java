@@ -65,9 +65,11 @@ public class FXMLTelaPrincipalController implements Initializable {
     @FXML
     private Label lblCpf;
     @FXML
-    private Label lblDataHora;
-    @FXML
     private HBox hbBottom;
+    @FXML
+    private Label lblData;
+    @FXML
+    private Label lblHora;
 
     /**
      * Initializes the controller class.
@@ -87,20 +89,22 @@ public class FXMLTelaPrincipalController implements Initializable {
             public void onScreenChanged(String newScreen, Object userData) {
                 usuario = (Usuario) userData;
                 System.out.println(usuario);
-                lblUsuario.setText(lblUsuario.getText() + usuario.getNome());
-                lblPerfil.setText(lblPerfil.getText() + usuario.getPerfil());
-                lblCpf.setText(lblCpf.getText() + usuario.getCpf());
-                LocalDateTime dt = LocalDateTime.now();
-                lblDataHora.setText(lblDataHora.getText() + dataHora());
+
+                lblUsuario.setText(lblUsuario.getText()+" "+ usuario.getNome());
+                lblPerfil.setText(lblPerfil.getText() +" "+ usuario.getPerfil());
+                lblCpf.setText(lblCpf.getText() +" "+ usuario.getCpf());
+                dataHora();
             }
         });
     }
-    
-    private String dataHora(){
+
+    private String dataHora() {
         LocalDateTime dt = LocalDateTime.now();
-        String data = dt.getDayOfMonth()+"/"+dt.getMonth()+"/"+dt.getYear();
-        String hora = dt.getHour()+":"+dt.getMinute()+":"+dt.getSecond();
-        return data + " - " +hora;
+        String data = dt.getDayOfMonth() + "/" + dt.getMonth() + "/" + dt.getYear();
+        String hora = dt.getHour() + ":" + dt.getMinute() + ":" + dt.getSecond();
+        lblData.setText(lblData.getText() +" "+ data);
+        lblHora.setText(lblHora.getText() +" "+ hora);
+        return lblData.getText() + lblHora.getText();
     }
 
     /**

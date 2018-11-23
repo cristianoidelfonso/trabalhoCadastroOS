@@ -42,10 +42,11 @@
    <bottom>
       <HBox fx:id="hbBottom" alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblUsuario" style="-fx-text-fill: #FFFFFF;" stylesheets="@css/fxmltelaprincipal.css" text="Usuário:" />
-            <Label fx:id="lblPerfil" style="-fx-text-fill: #FFFFFF;" text="Perfil: " />
-            <Label fx:id="lblCpf" style="-fx-text-fill: #FFFFFF;" text="CPF:" />
-            <Label fx:id="lblDataHora" style="-fx-text-fill: #FFFFFF;" text="Data e Hora: " />
+            <Label fx:id="lblUsuario" style="-fx-text-fill: #FFFFFF;" stylesheets="@css/fxmltelaprincipal.css" text="Usuário :" />
+            <Label fx:id="lblPerfil" style="-fx-text-fill: #FFFFFF;" text="Perfil : " />
+            <Label fx:id="lblCpf" style="-fx-text-fill: #FFFFFF;" text="CPF :" />
+            <Label fx:id="lblData" style="-fx-text-fill: #FFFFFF;" text="Data :" />
+            <Label fx:id="lblHora" style="-fx-text-fill: #FFFFFF;" text="Hora :" />
          </children>
       </HBox>
    </bottom>
