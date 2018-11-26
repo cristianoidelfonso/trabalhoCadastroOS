@@ -226,4 +226,28 @@ public class FXMLTelaPrincipalController implements Initializable {
         System.exit(0);
     }
 
+    @FXML
+    private void consultarCliente(ActionEvent event) throws IOException {
+        Parent telaSobre = FXMLLoader.load(getClass().getResource("/view/ConsultarCliente.fxml"));
+
+        Scene cenaTelaSobre = new Scene(telaSobre);
+        Stage stage = new Stage(StageStyle.UTILITY);
+        stage.setTitle("Cliente");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(cenaTelaSobre);
+        stage.show();
+    }
+
+    @FXML
+    private void consultarOS(ActionEvent event) throws IOException {
+        Parent telaSobre = FXMLLoader.load(getClass().getResource("/view/ConsultarOS.fxml"));
+
+        Scene cenaTelaSobre = new Scene(telaSobre);
+        Stage stage = new Stage(StageStyle.UTILITY);
+        stage.setTitle("Ordem de Serviço");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setScene(cenaTelaSobre);
+        stage.show();
+    }
+
 }

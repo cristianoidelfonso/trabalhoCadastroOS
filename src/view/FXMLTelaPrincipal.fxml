@@ -25,8 +25,8 @@
           </Menu>
           <Menu fx:id="mnConsultar" mnemonicParsing="false" text="Consultar">
             <items>
-              <MenuItem fx:id="mnConsCli" mnemonicParsing="false" text="Cliente" />
-                  <MenuItem fx:id="mnConsOS" mnemonicParsing="false" text="O.S." />
+              <MenuItem fx:id="mnConsCli" mnemonicParsing="false" onAction="#consultarCliente" text="Cliente" />
+                  <MenuItem fx:id="mnConsOS" mnemonicParsing="false" onAction="#consultarOS" text="O.S." />
             </items>
           </Menu>
           <Menu fx:id="mnSobre" mnemonicParsing="false" text="Sobre">

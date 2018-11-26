@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -11,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -192,8 +194,12 @@ public class ClienteController implements Initializable {
     }
 
     @FXML
-    private void onActionSalvar(ActionEvent event) {
+    private void onActionSalvar(ActionEvent event) throws SQLException {
 
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setTitle(null);
+        alerta.setHeaderText(null);
+        
         try {
             if (txtNomeCliente.getText() == null || txtNomeCliente.getText().isEmpty()) {
                 txtNomeCliente.requestFocus();
@@ -271,6 +277,8 @@ public class ClienteController implements Initializable {
             }
 
         } catch (RuntimeException e) {
+            alerta.setContentText(e.getMessage());
+            alerta.showAndWait();
         }
     }
     
