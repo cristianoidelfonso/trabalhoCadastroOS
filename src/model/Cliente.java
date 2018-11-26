@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -10,7 +11,7 @@ public class Cliente {
 
     private Integer idCliente;
     private String nome;
-    private LocalDate dtNasc;
+    private LocalDate dataNasc;
     private String cpf;
     private String rg;
     private String telefone;
@@ -25,10 +26,10 @@ public class Cliente {
         
     }
 
-    public Cliente(Integer id,String nome, LocalDate dtNasc, String cpf, String rg, String telefone, String rua, String numero, String bairro, String cidade, String estado, String cep) {
+    public Cliente(Integer id,String nome, LocalDate dataNasc, String cpf, String rg, String telefone, String rua, String numero, String bairro, String cidade, String estado, String cep) {
         this.idCliente = id;
         this.nome = nome;
-        this.dtNasc = dtNasc;
+        this.dataNasc = dataNasc;
         this.cpf = cpf;
         this.rg = rg;
         this.telefone = telefone;
@@ -56,12 +57,12 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public LocalDate getDtNasc() {
-        return dtNasc;
+    public LocalDate getDataNasc() {
+        return dataNasc;
     }
 
-    public void setDtNasc(LocalDate dtNasc) {
-        this.dtNasc = dtNasc;
+    public void setDtNasc(LocalDate dataNasc) {
+        this.dataNasc = dataNasc;
     }
 
     public String getCpf() {
@@ -138,9 +139,36 @@ public class Cliente {
     
     @Override
     public String toString(){
-        return "[" + idCliente + "]\t[" + nome + "\t" + dtNasc + "\t" + cpf + 
+        return "[" + idCliente + "]\t[" + nome + "\t" + dataNasc + "\t" + cpf + 
                 "\t" + rg + "\t" + telefone + "\t" + rua + "\t" + numero + 
                 "\t" + bairro + "\t" + cidade + "\t" + estado + "\t" + cep + "]";
     }
-                                            
+       
+    
+    //--------------------------------------------------------------------------
+    // Padrão de projeto DAO
+    private static DAOCliente dao = new DAOCliente();
+
+    public void save() {
+        if (idCliente != null && dao.find(idCliente) != null) {
+            dao.update(this);
+        } else {
+            Integer generatedKey = dao.create(this);
+            this.idCliente = generatedKey;
+        }
+    }
+
+    //public void delete() {
+    //    if (dao.find(idCliente) != null) {
+    //        dao.delete(this);
+    //    }
+    //}
+
+    public static ArrayList<Cliente> listar(){
+        return dao.listar();
+    }
+
+    public static Cliente find(String nome) {
+        return dao.find(nome);
+    }
 }

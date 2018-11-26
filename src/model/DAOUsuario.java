@@ -57,6 +57,8 @@ public class DAOUsuario extends ConnectionFactory {
         }
         return generatedId;
     }
+    
+//------------------------------------------------------------------------------    
 
     public void update(Usuario usuario) {
         getConexao();
@@ -87,6 +89,8 @@ public class DAOUsuario extends ConnectionFactory {
             fecharConexao(conn, pst);
         }
     }
+    
+//------------------------------------------------------------------------------    
 
     public void delete(Usuario usuario) {
         getConexao();
@@ -102,6 +106,7 @@ public class DAOUsuario extends ConnectionFactory {
         }
 
     }
+//------------------------------------------------------------------------------
 
     public Usuario find(String nome) {
         Usuario resultado = null;
