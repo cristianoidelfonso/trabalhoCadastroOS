@@ -2,10 +2,12 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,11 +18,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import model.Usuario;
 
 /**
@@ -70,6 +75,11 @@ public class FXMLTelaPrincipalController implements Initializable {
     private Label lblData;
     @FXML
     private Label lblHora;
+    @FXML
+    private Label lblRelogio;
+
+    // SimpleDateFormat é a classe do Java que transforma datas para Strings usando o formato passado
+    private SimpleDateFormat formatador = new SimpleDateFormat("hh:mm:ss");
 
     /**
      * Initializes the controller class.
@@ -91,27 +101,43 @@ public class FXMLTelaPrincipalController implements Initializable {
                 verificarPerfil();
                 System.out.println(usuario);
 
-                lblUsuario.setText(lblUsuario.getText()+" "+ usuario.getNome());
-                lblPerfil.setText(lblPerfil.getText() +" "+ usuario.getPerfil());
-                lblCpf.setText(lblCpf.getText() +" "+ usuario.getCpf());
+                lblUsuario.setText(lblUsuario.getText() + " " + usuario.getNome());
+                lblPerfil.setText(lblPerfil.getText() + " " + usuario.getPerfil());
+                lblCpf.setText(lblCpf.getText() + " " + usuario.getCpf());
                 dataHora();
             }
         });
+        lblRelogio.setEffect(new DropShadow(10, Color.RED));
+        horaSistema();
+
     }
 
     private String dataHora() {
         LocalDateTime dt = LocalDateTime.now();
         String data = dt.getDayOfMonth() + "/" + dt.getMonth() + "/" + dt.getYear();
         String hora = dt.getHour() + ":" + dt.getMinute() + ":" + dt.getSecond();
-        lblData.setText(lblData.getText() +" "+ data);
-        lblHora.setText(lblHora.getText() +" "+ hora);
+        lblData.setText(lblData.getText() + " " + data);
+        lblHora.setText(lblHora.getText() + " " + hora);
         return lblData.getText() + lblHora.getText();
     }
-    
-    private void verificarPerfil(){
-        if(!usuario.getPerfil().equals("Admin")){
+
+    private void verificarPerfil() {
+        if (!usuario.getPerfil().equals("Admin")) {
             mnCadUsu.setVisible(false);
         }
+    }
+
+    private void horaSistema() {
+        // agora ligamos um loop infinito que roda a cada segundo e atualiza nosso label chamando atualizaHoras.
+        KeyFrame frame = new KeyFrame(Duration.millis(1000), e -> atualizaHoras());
+        Timeline timeline = new Timeline(frame);
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+    }
+
+    private void atualizaHoras() {
+        Date agora = new Date();
+        lblRelogio.setText(formatador.format(agora));
     }
 
     /**

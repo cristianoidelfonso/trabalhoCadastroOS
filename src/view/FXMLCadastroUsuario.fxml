@@ -50,7 +50,7 @@
                               <Insets left="10.0" />
                            </padding>
                               </JFXTextField>
-                            <JFXComboBox fx:id="cbPerfil" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="181.0" promptText="Perfil" styleClass="comboBox" stylesheets="@css/fxmlcadastrousuario.css" visibleRowCount="12" />
+                            <JFXComboBox fx:id="cbPerfil" editable="true" labelFloat="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="31.0" prefWidth="181.0" promptText="Perfil" styleClass="comboBox" stylesheets="@css/fxmlcadastrousuario.css" visibleRowCount="12" />
                           </children>
                      <VBox.margin>
                         <Insets bottom="15.0" top="15.0" />

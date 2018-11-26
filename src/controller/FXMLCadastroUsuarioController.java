@@ -85,7 +85,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         lblId.setVisible(false);
 
         carregarCombo();
-        //cbPerfil.setValue("Admin");
+        cbPerfil.setValue("Admin");
 
         configurarTabela();
         carregarTableView();
@@ -211,10 +211,10 @@ public class FXMLCadastroUsuarioController implements Initializable {
             } else if (txtCpf.getText() == null || txtCpf.getText().isEmpty()) {
                 txtCpf.requestFocus();
                 throw new RuntimeException("O campo CPF nao pode ser vazio.");
-            } else if (txtLogin.getText() == null || txtLogin.getText().isEmpty() || txtLogin.getText().matches("[\\w]{5,12}")) {
+            } else if (txtLogin.getText() == null || txtLogin.getText().isEmpty() || !txtLogin.getText().matches("[\\w]{5,12}")) {
                 txtLogin.requestFocus();
                 throw new RuntimeException("O campo LOGIN nao pode ser vazio.");
-            } else if (txtSenha.getText() == null || txtSenha.getText().isEmpty() || txtSenha.getText().matches("(\\w{5,10})")) {
+            } else if (txtSenha.getText() == null || txtSenha.getText().isEmpty() || !txtSenha.getText().matches("(\\w{5,10})")) {
                 txtSenha.requestFocus();
                 throw new RuntimeException("O campo SENHA nao pode ser vazio.");
             } else if (cbPerfil.getValue() == null || cbPerfil.getValue().isEmpty()) {

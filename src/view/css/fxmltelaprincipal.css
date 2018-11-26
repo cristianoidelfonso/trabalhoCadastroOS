@@ -6,3 +6,7 @@
     -fx-background-color: #2E7D32;
     -fx-font-size: 15px;
 }
+#lblRelogio{
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+}

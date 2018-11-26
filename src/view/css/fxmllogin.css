@@ -2,11 +2,6 @@
  * Empty Stylesheet file.
  */
 
-.borderpane{
-    
-    
-}
-
 .root{
     -fx-background-color: linear-gradient(from 0% 0% to 80% 80%, green 0%, silver 100%);
 }
