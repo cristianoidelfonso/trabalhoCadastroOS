@@ -47,7 +47,7 @@ public class LoginMain extends Application {
         Parent fxmlPrincipal = FXMLLoader.load(getClass().getResource("/view/FXMLTelaPrincipal.fxml"));
         cenaPrincipal = new Scene(fxmlPrincipal);
 
-        primaryStage.initStyle(StageStyle.UNIFIED);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.getIcons().add(new Image("/image/Document_48px.png"));
         primaryStage.setScene(cenaLogin);
         primaryStage.show();

@@ -88,6 +88,7 @@ public class FXMLTelaPrincipalController implements Initializable {
             @Override
             public void onScreenChanged(String newScreen, Object userData) {
                 usuario = (Usuario) userData;
+                verificarPerfil();
                 System.out.println(usuario);
 
                 lblUsuario.setText(lblUsuario.getText()+" "+ usuario.getNome());
@@ -105,6 +106,12 @@ public class FXMLTelaPrincipalController implements Initializable {
         lblData.setText(lblData.getText() +" "+ data);
         lblHora.setText(lblHora.getText() +" "+ hora);
         return lblData.getText() + lblHora.getText();
+    }
+    
+    private void verificarPerfil(){
+        if(!usuario.getPerfil().equals("Admin")){
+            mnCadUsu.setVisible(false);
+        }
     }
 
     /**
