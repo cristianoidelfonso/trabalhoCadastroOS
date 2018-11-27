@@ -21,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Cliente;
 import model.MascarasFX;
@@ -71,6 +72,8 @@ public class ClienteController implements Initializable {
     private TableView<Cliente> tableView;
     //Dados da Tabela
     private ObservableList<Cliente> dados;
+    @FXML
+    private BorderPane borderPanePrincipal;
 
     /**
      * Initializes the controller class.

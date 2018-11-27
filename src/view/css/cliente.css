@@ -2,6 +2,10 @@
  * Empty Stylesheet file.
  */
 
+#borderPanePrincipal{
+    -fx-border-radius: 30;
+    -fx-background-radius: 0;
+}
 .textField{
     -fx-font-size: 12px;
 }
