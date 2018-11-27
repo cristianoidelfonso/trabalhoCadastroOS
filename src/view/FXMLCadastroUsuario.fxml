@@ -130,27 +130,19 @@
             </BorderPane.margin>
         </HBox>
     </bottom>
-    <!-- Topo -->
-    <top>
-        <HBox alignment="TOP_RIGHT" prefHeight="0.0" BorderPane.alignment="TOP_RIGHT">
-            <children>
-            <HBox alignment="CENTER" maxHeight="90.0" minHeight="90.0" prefHeight="90.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <Label fx:id="lblTitulo" styleClass="lblTitulo" stylesheets="@css/fxmlcadastrousuario.css" text="Cadastro de Usuário" />
-               </children>
-            </HBox>
-                <Label fx:id="lblSair" onMouseClicked="#lblSairAction" styleClass="labelSair" stylesheets="@css/fxmlcadastrousuario.css" text="X">
+   <top>
+      <AnchorPane maxHeight="90.0" minHeight="90.0" prefHeight="90.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+                <Label fx:id="lblSair" layoutX="780.0" layoutY="-1.0" onMouseClicked="#lblSairAction" styleClass="labelSair" stylesheets="@css/fxmlcadastrousuario.css" text="X">
                     <font>
                         <Font size="18.0" />
                     </font>
-                    <HBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                    </HBox.margin>
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Label>
-            </children>
-        </HBox>
-    </top>
+            <Label fx:id="lblTitulo" layoutX="305.0" layoutY="30.0" styleClass="lblTitulo" stylesheets="@css/fxmlcadastrousuario.css" text="Cadastro de Usuário" />
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>

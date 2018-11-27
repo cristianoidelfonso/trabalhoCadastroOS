@@ -68,9 +68,11 @@ public class LoginMain extends Application {
                 stage.setScene(cenaPrincipal);
                 stage.setMaximized(true);
                 notifyAllListeners("principal", userData);
+                
         }
 
     }
+    
     /**
      * 
      * @param src 
@@ -78,20 +80,23 @@ public class LoginMain extends Application {
     public static void changeScreen(String src) {
         changeScreen(src, null);
     }
+    public static void changeScreen(Object userData) {
+        changeScreen(null, userData);
+    }
 
     //--------------------------------------------------------------------------
     /**
      * 
      */
     private static ArrayList<OnChangeScreen> listeners = new ArrayList<>();
-
+    
     /**
      * 
      */
     public static interface OnChangeScreen {
         void onScreenChanged(String newScreen, Object userData);
     }
-
+ 
     /**
      * 
      * @param newListener 

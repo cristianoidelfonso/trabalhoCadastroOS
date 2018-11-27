@@ -17,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.Reflection;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -25,6 +24,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Cliente;
 import model.MascarasFX;
+import model.Usuario;
 
 /**
  * FXML Controller class
@@ -75,6 +75,7 @@ public class ClienteController implements Initializable {
     private BorderPane bpPrincipal;
     @FXML
     private Label lblTitulo;
+   
 
     /**
      * Initializes the controller class.
@@ -91,12 +92,15 @@ public class ClienteController implements Initializable {
         MascarasFX.mascaraTelefone(txtTelCliente);
         MascarasFX.mascaraData(dtNascimento);
         MascarasFX.mascaraRG(txtRgCliente);
-        
+
         configurarTabela();
         carregarTableView();
-        
+
     }
+//==============================================================================    
+
     
+
 //==============================================================================
     /**
      * Faz a configuração da tabela e das colunas
@@ -147,7 +151,7 @@ public class ClienteController implements Initializable {
         colCep.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 8% width
 
         //Adiciona as colunas na tabela na ordem que devem aparecer
-        tableView.getColumns().addAll(colId, colNome, colDataNasc, colCpf, 
+        tableView.getColumns().addAll(colId, colNome, colDataNasc, colCpf,
                 colRg, colTelefone, colRua, colNumero, colBairro, colCidade, colEstado, colCep);
     }
 
@@ -173,7 +177,6 @@ public class ClienteController implements Initializable {
         });
     }
 //------------------------------------------------------------------------------    
-    
 
     @FXML
     private void onMouseClickedSair(MouseEvent event) {
@@ -203,7 +206,7 @@ public class ClienteController implements Initializable {
         Alert alerta = new Alert(Alert.AlertType.WARNING);
         alerta.setTitle(null);
         alerta.setHeaderText(null);
-        
+
         try {
             if (txtNomeCliente.getText() == null || txtNomeCliente.getText().isEmpty()) {
                 txtNomeCliente.requestFocus();
@@ -253,10 +256,10 @@ public class ClienteController implements Initializable {
                 clienteAtual.setCidade(txtEndCidade.getText());
                 clienteAtual.setEstado(cbEndEstado.getValue());
                 clienteAtual.setCep(txtEndCep.getText());
-                
+
                 clienteAtual.save();
                 updateList();
-                
+
                 limparTudo();
 
             } else {
@@ -272,10 +275,10 @@ public class ClienteController implements Initializable {
                 cliente.setCidade(txtEndCidade.getText());
                 cliente.setEstado(cbEndEstado.getValue());
                 cliente.setCep(txtEndCep.getText());
-                
+
                 cliente.save();
                 updateList();
-                
+
                 limparTudo();
 
             }
@@ -285,8 +288,8 @@ public class ClienteController implements Initializable {
             alerta.showAndWait();
         }
     }
-    
-    private void limparTudo(){
+
+    private void limparTudo() {
         txtNomeCliente.setText("");
         txtCpfCliente.setText("");
     }

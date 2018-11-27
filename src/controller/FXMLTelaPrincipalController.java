@@ -169,7 +169,7 @@ public class FXMLTelaPrincipalController implements Initializable {
     private void chamarTelaCadCli(ActionEvent event) throws IOException {
 
         Parent cadCliente = FXMLLoader.load(getClass().getResource("/view/Cliente.fxml"));
-
+       
         Scene cenaCadCli = new Scene(cadCliente);
         Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.setTitle("Clientes");
