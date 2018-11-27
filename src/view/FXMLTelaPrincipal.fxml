@@ -58,4 +58,7 @@
          </children>
       </VBox>
    </right>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

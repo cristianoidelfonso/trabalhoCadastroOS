@@ -14,6 +14,11 @@
    <top>
       <HBox alignment="TOP_RIGHT" prefHeight="50.0" BorderPane.alignment="TOP_RIGHT">
          <children>
+            <HBox alignment="CENTER" maxHeight="90.0" minHeight="90.0" prefHeight="90.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="lblTitulo" styleClass="lblTitulo" stylesheets="@css/fxmlcadastroos.css" text="Cadastro de Ordem de Serviço" />
+               </children>
+            </HBox>
             <Label fx:id="lblSairOS" onMouseClicked="#onMouseClickedSairOS" styleClass="labelSair" stylesheets="@css/fxmlcadastroos.css" text="X">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -44,9 +49,6 @@
    </right>
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <top>
-            <Label fx:id="lblTitulo" styleClass="lblTitulo" stylesheets="@css/fxmlcadastroos.css" text="Cadastro de Ordem de Serviço" BorderPane.alignment="CENTER" />
-         </top>
          <center>
             <GridPane gridLinesVisible="true" prefHeight="368.0" prefWidth="900.0" BorderPane.alignment="CENTER">
               <columnConstraints>
