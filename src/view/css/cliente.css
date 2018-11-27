@@ -1,13 +1,17 @@
 /*
  * Empty Stylesheet file.
  */
-
-#borderPanePrincipal{
-    -fx-border-radius: 30;
-    -fx-background-radius: 0;
+.bpPrincipal{
+    
+    -fx-border-color: black;
+    -fx-border-width: 5;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+    
 }
 .textField{
     -fx-font-size: 12px;
+    -fx-fill: radial-gradient(focus-angle 45deg, focus-distance 20%, center 25% 25%, radius 50%, reflect, #eeeeee88, #aaaaaa88 75%, gray);
 }
 
 .labelSair{
@@ -40,4 +44,10 @@
 
 .btn:hover{
     -fx-background-color: blue;
+}
+
+.lblTitulo{
+    -fx-font-size: 20px;
+    -fx-text-fill: #2E7D32;
+    -fx-font-weight: bold;
 }

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="bpCadUsu" maxHeight="550.0" maxWidth="750.0" minHeight="550.0" minWidth="750.0" prefHeight="550.0" prefWidth="750.0" stylesheets="@css/fxmlcadastrousuario.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLCadastroUsuarioController">
+<BorderPane fx:id="bpCadUsu" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" stylesheets="@css/fxmlcadastrousuario.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLCadastroUsuarioController">
     <!-- Esquerda -->
     <left>
         <VBox prefWidth="25.0" BorderPane.alignment="CENTER" />
@@ -132,8 +132,13 @@
     </bottom>
     <!-- Topo -->
     <top>
-        <HBox alignment="TOP_RIGHT" prefHeight="25.0" BorderPane.alignment="TOP_RIGHT">
+        <HBox alignment="TOP_RIGHT" prefHeight="0.0" BorderPane.alignment="TOP_RIGHT">
             <children>
+            <HBox alignment="CENTER" maxHeight="90.0" minHeight="90.0" prefHeight="90.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label fx:id="lblTitulo" styleClass="lblTitulo" stylesheets="@css/fxmlcadastrousuario.css" text="Cadastro de Usuário" />
+               </children>
+            </HBox>
                 <Label fx:id="lblSair" onMouseClicked="#lblSairAction" styleClass="labelSair" stylesheets="@css/fxmlcadastrousuario.css" text="X">
                     <font>
                         <Font size="18.0" />

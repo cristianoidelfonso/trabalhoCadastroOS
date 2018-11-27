@@ -5,7 +5,6 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.effect.Reflection;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -25,7 +25,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import model.Cliente;
 import model.MascarasFX;
-import model.Usuario;
 
 /**
  * FXML Controller class
@@ -73,7 +72,9 @@ public class ClienteController implements Initializable {
     //Dados da Tabela
     private ObservableList<Cliente> dados;
     @FXML
-    private BorderPane borderPanePrincipal;
+    private BorderPane bpPrincipal;
+    @FXML
+    private Label lblTitulo;
 
     /**
      * Initializes the controller class.

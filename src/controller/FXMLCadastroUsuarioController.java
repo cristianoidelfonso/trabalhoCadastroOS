@@ -67,6 +67,8 @@ public class FXMLCadastroUsuarioController implements Initializable {
     private TableView<Usuario> tableView;
     //Dados da Tabela
     private ObservableList<Usuario> dados;
+    @FXML
+    private Label lblTitulo;
 
     /**
      * Initializes the controller class.

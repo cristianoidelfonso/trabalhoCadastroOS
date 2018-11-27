@@ -37,3 +37,9 @@
 .btn:hover{
     -fx-background-color: blue;
 }
+
+.lblTitulo{
+    -fx-font-size: 20px;
+    -fx-text-fill: #2E7D32;
+    -fx-font-weight: bold;
+}

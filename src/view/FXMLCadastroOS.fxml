@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1000.0" stylesheets="@css/fxmlcadastroos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLCadastroOSController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" stylesheets="@css/fxmlcadastroos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLCadastroOSController">
    <top>
       <HBox alignment="TOP_RIGHT" prefHeight="50.0" BorderPane.alignment="TOP_RIGHT">
          <children>
@@ -45,7 +45,7 @@
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <top>
-            <Label text="Cadastro de Ordem de Serviço" BorderPane.alignment="CENTER" />
+            <Label fx:id="lblTitulo" styleClass="lblTitulo" stylesheets="@css/fxmlcadastroos.css" text="Cadastro de Ordem de Serviço" BorderPane.alignment="CENTER" />
          </top>
          <center>
             <GridPane gridLinesVisible="true" prefHeight="368.0" prefWidth="900.0" BorderPane.alignment="CENTER">
