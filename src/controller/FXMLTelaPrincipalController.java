@@ -153,10 +153,11 @@ public class FXMLTelaPrincipalController implements Initializable {
         //Stage stage = new Stage(StageStyle.UNDECORATED);
         Stage stage = new Stage();
         stage.setTitle("Clientes");
-        //stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(cenaCadCli);
         stage.show();
-        // Passa o usuario logado para a tela chamada.
+        
+        // Passando o usuario logado para a tela de cadastro de Ordem de Serviço
         LoginMain.changeScreen("usuario", usuario);
     }
 

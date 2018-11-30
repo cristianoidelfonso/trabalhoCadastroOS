@@ -135,6 +135,9 @@ public class FXMLLoginController implements Initializable {
         this.user = txtLogin.getText();
         this.pass = txtSenha.getText();
         
+        txtSenha.setText(pass.replaceAll("\\w", "*"));
+        System.out.println(user +" | "+ pass +"\n"+ txtLogin.getText() +" | "+txtSenha.getText());
+        
         if(DAOUsuario.logarUsuario(user, pass) != null){
             Usuario u = DAOUsuario.logarUsuario(user, user);
             LoginMain.changeScreen("principal", u );

@@ -92,8 +92,8 @@ public class ClienteController implements Initializable {
             @Override
             public void onScreenChanged(String newScreen, Object userData) {
                 usuarioLogado = (Usuario) userData;
-                System.out.println(newScreen);
-                System.out.println(usuarioLogado);
+                //System.out.println(newScreen);
+                //System.out.println(usuarioLogado);
             }
         });
         
