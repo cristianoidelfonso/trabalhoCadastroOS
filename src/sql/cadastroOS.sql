@@ -33,14 +33,30 @@ create table if not exists tbl_cliente
     cep varchar(10) not null
 );
 
+create table if not exists tbl_os
+(
+	idOS integer not null primary key auto_increment,
+    idUsuario int not null,
+    idCliente integer not null,
+    dataOS timestamp default current_timestamp,
+    produto varchar(100),
+    descricao text,
+    valor double default 0.00,
+    foreign key (idUsuario) references tbl_usuario(id),
+    foreign key (idCliente) references tbl_cliente(idCliente)
+);
+
 drop table tbl_usuario;
 drop table tbl_cliente;
+drop table tbl_os;
 
 desc tbl_usuario;
 desc tbl_cliente;
+desc tbl_os;
 
 select * from tbl_usuario;
 select * from tbl_cliente;
+select * from tbl_os;
 
 delete from tbl_usuario where id = 1;
 select * from tbl_usuario where login like binary 'admin' and senha like binary 'admin';

@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" stylesheets="@css/fxmlcadastroos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLCadastroOSController">
@@ -25,6 +29,7 @@
          <children>
             <JFXButton fx:id="btnSalvar" onAction="#onActionSalvar" styleClass="btn" text="Salvar" />
             <JFXButton fx:id="btnEditar" onAction="#onActionEditar" styleClass="btn" text="Editar" />
+            <JFXButton fx:id="btnImprimir" styleClass="btn" stylesheets="@css/fxmlcadastroos.css" text="Imprimir" />
             <JFXButton fx:id="btnApagar" onAction="#onActionApagar" styleClass="btn" text="Apagar" />
             <JFXButton fx:id="btnSair" onAction="#onActionSair" onKeyPressed="#sairComEnter" styleClass="btn" text="Sair" />
          </children></HBox>
@@ -35,95 +40,6 @@
    <right>
       <VBox prefHeight="200.0" prefWidth="50.0" BorderPane.alignment="CENTER" />
    </right>
-   <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <center>
-            <GridPane gridLinesVisible="true" prefHeight="368.0" prefWidth="900.0" BorderPane.alignment="TOP_LEFT">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <top>
-                        <Label text="Dados do Cliente" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" />
-                           </BorderPane.margin>
-                        </Label>
-                     </top>
-                     <center>
-                        <GridPane BorderPane.alignment="CENTER">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <JFXTextField promptText="CPF">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </JFXTextField>
-                              <JFXTextField promptText="Nome" GridPane.rowIndex="1">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </JFXTextField>
-                              <JFXTextField promptText="Telefone" GridPane.rowIndex="2">
-                                 <GridPane.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </GridPane.margin>
-                              </JFXTextField>
-                           </children>
-                        </GridPane>
-                     </center>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                     <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </GridPane.margin>
-                  </BorderPane>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
-                     <top>
-                        <Label text="Dados da Ordem de Serviço" BorderPane.alignment="CENTER">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" />
-                           </padding>
-                        </Label>
-                     </top>
-                     <center>
-                        <VBox prefHeight="200.0" prefWidth="100.0" spacing="180.0">
-                           <children>
-                              <HBox alignment="BOTTOM_CENTER" prefWidth="200.0" spacing="180.0">
-                                 <children>
-                                    <DatePicker promptText="Data de abertura" />
-                                    <DatePicker promptText="Data prevista" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </center>
-                     <GridPane.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </GridPane.margin>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </BorderPane>
-               </children>
-            </GridPane>
-         </center>
-      </BorderPane>
-   </center>
    <top>
       <AnchorPane maxHeight="90.0" minHeight="90.0" prefHeight="90.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -132,4 +48,175 @@
          </children>
       </AnchorPane>
    </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="195.0" prefWidth="1100.0" spacing="60.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+               <children>
+                  <Pane prefHeight="185.0" prefWidth="294.0" style="-fx-border-color: #0000FF; -fx-border-radius: 10;">
+                     <children>
+                        <VBox prefHeight="176.0" prefWidth="296.0" spacing="15.0">
+                           <children>
+                              <HBox prefHeight="20.0" prefWidth="337.0" spacing="25.0">
+                                 <children>
+                                    <JFXTextField fx:id="txtNumOS" editable="false" labelFloat="true" prefHeight="25.0" prefWidth="137.0" promptText="Nº OS">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin></JFXTextField>
+                                    <JFXTextField fx:id="txtDtaEmissao" editable="false" labelFloat="true" promptText="Data Emissão">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin></JFXTextField>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="50.0">
+                                 <children>
+                                    <JFXRadioButton fx:id="rbOrcamento" alignment="BOTTOM_CENTER" selected="true" text="Orçamento">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="ButtonGroup1" />
+                                       </toggleGroup>
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                    </JFXRadioButton>
+                                    <JFXRadioButton fx:id="rbOrdemServico" alignment="BOTTOM_CENTER" text="Ordem de Serviço" toggleGroup="$ButtonGroup1">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin></JFXRadioButton>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <JFXComboBox fx:id="cbSituacaoOS" labelFloat="true" prefHeight="25.0" prefWidth="268.0" promptText="Situação" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane style="-fx-border-color: #0000FF; -fx-border-radius: 10;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <VBox alignment="TOP_CENTER">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" spacing="15.0">
+                                 <children>
+                                    <JFXTextField fx:id="txtNomeCliente" labelFloat="true" prefHeight="37.0" prefWidth="538.0" promptText="Cliente">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </JFXTextField>
+                                    <JFXTextField fx:id="txtIdCliente" editable="false" labelFloat="true" prefHeight="37.0" prefWidth="112.0" promptText="* Id">
+                                       <HBox.margin>
+                                          <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                       </HBox.margin>
+                                       <padding>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </padding>
+                                    </JFXTextField>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <TableView fx:id="tableView" layoutX="14.0" layoutY="52.0" prefHeight="130.0" prefWidth="724.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="C1" />
+                            <TableColumn prefWidth="75.0" text="C2" />
+                          </columns>
+                        </TableView>
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Pane>
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin></Separator>
+            <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-border-color: #0000FF; -fx-border-radius: 10;" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                     <children>
+                        <JFXTextField fx:id="txtProduto" labelFloat="true" promptText="Produto" HBox.hgrow="SOMETIMES">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtDataEntrega" editable="false" labelFloat="true" prefHeight="25.0" prefWidth="183.0" promptText="Data Previsão de Entrega">
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </JFXTextField>
+                     </children>
+                  </HBox>
+                  <JFXTextArea fx:id="txtDescricao" labelFloat="true" prefHeight="84.0" prefWidth="1098.0" promptText="Descrição" VBox.vgrow="ALWAYS">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </JFXTextArea>
+                  <HBox alignment="CENTER_LEFT" spacing="50.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <JFXTextField fx:id="txtIdUsuario" editable="false" labelFloat="true" promptText="*Id">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin></JFXTextField>
+                        <JFXTextField fx:id="txtNomeUsuario" editable="false" labelFloat="true" prefHeight="27.0" prefWidth="624.0" promptText=" Usuário responsável">
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtValor" alignment="CENTER_RIGHT" labelFloat="true" prefHeight="25.0" prefWidth="219.0" promptText="Valor">
+                           <HBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </HBox.margin></JFXTextField>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
 </BorderPane>

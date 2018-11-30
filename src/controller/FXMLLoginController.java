@@ -23,6 +23,7 @@ import javafx.stage.StageStyle;
 import model.DAOUsuario;
 import model.Usuario;
 
+
 /**
  * FXML Controller class
  *
@@ -53,7 +54,7 @@ public class FXMLLoginController implements Initializable {
     public FXMLLoginController() {
  
     }
-
+//==============================================================================
     /**
      * Initializes the controller class.
      *
@@ -64,7 +65,8 @@ public class FXMLLoginController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
+//==============================================================================
+    
     /**
      *
      * @param e

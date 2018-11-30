@@ -398,14 +398,11 @@ public class FXMLCadastroUsuarioController implements Initializable {
                 usuario.save();
                 updateList();
 
-                // Se salvar com sucesso, imprime esta mensagem.
-                alerta.setTitle("SUCESSO");
-                alerta.setHeaderText("USUÁRIO CADASTRADO");
-                alerta.setContentText("Novo usuário foi cadastrado com sucesso");
-                alerta.show();
-
-                limparCampos();
-                txtNome.requestFocus();
+//                Se salvar com sucesso, imprime esta mensagem.
+//                alerta.setTitle("SUCESSO");
+//                alerta.setHeaderText("USUÁRIO CADASTRADO");
+//                alerta.setContentText("Novo usuário foi cadastrado com sucesso");
+//                alerta.show();
             }
 
         } catch (RuntimeException e) {
@@ -414,6 +411,8 @@ public class FXMLCadastroUsuarioController implements Initializable {
             alerta.show();
         }
         usuarioAtual = null;
+        limparCampos();
+        txtNome.requestFocus();
     }
 
     /**

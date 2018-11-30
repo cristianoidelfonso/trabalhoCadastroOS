@@ -47,12 +47,12 @@ public class LoginMain extends Application {
         Parent fxmlPrincipal = FXMLLoader.load(getClass().getResource("/view/FXMLTelaPrincipal.fxml"));
         cenaPrincipal = new Scene(fxmlPrincipal);
 
-        primaryStage.initStyle(StageStyle.UNDECORATED);
+        //primaryStage.initStyle(StageStyle.UTILITY);
         primaryStage.getIcons().add(new Image("/image/Document_48px.png"));
         primaryStage.setScene(cenaLogin);
         primaryStage.show();
     }
-
+//==============================================================================
     /**
      * 
      * @param src
@@ -68,9 +68,10 @@ public class LoginMain extends Application {
                 stage.setScene(cenaPrincipal);
                 stage.setMaximized(true);
                 notifyAllListeners("principal", userData);
-                
+                break;
+            case "usuario":
+                notifyAllListeners("usuario", userData);
         }
-
     }
     
     /**
@@ -80,10 +81,7 @@ public class LoginMain extends Application {
     public static void changeScreen(String src) {
         changeScreen(src, null);
     }
-    public static void changeScreen(Object userData) {
-        changeScreen(null, userData);
-    }
-
+//==============================================================================
     //--------------------------------------------------------------------------
     /**
      * 

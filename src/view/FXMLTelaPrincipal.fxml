@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -47,14 +48,16 @@
             <Label fx:id="lblPerfil" style="-fx-text-fill: #FFFFFF;" text="Perfil : " />
             <Label fx:id="lblCpf" style="-fx-text-fill: #FFFFFF;" text="CPF :" />
             <Label fx:id="lblData" style="-fx-text-fill: #FFFFFF;" text="Data :" />
-            <Label fx:id="lblHora" style="-fx-text-fill: #FFFFFF;" text="Hora :" />
          </children>
       </HBox>
    </bottom>
    <right>
       <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="lblRelogio" text="teste" />
+            <Label fx:id="lblRelogio" text="teste">
+               <VBox.margin>
+                  <Insets right="10.0" top="5.0" />
+               </VBox.margin></Label>
          </children>
       </VBox>
    </right>

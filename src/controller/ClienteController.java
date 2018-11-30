@@ -34,6 +34,7 @@ import model.Usuario;
 public class ClienteController implements Initializable {
 
     private Cliente clienteAtual;
+    private Usuario usuarioLogado = null;
 
     @FXML
     private Label lblSairCliente;
@@ -76,7 +77,7 @@ public class ClienteController implements Initializable {
     @FXML
     private Label lblTitulo;
    
-
+//==============================================================================
     /**
      * Initializes the controller class.
      *
@@ -86,6 +87,16 @@ public class ClienteController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        // Recebendo o usuario logado da tela principal.
+        LoginMain.addOnChangeScreenListener(new LoginMain.OnChangeScreen() {
+            @Override
+            public void onScreenChanged(String newScreen, Object userData) {
+                usuarioLogado = (Usuario) userData;
+                System.out.println(newScreen);
+                System.out.println(usuarioLogado);
+            }
+        });
+        
         clienteAtual = null;
 
         MascarasFX.mascaraCPF(txtCpfCliente);
@@ -180,6 +191,8 @@ public class ClienteController implements Initializable {
 
     @FXML
     private void onMouseClickedSair(MouseEvent event) {
+        usuarioLogado = null;
+        
         // Recuperando o stage atual
         Stage stageAtual = (Stage) lblSairCliente.getScene().getWindow();
         // Fecha o stage atual
@@ -188,6 +201,7 @@ public class ClienteController implements Initializable {
 
     @FXML
     private void onActionSair(ActionEvent event) {
+        usuarioLogado = null;
         Stage stageAtual = (Stage) btnSairCliente.getScene().getWindow();
         stageAtual.close();
     }
@@ -195,6 +209,7 @@ public class ClienteController implements Initializable {
     @FXML
     private void sairComEnter(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
+            usuarioLogado = null;
             Stage stageAtual = (Stage) btnSairCliente.getScene().getWindow();
             stageAtual.close();
         }

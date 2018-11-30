@@ -3,11 +3,9 @@ package controller;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.ResourceBundle;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +23,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 import model.Usuario;
 
 /**
@@ -74,13 +71,9 @@ public class FXMLTelaPrincipalController implements Initializable {
     @FXML
     private Label lblData;
     @FXML
-    private Label lblHora;
-    @FXML
     private Label lblRelogio;
 
-    // SimpleDateFormat é a classe do Java que transforma datas para Strings usando o formato passado
-    private SimpleDateFormat formatador = new SimpleDateFormat("hh:mm:ss");
-
+//==============================================================================    
     /**
      * Initializes the controller class.
      *
@@ -92,52 +85,38 @@ public class FXMLTelaPrincipalController implements Initializable {
         // TODO
         /**
          * Método para receber o usuario vindo da tela de login e poder
-         * trabalhar com os dados dele na tela principal
+         * trabalhar com os dados dele na tela principal.
          */
         LoginMain.addOnChangeScreenListener(new LoginMain.OnChangeScreen() {
             @Override
             public void onScreenChanged(String newScreen, Object userData) {
                 usuario = (Usuario) userData;
                 verificarPerfil();
-                System.out.println(usuario);
+                //System.out.println(usuario);
 
-                lblUsuario.setText(lblUsuario.getText() + " " + usuario.getNome());
-                lblPerfil.setText(lblPerfil.getText() + " " + usuario.getPerfil());
-                lblCpf.setText(lblCpf.getText() + " " + usuario.getCpf());
-                dataHora();
+                lblUsuario.setText(usuario.getNome());
+                lblPerfil.setText(usuario.getPerfil());
+                lblCpf.setText(usuario.getCpf());
+                lblData.setText(dataHora());
             }
         });
         lblRelogio.setEffect(new DropShadow(10, Color.RED));
-        horaSistema();
 
     }
-
+//==============================================================================
+    
     private String dataHora() {
-        LocalDateTime dt = LocalDateTime.now();
-        String data = dt.getDayOfMonth() + "/" + dt.getMonth() + "/" + dt.getYear();
-        String hora = dt.getHour() + ":" + dt.getMinute() + ":" + dt.getSecond();
-        lblData.setText(lblData.getText() + " " + data);
-        lblHora.setText(lblHora.getText() + " " + hora);
-        return lblData.getText() + lblHora.getText();
+        Locale locale = new Locale("pt", "BR");
+        GregorianCalendar calendar = new GregorianCalendar();
+        SimpleDateFormat formatador = new SimpleDateFormat("dd' de 'MMMMM' de 'yyyy' - 'HH':'mm'h'", locale);
+        return formatador.format(calendar.getTime());
+
     }
 
     private void verificarPerfil() {
         if (!usuario.getPerfil().equals("Admin")) {
             mnCadUsu.setVisible(false);
         }
-    }
-
-    private void horaSistema() {
-        // agora ligamos um loop infinito que roda a cada segundo e atualiza nosso label chamando atualizaHoras.
-        KeyFrame frame = new KeyFrame(Duration.millis(1000), e -> atualizaHoras());
-        Timeline timeline = new Timeline(frame);
-        timeline.setCycleCount(Timeline.INDEFINITE);
-        timeline.play();
-    }
-
-    private void atualizaHoras() {
-        Date agora = new Date();
-        lblRelogio.setText(formatador.format(agora));
     }
 
     /**
@@ -169,14 +148,16 @@ public class FXMLTelaPrincipalController implements Initializable {
     private void chamarTelaCadCli(ActionEvent event) throws IOException {
 
         Parent cadCliente = FXMLLoader.load(getClass().getResource("/view/Cliente.fxml"));
-       
+
         Scene cenaCadCli = new Scene(cadCliente);
-        Stage stage = new Stage(StageStyle.UNDECORATED);
+        //Stage stage = new Stage(StageStyle.UNDECORATED);
+        Stage stage = new Stage();
         stage.setTitle("Clientes");
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(cenaCadCli);
-        stage.getWidth();
         stage.show();
+        // Passa o usuario logado para a tela chamada.
+        LoginMain.changeScreen("usuario", usuario);
     }
 
     /**
@@ -194,8 +175,10 @@ public class FXMLTelaPrincipalController implements Initializable {
         stage.setTitle("Ordens de Serviços");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(cenaCadOs);
-        stage.getWidth();
         stage.show();
+        
+        // Passando o usuario logado para a tela de cadastro de Ordem de Serviço
+        LoginMain.changeScreen("usuario", usuario);
     }
 
     /**
