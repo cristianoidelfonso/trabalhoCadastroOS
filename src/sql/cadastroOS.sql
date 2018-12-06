@@ -38,17 +38,27 @@ create table if not exists tbl_os
 	idOS integer not null primary key auto_increment,
     idUsuario int not null,
     idCliente integer not null,
-    dataOS timestamp default current_timestamp,
+    dataOS datetime default current_timestamp,
+    tipo varchar(20) not null,
+    situacao varchar(40) not null,
     produto varchar(100),
-    descricao text,
+    descricao varchar(500),
     valor double default 0.00,
     foreign key (idUsuario) references tbl_usuario(id),
     foreign key (idCliente) references tbl_cliente(idCliente)
 );
 
-drop table tbl_usuario;
-drop table tbl_cliente;
-drop table tbl_os;
+-- alter table tbl_os add tipo varchar(20) not null after dataOS;
+
+insert into tbl_os(idUsuario, idCliente, tipo, situacao, produto, descricao, valor)
+values
+(1, 1, 'orçamento', 'entrega ok', 'Jogo de Sofá 2 e 3 Lugares', 'Fabricação do jogo de sofá, com tecido tal, na cor tal, etc...', 2340.00),
+(1, 2, 'orçamento', 'aguardando aprovação', 'Jogo de Sofá de canto, 3x5 lugares', 'Fabricação do jogo de sofá, com tecido tal, na cor tal, etc...', 4180.00),
+(2, 3, 'orçamento', 'orçamento', 'Jogo de Sofá Bicama ', 'Fabricação do jogo de sofá, com tecido tal, na cor tal, etc...', 1890.00);
+
+-- drop table tbl_usuario;
+-- drop table tbl_cliente;
+-- drop table tbl_os;
 
 desc tbl_usuario;
 desc tbl_cliente;
@@ -58,5 +68,9 @@ select * from tbl_usuario;
 select * from tbl_cliente;
 select * from tbl_os;
 
+select sum(valor) from tbl_os;
+
 delete from tbl_usuario where id = 1;
 select * from tbl_usuario where login like binary 'admin' and senha like binary 'admin';
+
+select idCliente, nome, telefone from tbl_cliente where nome like binary "C%";

@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -8,6 +9,10 @@ import java.util.ArrayList;
  * @author Idelfonso
  */
 public class Cliente {
+
+    public static ResultSet listar(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     private Integer idCliente;
     private String nome;
@@ -22,9 +27,20 @@ public class Cliente {
     private String estado;
     private String cep;
     
-    public Cliente(){
-        
+    public Cliente(){  
     }
+    
+    public Cliente(Integer id){
+        this.idCliente = id;
+    }
+
+    public Cliente(Integer idCliente, String nome, String telefone) {
+        this.idCliente = idCliente;
+        this.nome = nome;
+        this.telefone = telefone;
+    }
+    
+    
 
     public Cliente(Integer id,String nome, LocalDate dataNasc, String cpf, String rg, String telefone, String rua, String numero, String bairro, String cidade, String estado, String cep) {
         this.idCliente = id;
@@ -145,7 +161,7 @@ public class Cliente {
     }
        
     
-    //--------------------------------------------------------------------------
+//==============================================================================
     // Padrão de projeto DAO
     private static DAOCliente dao = new DAOCliente();
 
@@ -170,5 +186,13 @@ public class Cliente {
 
     public static Cliente find(String nome) {
         return dao.find(nome);
+    }
+    
+    public static Cliente find(int pk) {
+        return dao.find(pk);
+    }
+    
+    public static ArrayList<Cliente> findName(String nome){
+        return dao.findName(nome);
     }
 }

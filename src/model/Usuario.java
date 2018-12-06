@@ -19,7 +19,10 @@ public class Usuario {
 
     // Construtor sem parametros.
     public Usuario() {
-
+    }
+    
+    public Usuario(Integer id){
+        this.id = id;
     }
 
     // Construtor com todos os parametros.
@@ -109,7 +112,7 @@ public class Usuario {
         return "[" + id + "]\t[" + nome + "\t" + dataNasc + "\t" + login + "\t" + senha + "\t" + perfil + "]";
     }
 
-    //--------------------------------------------------------------------------
+//==============================================================================
     // Padrão de projeto DAO
     private static DAOUsuario dao = new DAOUsuario();
 

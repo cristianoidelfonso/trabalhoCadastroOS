@@ -136,7 +136,48 @@ public class DAOCliente extends ConnectionFactory {
         }
         return resultado;
     }
+//==== AQUI ====================================================================    
+    public ArrayList<Cliente> findName(String nome){
+        ArrayList<Cliente> lista = new ArrayList<>();
+        getConexao();
+        try{
+        //Comando
+        String sql = "SELECT * FROM tbl_cliente WHERE nome LIKE ?";
+        //Preparar o SQL
+        pst = conn.prepareStatement(sql);
+        pst.setString(1, nome);
+        //Executa consulta no bd
+        rs = pst.executeQuery();
 
+        //Enquanto tiver resultado no BD
+        while (rs.next()) {
+            //Cria o produto a partir do resultado do banco
+            Cliente cliente = new Cliente(
+                    rs.getInt("idCliente"),
+                    rs.getString("nome"),
+                    rs.getDate("dataNasc").toLocalDate(),
+                    rs.getString("cpf"),
+                    rs.getString("rg"),
+                    rs.getString("telefone"),
+                    rs.getString("rua"),
+                    rs.getString("numero"),
+                    rs.getString("bairro"),
+                    rs.getString("cidade"),
+                    rs.getString("estado"),
+                    rs.getString("cep"));
+
+            //adiciona o resultado na lista
+            lista.add(cliente);
+
+        }//while
+        }catch(SQLException e){
+            
+        }
+        return lista;
+    }   
+    
+//------------------------------------------------------------------------------
+    
     public Cliente find(int pk) {
         Cliente resultado = null;
         getConexao();
@@ -208,5 +249,8 @@ public class DAOCliente extends ConnectionFactory {
             
         }
         return lista;
-    }
+    }   
+    
+//------------------------------------------------------------------------------    
+
 }
