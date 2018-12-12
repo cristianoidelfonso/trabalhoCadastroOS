@@ -320,7 +320,6 @@ public class FXMLCadastroOSController implements Initializable {
             txtIdCliente.setText(clienteSelecionado.getIdCliente().toString());
 
             carregarTableViewOS();
-
         }
     }
 //------------------------------------------------------------------------------
