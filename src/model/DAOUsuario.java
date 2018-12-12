@@ -57,9 +57,8 @@ public class DAOUsuario extends ConnectionFactory {
         }
         return generatedId;
     }
-    
-//------------------------------------------------------------------------------    
 
+//------------------------------------------------------------------------------    
     public void update(Usuario usuario) {
         getConexao();
         try {
@@ -89,10 +88,9 @@ public class DAOUsuario extends ConnectionFactory {
             fecharConexao(conn, pst);
         }
     }
-    
-//------------------------------------------------------------------------------    
 
-    public void delete(Usuario usuario) {
+//------------------------------------------------------------------------------    
+    public void delete(Usuario usuario) throws RuntimeException {
         getConexao();
         try {
             String sql = "DELETE FROM tbl_usuario WHERE id = ?";
@@ -163,9 +161,9 @@ public class DAOUsuario extends ConnectionFactory {
         }
         return resultado;
     }
-     
+
 //------------------------------------------------------------------------------
-     public static Usuario logarUsuario(String login, String senha) {
+    public static Usuario logarUsuario(String login, String senha) {
         Usuario resultado = null;
         getConexao();
         try {
@@ -200,57 +198,57 @@ public class DAOUsuario extends ConnectionFactory {
      *
      * @return
      */
-    public ArrayList<Usuario> listar(){
+    public ArrayList<Usuario> listar() {
         ArrayList<Usuario> lista = new ArrayList<>();
         getConexao();
-        try{
-        //Comando
-        String sql = "SELECT * FROM tbl_usuario";
-        //Preparar o SQL
-        pst = conn.prepareStatement(sql);
-        //Executa consulta no bd
-        rs = pst.executeQuery();
+        try {
+            //Comando
+            String sql = "SELECT * FROM tbl_usuario";
+            //Preparar o SQL
+            pst = conn.prepareStatement(sql);
+            //Executa consulta no bd
+            rs = pst.executeQuery();
 
-        //Enquanto tiver resultado no BD
-        while (rs.next()) {
-            //Cria o produto a partir do resultado do banco
-            Usuario usuario = new Usuario(
-                    rs.getInt("id"),
-                    rs.getString("nome"),
-                    rs.getDate("dataNasc").toLocalDate(),
-                    rs.getString("cpf"),
-                    rs.getString("login"),
-                    rs.getString("senha"),
-                    rs.getString("perfil"));
+            //Enquanto tiver resultado no BD
+            while (rs.next()) {
+                //Cria o produto a partir do resultado do banco
+                Usuario usuario = new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getDate("dataNasc").toLocalDate(),
+                        rs.getString("cpf"),
+                        rs.getString("login"),
+                        rs.getString("senha"),
+                        rs.getString("perfil"));
 
-            //adiciona o resultado na lista
-            lista.add(usuario);
+                //adiciona o resultado na lista
+                lista.add(usuario);
 
-        }//while
-        }catch(SQLException e){
-            
+            }//while
+        } catch (SQLException e) {
+
         }
         return lista;
     }
-    
+
     //--------------------------------------------------------------------------
     /**
-     * Pesquisar em tempo real, pelo nome que esta sendo digitado no campo de texto "NOME";
+     * Pesquisar em tempo real, pelo nome que esta sendo digitado no campo de
+     * texto "NOME";
      */
-    public void pesquisarUsuario(){
+    public void pesquisarUsuario() {
         getConexao();
-        
+
         try {
             String sql = "SELECT * FROM tbl_usuario WHERE nome LIKE ?";
             pst = conn.prepareStatement(sql);
             //pst.setString(1, FXMLCadastroUsuarioController.txtNome.getText() + "%" );
             rs = pst.executeQuery();
-            
+
             //tbl_usuario.setModel(DbUtils.resultSetToTableModel(rs));
-            
         } catch (SQLException e) {
         }
-        
+
     }
     //--------------------------------------------------------------------------
 }

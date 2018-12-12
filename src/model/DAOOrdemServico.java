@@ -31,19 +31,20 @@ public class DAOOrdemServico extends ConnectionFactory {
         getConexao();
         try {
             //insert into tbl_os(idUsuario, idCliente, tipo, situacao, produto, descricao, valor)
-            String sql = "INSERT INTO tbl_os (idUsuario, idCliente, dataOS, tipo, situacao, produto, descricao, valor)"
-                    + "VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO tbl_os (idUsuario, nomeUsuario, idCliente, dataOS, tipo, situacao, produto, descricao, valor)"
+                    + "VALUES (?,?,?,?,?,?,?,?,?)";
 
             pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             pst.setInt(1, os.getIdUsuario());
-            pst.setInt(2, os.getIdCliente());
-            pst.setDate(3, java.sql.Date.valueOf(os.getDataOS()));
-            pst.setString(4, os.getTipo());
-            pst.setString(5, os.getSituacao());
-            pst.setString(6, os.getProduto());
-            pst.setString(7, os.getDescricao());
-            pst.setDouble(8, os.getValor());
+            pst.setString(2, os.getNomeUsuario());
+            pst.setInt(3, os.getIdCliente());
+            pst.setDate(4, java.sql.Date.valueOf(os.getDataOS()));
+            pst.setString(5, os.getTipo());
+            pst.setString(6, os.getSituacao());
+            pst.setString(7, os.getProduto());
+            pst.setString(8, os.getDescricao());
+            pst.setDouble(9, os.getValor());
             
             if (pst.executeUpdate() != 0) {
                 System.out.println("Salvo com sucesso");
@@ -113,6 +114,7 @@ public class DAOOrdemServico extends ConnectionFactory {
                 OrdemServico os = new OrdemServico();
                         rs.getInt("idOS");
                         rs.getInt("idUsuario");
+                        rs.getString("nomeUsuario");
                         rs.getInt("idCliente");
                         rs.getDate("dataOS").toLocalDate();
                         rs.getString("tipo");
@@ -149,6 +151,7 @@ public class DAOOrdemServico extends ConnectionFactory {
                 OrdemServico os = new OrdemServico();
                     os.setIdOS(rs.getInt("idOS"));
                     os.setIdUsuario(rs.getInt("idUsuario"));
+                    os.setNomeUsuario(rs.getString("nomeUsuario"));
                     os.setIdCliente(rs.getInt("idCliente"));
                     os.setDataOS(rs.getDate("dataOS").toLocalDate());
                     os.setProduto(rs.getString("produto"));

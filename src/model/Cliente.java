@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -174,11 +175,11 @@ public class Cliente {
         }
     }
 
-    //public void delete() {
-    //    if (dao.find(idCliente) != null) {
-    //        dao.delete(this);
-    //    }
-    //}
+    public void delete() throws SQLException {
+        if (dao.find(idCliente) != null) {
+            dao.delete(this);
+        }
+    }
 
     public static ArrayList<Cliente> listar(){
         return dao.listar();

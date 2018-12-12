@@ -238,7 +238,7 @@ public class FXMLCadastroOSController implements Initializable {
             //osAtual.setIdOS(Integer.parseInt(txtNumOS.getText()));
             osAtual.setIdCliente(Integer.parseInt(txtIdCliente.getText()));
             osAtual.setIdUsuario(Integer.parseInt(txtIdUsuario.getText()));
-            //osAtual.setDataOS(LocalDate.parse(txtDtaEmissao.getText()));
+            osAtual.setNomeUsuario(txtNomeUsuario.getText());
             osAtual.setDataOS(LocalDate.now());
             osAtual.setTipo(radioButtonSelected());
             osAtual.setSituacao(cbSituacaoOS.getValue());
@@ -254,7 +254,7 @@ public class FXMLCadastroOSController implements Initializable {
             //osAtual.setIdOS(Integer.parseInt(txtNumOS.getText()));
             osAtual.setIdCliente(Integer.parseInt(txtIdCliente.getText()));
             osAtual.setIdUsuario(Integer.parseInt(txtIdUsuario.getText()));
-            //osAtual.setDataOS(LocalDate.parse(txtDtaEmissao.getText()));
+            osAtual.setNomeUsuario(txtNomeUsuario.getText());
             osAtual.setDataOS(LocalDate.now());
             osAtual.setTipo(radioButtonSelected());
             osAtual.setSituacao(cbSituacaoOS.getValue());

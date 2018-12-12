@@ -204,7 +204,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         alerta.setTitle("INFORMAÇÃO");
 
         try {
-            if (txtNome.getText() == null || txtNome.getText().isEmpty() || !txtNome.getText().matches("([A-Z]{1}[A-Za-z\\s]+)")) {
+            if (txtNome.getText() == null || txtNome.getText().isEmpty() || !txtNome.getText().matches("([A-ZÀ-ú]{1}[A-Za-zÀ-ú\\s]+)")) {
                 txtNome.requestFocus();
                 throw new RuntimeException("O campo NOME nao pode ser vazio. teste 01");
             } else if (dtDataNasc.getValue() == null) {
@@ -234,7 +234,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
 
                 usuarioAtual.save();
                 //usuarioAtual = null;
-                updateList();
+                //updateList();
 
                 // Se salvar com sucesso, imprime esta mensagem.
                 alerta.setTitle("SUCESSO");
@@ -243,14 +243,14 @@ public class FXMLCadastroUsuarioController implements Initializable {
                 alerta.show();
 
                 limparCampos();
-                txtNome.requestFocus();
+                //txtNome.requestFocus();
 
             } else {
                 Usuario usuario = new Usuario();
                 // Validação do txtNome  
                 //----------------------------------------------------------------------
                 if (!txtNome.getText().equals("")) {
-                    if (txtNome.getText().matches("([A-Z]{1}[A-Za-z\\s]+)")) {
+                    if (txtNome.getText().matches("([A-ZÀ-ú]{1}[A-Za-zÀ-ú\\s]+)")) {
                         usuario.setNome(txtNome.getText());
                     } else {
                         alerta.setHeaderText("NOME");
@@ -396,7 +396,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
                 }
 
                 usuario.save();
-                updateList();
+                //updateList();
 
 //                Se salvar com sucesso, imprime esta mensagem.
 //                alerta.setTitle("SUCESSO");
@@ -404,7 +404,10 @@ public class FXMLCadastroUsuarioController implements Initializable {
 //                alerta.setContentText("Novo usuário foi cadastrado com sucesso");
 //                alerta.show();
             }
-
+            
+            updateList();
+            txtNome.requestFocus();
+            
         } catch (RuntimeException e) {
 
             alerta.setContentText(e.getMessage());
@@ -466,7 +469,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
      * @param event
      */
     @FXML
-    private void btnApagarAction(ActionEvent event) {
+    private void btnApagarAction(ActionEvent event) throws SQLException {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             usuarioAtual = Usuario.find(tableView.getSelectionModel().getSelectedItem().getNome());
             if (usuarioAtual != null) {
@@ -499,6 +502,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
             a.setContentText("Selecione o usuário a ser excluído.");
             a.showAndWait();
         }
+
     }
 
     private void preencherTela() {

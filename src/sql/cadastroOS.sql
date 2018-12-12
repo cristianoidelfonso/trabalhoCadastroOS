@@ -37,6 +37,7 @@ create table if not exists tbl_os
 (
 	idOS integer not null primary key auto_increment,
     idUsuario int not null,
+    nomeUsuario varchar(50),
     idCliente integer not null,
     dataOS datetime default current_timestamp,
     tipo varchar(20) not null,
@@ -44,9 +45,14 @@ create table if not exists tbl_os
     produto varchar(100),
     descricao varchar(500),
     valor double default 0.00,
-    foreign key (idUsuario) references tbl_usuario(id),
     foreign key (idCliente) references tbl_cliente(idCliente)
 );
+
+-- ALTER TABLE child_table_name ADD CONSTRAINT fk_name FOREIGN KEY (child_column_name) 
+-- REFERENCES parent_table_name(parent_column_name) ON DELETE CASCADE;
+
+-- alter table tbl_os add constraint idCliente foreign key(idCliente) 
+-- references tbl_cliente(idCliente) on delete cascade;
 
 -- alter table tbl_os add tipo varchar(20) not null after dataOS;
 
@@ -58,7 +64,7 @@ values
 
 -- drop table tbl_usuario;
 -- drop table tbl_cliente;
--- drop table tbl_os;
+ drop table tbl_os;
 
 desc tbl_usuario;
 desc tbl_cliente;
@@ -68,9 +74,13 @@ select * from tbl_usuario;
 select * from tbl_cliente;
 select * from tbl_os;
 
+select * from tbl_os where idCliente = 2;
+
 select sum(valor) from tbl_os;
 
 delete from tbl_usuario where id = 1;
 select * from tbl_usuario where login like binary 'admin' and senha like binary 'admin';
 
 select idCliente, nome, telefone from tbl_cliente where nome like binary "C%";
+
+delete tbl_cliente , tbl_os from tbl_cliente C, tblOS inner join C () 

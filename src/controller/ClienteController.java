@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -76,7 +78,7 @@ public class ClienteController implements Initializable {
     private BorderPane bpPrincipal;
     @FXML
     private Label lblTitulo;
-   
+
 //==============================================================================
     /**
      * Initializes the controller class.
@@ -96,21 +98,20 @@ public class ClienteController implements Initializable {
                 //System.out.println(usuarioLogado);
             }
         });
-        
+
         clienteAtual = null;
 
         MascarasFX.mascaraCPF(txtCpfCliente);
         MascarasFX.mascaraTelefone(txtTelCliente);
         MascarasFX.mascaraData(dtNascimento);
         MascarasFX.mascaraRG(txtRgCliente);
+        MascarasFX.mascaraCEP(txtEndCep);
 
         configurarTabela();
         carregarTableView();
 
     }
 //==============================================================================    
-
-    
 
 //==============================================================================
     /**
@@ -184,6 +185,7 @@ public class ClienteController implements Initializable {
     private void updateList() {
         tableView.getItems().clear();
         Cliente.listar().forEach((c) -> {
+            //Cliente.findName(txtNomeCliente.getText()+"%").forEach((c)->{
             tableView.getItems().add(c);
         });
     }
@@ -192,7 +194,7 @@ public class ClienteController implements Initializable {
     @FXML
     private void onMouseClickedSair(MouseEvent event) {
         usuarioLogado = null;
-        
+
         // Recuperando o stage atual
         Stage stageAtual = (Stage) lblSairCliente.getScene().getWindow();
         // Fecha o stage atual
@@ -300,21 +302,117 @@ public class ClienteController implements Initializable {
 
         } catch (RuntimeException e) {
             alerta.setContentText(e.getMessage());
-            alerta.showAndWait();
         }
+        alerta.showAndWait();
+
     }
 
     private void limparTudo() {
         txtNomeCliente.setText("");
         txtCpfCliente.setText("");
+        txtRgCliente.setText("");
+        txtTelCliente.setText("");
+        dtNascimento.setValue(null);
+        txtEndRua.setText("");
+        txtEndNum.setText("");
+        txtEndBairro.setText("");
+        txtEndCidade.setText("");
+        cbEndEstado.setValue(null);
+        txtEndCep.setText("");
     }
+//------------------------------------------------------------------------------
 
     @FXML
     private void onActionEditar(ActionEvent event) {
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            txtNomeCliente.setText(tableView.getSelectionModel().getSelectedItem().getNome());
+            if (Cliente.find(txtNomeCliente.getText()) != null) {
+                clienteAtual = Cliente.find(txtNomeCliente.getText());
+                preencherTela();
+            } else {
+                if (txtNomeCliente.getText().equals("")) {
+                    txtNomeCliente.requestFocus();
+                    //throw new RuntimeException("Campo vazio");
+                } else {
+                    if (Usuario.find(txtNomeCliente.getText()) != null) {
+                        clienteAtual = Cliente.find(txtNomeCliente.getText());
+                        preencherTela();
+                    } else {
+                        Alert info = new Alert(Alert.AlertType.ERROR);
+                        info.setTitle("Error");
+                        info.setHeaderText("Usuario nao cadastrado");
+                        info.setContentText("Para cadastrar " + txtNomeCliente.getText() + " preencha todos os campos.");
+                        info.showAndWait();
+                        limparTudo();
+                        txtNomeCliente.setText("");
+                        txtNomeCliente.requestFocus();
+                    }
+                }
+            }
+        }
     }
+
+    private void preencherTela() {
+        txtNomeCliente.setText(clienteAtual.getNome());
+        txtCpfCliente.setText(clienteAtual.getCpf());
+        txtRgCliente.setText(clienteAtual.getRg());
+        txtTelCliente.setText(clienteAtual.getTelefone());
+        dtNascimento.setValue(clienteAtual.getDataNasc());
+        txtEndRua.setText(clienteAtual.getRua());
+        txtEndNum.setText(clienteAtual.getNumero());
+        txtEndBairro.setText(clienteAtual.getBairro());
+        txtEndCidade.setText(clienteAtual.getCidade());
+        cbEndEstado.setValue(clienteAtual.getEstado());
+        txtEndCep.setText(clienteAtual.getCep());
+    }
+//------------------------------------------------------------------------------
 
     @FXML
     private void onActionApagar(ActionEvent event) {
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            clienteAtual = Cliente.find(tableView.getSelectionModel().getSelectedItem().getNome());
+            System.out.println(clienteAtual);
+            
+            if (clienteAtual != null) {
+                System.out.println(clienteAtual + "Botao Apagar");
+                //Pegando o botao que foi pressionado
+                Alert conf = new Alert(Alert.AlertType.CONFIRMATION);
+                conf.setTitle("EXCLUIR");
+                conf.setHeaderText(null);
+                conf.setContentText("Deseja excluir esse cliente?");
+                Optional<ButtonType> btn = conf.showAndWait();
+                //Verificar qual botão foi pressionado
+                if (btn.get() == ButtonType.OK) { //Manda a classe de negocio excluir
+                    clienteAtual.delete();
+                    //Atualizar a tabela
+                    updateList();
+                    //Mensagem de excluído com sucesso
+                    Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
+                    sucesso.setTitle("SUCESSO");
+                    sucesso.setHeaderText("Concluido com sucesso!");
+                    sucesso.setContentText("O usuário foi excluido");
+                    sucesso.showAndWait();
+                    //clienteAtual = null;
+                }
+            }
+        } else {
+            System.out.println("Usuario nao selecionado");
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("INFORMAÇÂO");
+            a.setHeaderText(null);
+            a.setContentText("Selecione o usuário a ser excluído.");
+            a.showAndWait();
+        }
+        
     }
 
+    @FXML
+    private void txtNomeClienteOnKeyReleased(KeyEvent event) {
+        if (!txtNomeCliente.getText().isEmpty() && txtNomeCliente.getText().matches("[A-z]{1,}")) {
+            tableView.getItems().clear();
+            Cliente.findName(txtNomeCliente.getText() + "%").forEach((c) -> {
+                tableView.getItems().add(c);
+            });
+        }
+    }
 }

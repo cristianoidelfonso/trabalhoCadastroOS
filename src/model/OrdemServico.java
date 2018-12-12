@@ -12,7 +12,9 @@ public class OrdemServico {
     //(idOS, idUsuario, idCliente, dataOS, tipo, situacao, produto, descricao, valor)
     private Integer idOS;
     private Integer idUsuario;
+    private String nomeUsuario;
     private Integer idCliente;
+    private String nomeCliente;
     private LocalDate dataOS;
     private String tipo;
     private String situacao;
@@ -25,10 +27,12 @@ public class OrdemServico {
         
     }
 
-    public OrdemServico(Integer idOS, Integer idUsuario, Integer idCliente, LocalDate dataOS, String tipo, String situacao, String produto, String descricao, double valor) {
+    public OrdemServico(Integer idOS, Integer idUsuario, String nomeUsuario, Integer idCliente, String nomeCliente, LocalDate dataOS, String tipo, String situacao, String produto, String descricao, double valor) {
         this.idOS = idOS;
         this.idUsuario = idUsuario;
+        this.nomeUsuario = nomeUsuario;
         this.idCliente = idCliente;
+        this.nomeCliente = nomeCliente;
         this.dataOS = dataOS;
         this.tipo = tipo;
         this.situacao = situacao;
@@ -52,6 +56,14 @@ public class OrdemServico {
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
+    
+    public String getNomeUsuario(){
+        return nomeUsuario;
+    }
+    
+    public void setNomeUsuario(String nomeUsuario){
+        this.nomeUsuario = nomeUsuario;
+    }
 
     public Integer getIdCliente() {
         return idCliente;
@@ -59,6 +71,14 @@ public class OrdemServico {
 
     public void setIdCliente(Integer idCliente) {
         this.idCliente = idCliente;
+    }
+    
+    public String getNomeCliente(){
+        return nomeCliente;
+    }
+    
+    public void setNomeCliente(String nomeCliente){
+        this.nomeCliente = nomeCliente;
     }
 
     public LocalDate getDataOS() {
@@ -111,7 +131,7 @@ public class OrdemServico {
     
     @Override
     public String toString(){
-        return "["+idOS+"] ["+idCliente+"] ["+idUsuario+"] ["+tipo+"] ["+situacao+"] ["+produto+"] ["+descricao+"] ["+valor+"] ["+dataOS+"]"; 
+        return "["+idOS+"] ["+idUsuario+" | "+nomeUsuario+"] ["+idCliente+" | "+nomeCliente+"] ["+tipo+"] ["+situacao+"] ["+produto+"] ["+descricao+"] ["+valor+"] ["+dataOS+"]"; 
     }
     
     

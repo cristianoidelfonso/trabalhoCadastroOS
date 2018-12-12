@@ -72,7 +72,7 @@ public class DAOCliente extends ConnectionFactory {
         try {
             String sql = "UPDATE tbl_cliente SET nome = ?, dataNasc = ?, cpf = ?, "
                     + "rg = ?, telefone = ?, rua = ? , numero = ?, bairro = ?, cidade = ?, "
-                    + "estado = ?, cep = ?  WHERE id = ?";
+                    + "estado = ?, cep = ?  WHERE idCliente = ?";
 
             pst = conn.prepareStatement(sql);
             pst.setString(1, cliente.getNome());
@@ -253,4 +253,19 @@ public class DAOCliente extends ConnectionFactory {
     
 //------------------------------------------------------------------------------    
 
+     public void delete(Cliente cliente) {
+        getConexao();
+        try {
+            String sql = "DELETE FROM tbl_cliente WHERE idCliente = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, cliente.getIdCliente());
+
+            pst.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+    }
+//------------------------------------------------------------------------------   
 }

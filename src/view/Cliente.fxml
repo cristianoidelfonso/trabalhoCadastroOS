@@ -26,7 +26,7 @@
          <children>
             <HBox alignment="BOTTOM_LEFT" spacing="25.0">
                <children>
-                  <JFXTextField fx:id="txtNomeCliente" labelFloat="true" prefHeight="25.0" prefWidth="567.0" promptText="Nome">
+                  <JFXTextField fx:id="txtNomeCliente" labelFloat="true" onKeyReleased="#txtNomeClienteOnKeyReleased" prefHeight="25.0" prefWidth="567.0" promptText="Nome">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin></JFXTextField>
