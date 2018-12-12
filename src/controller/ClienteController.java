@@ -98,7 +98,6 @@ public class ClienteController implements Initializable {
                 //System.out.println(usuarioLogado);
             }
         });
-
         clienteAtual = null;
 
         MascarasFX.mascaraCPF(txtCpfCliente);
@@ -109,7 +108,6 @@ public class ClienteController implements Initializable {
 
         configurarTabela();
         carregarTableView();
-
     }
 //==============================================================================    
 
@@ -166,7 +164,7 @@ public class ClienteController implements Initializable {
         tableView.getColumns().addAll(colId, colNome, colDataNasc, colCpf,
                 colRg, colTelefone, colRua, colNumero, colBairro, colCidade, colEstado, colCep);
     }
-
+//------------------------------------------------------------------------------
     /**
      * Vai carregar os dados na tabela
      */
@@ -181,7 +179,7 @@ public class ClienteController implements Initializable {
 
         }
     }
-
+//------------------------------------------------------------------------------
     private void updateList() {
         tableView.getItems().clear();
         Cliente.listar().forEach((c) -> {
@@ -190,7 +188,6 @@ public class ClienteController implements Initializable {
         });
     }
 //------------------------------------------------------------------------------    
-
     @FXML
     private void onMouseClickedSair(MouseEvent event) {
         usuarioLogado = null;
@@ -200,14 +197,14 @@ public class ClienteController implements Initializable {
         // Fecha o stage atual
         stageAtual.close();
     }
-
+//------------------------------------------------------------------------------
     @FXML
     private void onActionSair(ActionEvent event) {
         usuarioLogado = null;
         Stage stageAtual = (Stage) btnSairCliente.getScene().getWindow();
         stageAtual.close();
     }
-
+//------------------------------------------------------------------------------
     @FXML
     private void sairComEnter(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -216,7 +213,7 @@ public class ClienteController implements Initializable {
             stageAtual.close();
         }
     }
-
+//------------------------------------------------------------------------------
     @FXML
     private void onActionSalvar(ActionEvent event) throws SQLException {
 
@@ -297,16 +294,12 @@ public class ClienteController implements Initializable {
                 updateList();
 
                 limparTudo();
-
             }
-
         } catch (RuntimeException e) {
             alerta.setContentText(e.getMessage());
         }
         alerta.showAndWait();
-
     }
-
     private void limparTudo() {
         txtNomeCliente.setText("");
         txtCpfCliente.setText("");
@@ -321,7 +314,6 @@ public class ClienteController implements Initializable {
         txtEndCep.setText("");
     }
 //------------------------------------------------------------------------------
-
     @FXML
     private void onActionEditar(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
@@ -351,7 +343,6 @@ public class ClienteController implements Initializable {
             }
         }
     }
-
     private void preencherTela() {
         txtNomeCliente.setText(clienteAtual.getNome());
         txtCpfCliente.setText(clienteAtual.getCpf());
@@ -366,9 +357,8 @@ public class ClienteController implements Initializable {
         txtEndCep.setText(clienteAtual.getCep());
     }
 //------------------------------------------------------------------------------
-
     @FXML
-    private void onActionApagar(ActionEvent event) {
+    private void onActionApagar(ActionEvent event) throws SQLException {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             clienteAtual = Cliente.find(tableView.getSelectionModel().getSelectedItem().getNome());
             System.out.println(clienteAtual);

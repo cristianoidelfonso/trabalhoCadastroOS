@@ -214,14 +214,12 @@ public class FXMLCadastroOSController implements Initializable {
             tableViewOS.getItems().add(os);
         });
     }
-    //--------------------------------------------------------------------------
-
+//--------------------------------------------------------------------------
     @FXML
     private void txtNomeClienteOnKeyReleased(KeyEvent event) {
         updateList();
     }
-
-//==============================================================================   
+//------------------------------------------------------------------------------
     @FXML
     private void onMouseClickedSairOS(MouseEvent event) {
         // Recuperando o stage atual
@@ -230,7 +228,6 @@ public class FXMLCadastroOSController implements Initializable {
         stageAtual.close();
     }
 //------------------------------------------------------------------------------
-
     @FXML
     private void onActionSalvar(ActionEvent event) {
 
@@ -269,9 +266,8 @@ public class FXMLCadastroOSController implements Initializable {
 
             System.out.println("Criado com sucesso!!!");
         }
-
     }
-
+//------------------------------------------------------------------------------
     private String radioButtonSelected() {
         if (rbOrcamento.isSelected()) {
             tipo = "Orçamento";
@@ -281,7 +277,7 @@ public class FXMLCadastroOSController implements Initializable {
         }
         return tipo;
     }
-
+//------------------------------------------------------------------------------
     private void limparCampos() {
         txtNumOS.setText("");
         cbSituacaoOS.setValue("");
@@ -292,20 +288,16 @@ public class FXMLCadastroOSController implements Initializable {
         txtValor.setText("");
 
         tableView.getItems().clear();
-
     }
 //------------------------------------------------------------------------------
-
     @FXML
     private void onActionEditar(ActionEvent event) {
     }
 //------------------------------------------------------------------------------
-
     @FXML
     private void onActionApagar(ActionEvent event) {
     }
 //------------------------------------------------------------------------------
-
     @FXML
     private void sairComEnter(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -314,14 +306,12 @@ public class FXMLCadastroOSController implements Initializable {
         }
     }
 //------------------------------------------------------------------------------
-
     @FXML
     private void onActionSair(ActionEvent event) {
         Stage stageAtual = (Stage) btnSair.getScene().getWindow();
         stageAtual.close();
     }
 //------------------------------------------------------------------------------
-
     @FXML
     private void tableViewOnMouseClicked(MouseEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {

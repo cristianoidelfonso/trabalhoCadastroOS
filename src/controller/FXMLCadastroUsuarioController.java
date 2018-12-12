@@ -93,7 +93,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         carregarTableView();
 
     }
-
+//------------------------------------------------------------------------------
     /**
      * Cria a lista de perfis e povoa o comboBox.
      */
@@ -105,7 +105,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         //Jogar a lista no combo
         cbPerfil.getItems().addAll(lista);
     }
-
+//------------------------------------------------------------------------------
     /**
      * Faz a configuração da tabela e das colunas
      */
@@ -142,7 +142,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         //Adiciona as colunas na tabela na ordem que devem aparecer
         tableView.getColumns().addAll(colId, colNome, colDataNasc, colCpf, colPerfil, colLogin, colSenha);
     }
-
+//------------------------------------------------------------------------------
     /**
      * Vai carregar os dados na tabela
      */
@@ -157,14 +157,14 @@ public class FXMLCadastroUsuarioController implements Initializable {
 
         }
     }
-
+//------------------------------------------------------------------------------
     private void updateList() {
         tableView.getItems().clear();
         Usuario.listar().forEach((u) -> {
             tableView.getItems().add(u);
         });
     }
-
+//------------------------------------------------------------------------------
     /**
      * Recupera o stage atual e fecha em seguida
      *
@@ -177,13 +177,13 @@ public class FXMLCadastroUsuarioController implements Initializable {
         // Fecha o stage atual
         stageAtual.close();
     }
-
+//------------------------------------------------------------------------------
     @FXML
     private void btnSairAction(ActionEvent event) {
         Stage stageAtual = (Stage) btnSair.getScene().getWindow();
         stageAtual.close();
     }
-
+//------------------------------------------------------------------------------
     @FXML
     private void sairComEnter(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -191,7 +191,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
             stageAtual.close();
         }
     }
-
+//------------------------------------------------------------------------------
     /**
      * Validação de todos os campos de entrada de dados do novo usuário.
      *
@@ -417,7 +417,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         limparCampos();
         txtNome.requestFocus();
     }
-
+//------------------------------------------------------------------------------
     /**
      * Método que limpa todos os campos do formulário de cadastro de usuário.
      */
@@ -429,7 +429,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         dtDataNasc.setValue(null);
         cbPerfil.setValue("");
     }
-
+//------------------------------------------------------------------------------
     /**
      *
      * @param event
@@ -463,7 +463,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
             }
         }
     }
-
+//------------------------------------------------------------------------------
     /**
      *
      * @param event
@@ -502,9 +502,8 @@ public class FXMLCadastroUsuarioController implements Initializable {
             a.setContentText("Selecione o usuário a ser excluído.");
             a.showAndWait();
         }
-
     }
-
+//------------------------------------------------------------------------------
     private void preencherTela() {
         txtNome.setText(usuarioAtual.getNome());
         dtDataNasc.setValue(usuarioAtual.getDataNasc());
@@ -512,6 +511,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
         txtLogin.setText(usuarioAtual.getLogin());
         txtSenha.setText(usuarioAtual.getSenha());
         cbPerfil.setValue(usuarioAtual.getPerfil());
-
     }
 }
+//------------------------------------------------------------------------------

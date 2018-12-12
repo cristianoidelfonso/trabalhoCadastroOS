@@ -57,7 +57,6 @@ public class DAOUsuario extends ConnectionFactory {
         }
         return generatedId;
     }
-
 //------------------------------------------------------------------------------    
     public void update(Usuario usuario) {
         getConexao();
@@ -88,7 +87,6 @@ public class DAOUsuario extends ConnectionFactory {
             fecharConexao(conn, pst);
         }
     }
-
 //------------------------------------------------------------------------------    
     public void delete(Usuario usuario) throws RuntimeException {
         getConexao();
@@ -102,7 +100,6 @@ public class DAOUsuario extends ConnectionFactory {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
-
     }
 //------------------------------------------------------------------------------
 
@@ -161,7 +158,6 @@ public class DAOUsuario extends ConnectionFactory {
         }
         return resultado;
     }
-
 //------------------------------------------------------------------------------
     public static Usuario logarUsuario(String login, String senha) {
         Usuario resultado = null;
@@ -192,7 +188,6 @@ public class DAOUsuario extends ConnectionFactory {
         return resultado;
     }
 //------------------------------------------------------------------------------    
-
     /**
      * Retorna todos os produtos do banco de dados
      *
@@ -230,8 +225,7 @@ public class DAOUsuario extends ConnectionFactory {
         }
         return lista;
     }
-
-    //--------------------------------------------------------------------------
+//------------------------------------------------------------------------------
     /**
      * Pesquisar em tempo real, pelo nome que esta sendo digitado no campo de
      * texto "NOME";
@@ -248,7 +242,6 @@ public class DAOUsuario extends ConnectionFactory {
             //tbl_usuario.setModel(DbUtils.resultSetToTableModel(rs));
         } catch (SQLException e) {
         }
-
     }
     //--------------------------------------------------------------------------
 }

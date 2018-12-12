@@ -124,18 +124,19 @@ public class Usuario {
             this.id = generatedKey;
         }
     }
-
+//------------------------------------------------------------------------------
     public void delete() {
         if (dao.find(id) != null) {
             dao.delete(this);
         }
     }
-
+//------------------------------------------------------------------------------
     public static ArrayList<Usuario> listar(){
         return dao.listar();
     }
-
+//------------------------------------------------------------------------------
     public static Usuario find(String nome) {
         return dao.find(nome);
     }
+//------------------------------------------------------------------------------    
 }

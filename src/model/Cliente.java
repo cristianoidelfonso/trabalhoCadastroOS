@@ -174,26 +174,27 @@ public class Cliente {
             this.idCliente = generatedKey;
         }
     }
-
+//------------------------------------------------------------------------------
     public void delete() throws SQLException {
         if (dao.find(idCliente) != null) {
             dao.delete(this);
         }
     }
-
+//------------------------------------------------------------------------------
     public static ArrayList<Cliente> listar(){
         return dao.listar();
     }
-
+//------------------------------------------------------------------------------
     public static Cliente find(String nome) {
         return dao.find(nome);
     }
-    
+ //------------------------------------------------------------------------------   
     public static Cliente find(int pk) {
         return dao.find(pk);
     }
-    
+//------------------------------------------------------------------------------    
     public static ArrayList<Cliente> findName(String nome){
         return dao.findName(nome);
     }
+//------------------------------------------------------------------------------    
 }

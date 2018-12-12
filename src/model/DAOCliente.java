@@ -46,26 +46,22 @@ public class DAOCliente extends ConnectionFactory {
             if (pst.executeUpdate() != 0) {
                 System.out.println("Salvo com sucesso");
             }
-
             rs = pst.getGeneratedKeys();
             if (rs.next()) {
                 generatedId = rs.getInt(1);
                 System.out.println("ID gerado: " + generatedId);
             }
-
         } catch (SQLException e) {
             Alert alerta = new Alert(Alert.AlertType.WARNING);
             alerta.setTitle("WARNING");
             alerta.setHeaderText("Não foi possivel salvar este usuário no banco de dados.");
             alerta.setContentText(e.getMessage());
             alerta.show();
-
         } finally {
             ConnectionFactory.fecharConexao(conn, pst, rs);
         }
         return generatedId;
     }
-
 //------------------------------------------------------------------------------
     public void update(Cliente cliente) {
         getConexao();
@@ -97,13 +93,11 @@ public class DAOCliente extends ConnectionFactory {
 //            alerta.setContentText(e.getMessage());
 //            alerta.show();
             throw new RuntimeException(e.getMessage());
-
         } finally {
             fecharConexao(conn, pst);
         }
     }
 //------------------------------------------------------------------------------    
-
     public Cliente find(String nome) {
         Cliente resultado = null;
         getConexao();
@@ -168,16 +162,12 @@ public class DAOCliente extends ConnectionFactory {
 
             //adiciona o resultado na lista
             lista.add(cliente);
-
         }//while
-        }catch(SQLException e){
-            
+        }catch(SQLException e){           
         }
         return lista;
-    }   
-    
-//------------------------------------------------------------------------------
-    
+    }     
+//------------------------------------------------------------------------------ 
     public Cliente find(int pk) {
         Cliente resultado = null;
         getConexao();
@@ -210,9 +200,7 @@ public class DAOCliente extends ConnectionFactory {
         }
         return resultado;
     }
-
-//------------------------------------------------------------------------------
-    
+//------------------------------------------------------------------------------   
     public ArrayList<Cliente> listar(){
         ArrayList<Cliente> lista = new ArrayList<>();
         getConexao();
@@ -243,16 +231,12 @@ public class DAOCliente extends ConnectionFactory {
 
             //adiciona o resultado na lista
             lista.add(cliente);
-
         }//while
-        }catch(SQLException e){
-            
+        }catch(SQLException e){        
         }
         return lista;
     }   
-    
 //------------------------------------------------------------------------------    
-
      public void delete(Cliente cliente) {
         getConexao();
         try {
@@ -265,7 +249,6 @@ public class DAOCliente extends ConnectionFactory {
         } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
-
     }
 //------------------------------------------------------------------------------   
 }

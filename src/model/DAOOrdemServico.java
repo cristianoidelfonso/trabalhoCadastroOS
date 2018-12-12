@@ -49,27 +49,22 @@ public class DAOOrdemServico extends ConnectionFactory {
             if (pst.executeUpdate() != 0) {
                 System.out.println("Salvo com sucesso");
             }
-
             rs = pst.getGeneratedKeys();
             if (rs.next()) {
                 generatedId = rs.getInt(1);
                 System.out.println("ID gerado: " + generatedId);
             }
-
         } catch (SQLException e) {
             Alert alerta = new Alert(Alert.AlertType.WARNING);
             alerta.setTitle("WARNING");
             alerta.setHeaderText("Não foi possivel salvar a O.S. no banco de dados.");
             alerta.setContentText(e.getMessage());
             alerta.show();
-
         } finally {
             ConnectionFactory.fecharConexao(conn, pst, rs);
-        }
-        
+        }      
         return generatedId;
     }
-
     //--------------------------------------------------------------------------
     public void update(OrdemServico os) {
         getConexao();
@@ -98,8 +93,7 @@ public class DAOOrdemServico extends ConnectionFactory {
             fecharConexao(conn, pst);
         }
     }
-//------------------------------------------------------------------------------
-    
+//------------------------------------------------------------------------------  
     public OrdemServico find(int pk) {
         OrdemServico resultado = null;
         getConexao();
@@ -130,8 +124,7 @@ public class DAOOrdemServico extends ConnectionFactory {
             fecharConexao(conn, pst, rs);
         }
         return resultado;
-    }
-    
+    } 
 //------------------------------------------------------------------------------
     public ArrayList<OrdemServico> findOS(Integer idCliente) {
         ArrayList<OrdemServico> lista = new ArrayList<>();
@@ -158,7 +151,6 @@ public class DAOOrdemServico extends ConnectionFactory {
                     os.setDescricao(rs.getString("descricao"));
                     os.setValor(rs.getDouble("valor"));
                 
-
                 //adiciona o resultado na lista
                 lista.add(os);
 
@@ -168,5 +160,5 @@ public class DAOOrdemServico extends ConnectionFactory {
         }
         return lista;
     }
-
+//------------------------------------------------------------------------------
 }

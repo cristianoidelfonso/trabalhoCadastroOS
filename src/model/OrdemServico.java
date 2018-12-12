@@ -128,13 +128,11 @@ public class OrdemServico {
     public void setValor(double valor) {
         this.valor = valor;
     }
-    
+   
     @Override
     public String toString(){
         return "["+idOS+"] ["+idUsuario+" | "+nomeUsuario+"] ["+idCliente+" | "+nomeCliente+"] ["+tipo+"] ["+situacao+"] ["+produto+"] ["+descricao+"] ["+valor+"] ["+dataOS+"]"; 
-    }
-    
-    
+    }  
     
 //==============================================================================
     // Padrão de projeto DAO
@@ -148,26 +146,27 @@ public class OrdemServico {
             this.idCliente = generatedKey;
         }
     }
-
+//------------------------------------------------------------------------------
     //public void delete() {
     //    if (dao.find(idCliente) != null) {
     //        dao.delete(this);
     //    }
     //}
-
+//------------------------------------------------------------------------------
     //public static ArrayList<OrdemServico> listar(){
     //    return dao.listar();
     //}
-
+//------------------------------------------------------------------------------
     // public static Cliente find(String nome) {
     //     return dao.find(nome);
     // }
-    
+ //------------------------------------------------------------------------------   
     //public static Cliente find(int pk) {
     //    return dao.find(pk);
     //}
-    
+//------------------------------------------------------------------------------   
     public static ArrayList<OrdemServico> findOS(int numero){
         return dao.findOS(numero);
     }
+//------------------------------------------------------------------------------    
 }
