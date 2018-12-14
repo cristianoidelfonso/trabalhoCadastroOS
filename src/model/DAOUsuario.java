@@ -58,6 +58,7 @@ public class DAOUsuario extends ConnectionFactory {
         return generatedId;
     }
 //------------------------------------------------------------------------------    
+
     public void update(Usuario usuario) {
         getConexao();
         try {
@@ -88,6 +89,7 @@ public class DAOUsuario extends ConnectionFactory {
         }
     }
 //------------------------------------------------------------------------------    
+
     public void delete(Usuario usuario) throws RuntimeException {
         getConexao();
         try {
@@ -159,6 +161,7 @@ public class DAOUsuario extends ConnectionFactory {
         return resultado;
     }
 //------------------------------------------------------------------------------
+
     public static Usuario logarUsuario(String login, String senha) {
         Usuario resultado = null;
         getConexao();
@@ -188,6 +191,7 @@ public class DAOUsuario extends ConnectionFactory {
         return resultado;
     }
 //------------------------------------------------------------------------------    
+
     /**
      * Retorna todos os produtos do banco de dados
      *
@@ -226,6 +230,7 @@ public class DAOUsuario extends ConnectionFactory {
         return lista;
     }
 //------------------------------------------------------------------------------
+
     /**
      * Pesquisar em tempo real, pelo nome que esta sendo digitado no campo de
      * texto "NOME";
@@ -243,5 +248,59 @@ public class DAOUsuario extends ConnectionFactory {
         } catch (SQLException e) {
         }
     }
+
     //--------------------------------------------------------------------------
+    public Integer ultimoId() {
+        Integer ultimoId = null;
+        getConexao();
+        try {
+
+            String sql = "SELECT * FROM tbl_usuario WHERE id = (SELECT MAX(id) FROM tbl_usuario)";
+            pst = conn.prepareStatement(sql);
+            rs = pst.executeQuery();
+            if (rs.next()) {
+                ultimoId = rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            Alert a = new Alert(Alert.AlertType.ERROR);
+            a.setTitle(null);
+            a.setHeaderText(null);
+            a.setContentText(e.getMessage());
+            a.showAndWait();
+        }
+        return ultimoId;
+    }
+//==============================================================================
+
+    public ArrayList<Usuario> findName(String nome) {
+        ArrayList<Usuario> lista = new ArrayList<>();
+        getConexao();
+        try {
+            //Comando
+            String sql = "SELECT * FROM tbl_usuario WHERE nome LIKE ?";
+            //Preparar o SQL
+            pst = conn.prepareStatement(sql);
+            pst.setString(1, nome);
+            //Executa consulta no bd
+            rs = pst.executeQuery();
+
+            //Enquanto tiver resultado no BD
+            while (rs.next()) {
+                //Cria o produto a partir do resultado do banco
+                Usuario u = new Usuario(
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getDate("dataNasc").toLocalDate(),
+                        rs.getString("cpf"),
+                        rs.getString("login"),
+                        rs.getString("senha"),
+                        rs.getString("perfil"));
+
+                //adiciona o resultado na lista
+                lista.add(u);
+            }//while
+        } catch (SQLException e) {
+        }
+        return lista;
+    }
 }

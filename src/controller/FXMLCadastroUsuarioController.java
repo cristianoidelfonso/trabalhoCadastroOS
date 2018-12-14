@@ -84,7 +84,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         MascarasFX.mascaraCPF(txtCpf);
         MascarasFX.mascaraData(dtDataNasc);
 
-        lblId.setVisible(false);
+        lblId.setText("ID:" + Usuario.proximoId().toString());
 
         carregarCombo();
         cbPerfil.setValue("Admin");
@@ -94,6 +94,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
 
     }
 //------------------------------------------------------------------------------
+
     /**
      * Cria a lista de perfis e povoa o comboBox.
      */
@@ -106,6 +107,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         cbPerfil.getItems().addAll(lista);
     }
 //------------------------------------------------------------------------------
+
     /**
      * Faz a configuração da tabela e das colunas
      */
@@ -143,6 +145,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         tableView.getColumns().addAll(colId, colNome, colDataNasc, colCpf, colPerfil, colLogin, colSenha);
     }
 //------------------------------------------------------------------------------
+
     /**
      * Vai carregar os dados na tabela
      */
@@ -158,6 +161,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         }
     }
 //------------------------------------------------------------------------------
+
     private void updateList() {
         tableView.getItems().clear();
         Usuario.listar().forEach((u) -> {
@@ -165,6 +169,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         });
     }
 //------------------------------------------------------------------------------
+
     /**
      * Recupera o stage atual e fecha em seguida
      *
@@ -178,12 +183,14 @@ public class FXMLCadastroUsuarioController implements Initializable {
         stageAtual.close();
     }
 //------------------------------------------------------------------------------
+
     @FXML
     private void btnSairAction(ActionEvent event) {
         Stage stageAtual = (Stage) btnSair.getScene().getWindow();
         stageAtual.close();
     }
 //------------------------------------------------------------------------------
+
     @FXML
     private void sairComEnter(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -192,6 +199,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         }
     }
 //------------------------------------------------------------------------------
+
     /**
      * Validação de todos os campos de entrada de dados do novo usuário.
      *
@@ -204,27 +212,38 @@ public class FXMLCadastroUsuarioController implements Initializable {
         alerta.setTitle("INFORMAÇÃO");
 
         try {
-            if (txtNome.getText() == null || txtNome.getText().isEmpty() || !txtNome.getText().matches("([A-ZÀ-ú]{1}[A-Za-zÀ-ú\\s]+)")) {
+            if (txtNome.getText() == null || txtNome.getText().isEmpty()) {
                 txtNome.requestFocus();
-                throw new RuntimeException("O campo NOME nao pode ser vazio. teste 01");
+                throw new RuntimeException("O campo NOME nao pode ser vazio.");
+            } else if (!txtNome.getText().matches("([A-ZÀ-ú]{1}[A-Za-zÀ-ú\\s]+)")) {
+                txtNome.requestFocus();
+                throw new RuntimeException("O campo NOME possui caracteres inválidos.");
             } else if (dtDataNasc.getValue() == null) {
                 dtDataNasc.requestFocus();
                 throw new RuntimeException("O campo DATA DE NASCIMENTO nao pode ser vazio.");
             } else if (txtCpf.getText() == null || txtCpf.getText().isEmpty()) {
                 txtCpf.requestFocus();
                 throw new RuntimeException("O campo CPF nao pode ser vazio.");
-            } else if (txtLogin.getText() == null || txtLogin.getText().isEmpty() || !txtLogin.getText().matches("[\\w]{5,12}")) {
+            } else if (txtLogin.getText() == null || txtLogin.getText().isEmpty()) {
                 txtLogin.requestFocus();
                 throw new RuntimeException("O campo LOGIN nao pode ser vazio.");
-            } else if (txtSenha.getText() == null || txtSenha.getText().isEmpty() || !txtSenha.getText().matches("(\\w{5,10})")) {
+            } else if (!txtLogin.getText().matches("[\\w]{5,12}")) {
+                txtLogin.requestFocus();
+                throw new RuntimeException("O campo LOGIN possui caracteres inválidos.\n(Utilize min:3 / max:12 caracteres alfanuméricos.)");
+            } else if (txtSenha.getText() == null || txtSenha.getText().isEmpty()) {
                 txtSenha.requestFocus();
                 throw new RuntimeException("O campo SENHA nao pode ser vazio.");
+            } else if (!txtSenha.getText().matches("(\\w{5,10})")) {
+                txtSenha.requestFocus();
+                throw new RuntimeException("O campo SENHA possui caracteres inválidos.\n(Utilize min:5 / max:10 caracteres alfanuméricos.)");
             } else if (cbPerfil.getValue() == null || cbPerfil.getValue().isEmpty()) {
                 cbPerfil.requestFocus();
                 throw new RuntimeException("O campo PERFIL nao pode ser vazio.");
             }
 
             if (usuarioAtual != null) {
+                lblId.setText(usuarioAtual.getId().toString());
+                lblId.setVisible(true);
                 usuarioAtual.setNome(txtNome.getText());
                 usuarioAtual.setDataNasc(dtDataNasc.getValue());
                 usuarioAtual.setCpf(txtCpf.getText());
@@ -404,20 +423,22 @@ public class FXMLCadastroUsuarioController implements Initializable {
 //                alerta.setContentText("Novo usuário foi cadastrado com sucesso");
 //                alerta.show();
             }
-            
+
             updateList();
             txtNome.requestFocus();
-            
+
         } catch (RuntimeException e) {
 
             alerta.setContentText(e.getMessage());
             alerta.show();
+            return;
         }
         usuarioAtual = null;
         limparCampos();
         txtNome.requestFocus();
     }
 //------------------------------------------------------------------------------
+
     /**
      * Método que limpa todos os campos do formulário de cadastro de usuário.
      */
@@ -430,6 +451,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         cbPerfil.setValue("");
     }
 //------------------------------------------------------------------------------
+
     /**
      *
      * @param event
@@ -438,6 +460,8 @@ public class FXMLCadastroUsuarioController implements Initializable {
     private void btnEditarAction(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             txtNome.setText(tableView.getSelectionModel().getSelectedItem().getNome());
+            lblId.setText("ID: " + tableView.getSelectionModel().getSelectedItem().getId().toString());
+            lblId.setVisible(true);
             if (Usuario.find(txtNome.getText()) != null) {
                 usuarioAtual = Usuario.find(txtNome.getText());
                 preencherTela();
@@ -449,6 +473,8 @@ public class FXMLCadastroUsuarioController implements Initializable {
             } else {
                 if (Usuario.find(txtNome.getText()) != null) {
                     usuarioAtual = Usuario.find(txtNome.getText());
+                    lblId.setText("ID: " + usuarioAtual.getId().toString());
+                    lblId.setVisible(true);
                     preencherTela();
                 } else {
                     Alert info = new Alert(Alert.AlertType.ERROR);
@@ -464,6 +490,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         }
     }
 //------------------------------------------------------------------------------
+
     /**
      *
      * @param event
@@ -504,6 +531,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         }
     }
 //------------------------------------------------------------------------------
+
     private void preencherTela() {
         txtNome.setText(usuarioAtual.getNome());
         dtDataNasc.setValue(usuarioAtual.getDataNasc());
@@ -512,5 +540,18 @@ public class FXMLCadastroUsuarioController implements Initializable {
         txtSenha.setText(usuarioAtual.getSenha());
         cbPerfil.setValue(usuarioAtual.getPerfil());
     }
-}
 //------------------------------------------------------------------------------
+
+    @FXML
+    private void txtNomeOnKeyReleased(KeyEvent event) {
+        
+        if (!txtNome.getText().isEmpty() && txtNome.getText().matches("[A-z]{1,}")) {
+            tableView.getItems().clear();
+            Usuario.findName(txtNome.getText() + "%").forEach((u) -> {
+                tableView.getItems().add(u);
+            });
+        }else{
+            carregarTableView();
+        }
+    }
+}

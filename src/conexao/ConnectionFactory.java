@@ -24,8 +24,9 @@ public class ConnectionFactory {
             //System.out.println("Conectado com sucesso");
             
         } catch (ClassNotFoundException | SQLException e) {
+            System.out.println(e.toString());
             throw new RuntimeException("Ocorreu um  erro inesperado" + e);
-            //System.out.println(e.toString());
+            
         }
     }
 //------------------------------------------------------------------------------    

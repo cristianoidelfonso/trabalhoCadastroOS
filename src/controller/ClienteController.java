@@ -109,8 +109,6 @@ public class ClienteController implements Initializable {
         configurarTabela();
         carregarTableView();
     }
-//==============================================================================    
-
 //==============================================================================
     /**
      * Faz a configuração da tabela e das colunas
@@ -217,7 +215,7 @@ public class ClienteController implements Initializable {
     @FXML
     private void onActionSalvar(ActionEvent event) throws SQLException {
 
-        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
         alerta.setTitle(null);
         alerta.setHeaderText(null);
 
@@ -275,6 +273,8 @@ public class ClienteController implements Initializable {
                 updateList();
 
                 limparTudo();
+                alerta.setContentText("Dados alterados com sucesso!");
+                alerta.showAndWait();
 
             } else {
                 Cliente cliente = new Cliente();
@@ -294,11 +294,13 @@ public class ClienteController implements Initializable {
                 updateList();
 
                 limparTudo();
+                alerta.setContentText("Cliente salvo com sucesso!");
+                alerta.showAndWait();
             }
         } catch (RuntimeException e) {
             alerta.setContentText(e.getMessage());
         }
-        alerta.showAndWait();
+        
     }
     private void limparTudo() {
         txtNomeCliente.setText("");

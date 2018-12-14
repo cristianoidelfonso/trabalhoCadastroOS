@@ -83,4 +83,4 @@ select * from tbl_usuario where login like binary 'admin' and senha like binary 
 
 select idCliente, nome, telefone from tbl_cliente where nome like binary "C%";
 
-delete tbl_cliente , tbl_os from tbl_cliente C, tblOS inner join C () 
+select * from tbl_usuario where id = (select max(id) from tbl_usuario);

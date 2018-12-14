@@ -138,5 +138,12 @@ public class Usuario {
     public static Usuario find(String nome) {
         return dao.find(nome);
     }
-//------------------------------------------------------------------------------    
+//------------------------------------------------------------------------------
+    public static ArrayList<Usuario> findName(String nome){
+        return dao.findName(nome);
+    }
+//------------------------------------------------------------------------------
+    public static Integer proximoId(){
+        return dao.ultimoId() + 1;
+    }
 }

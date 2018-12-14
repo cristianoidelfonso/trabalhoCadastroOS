@@ -28,12 +28,8 @@
                <children>
                   <HBox alignment="BOTTOM_LEFT" prefWidth="200.0" spacing="40.0">
                      <children>
-                        <Label fx:id="lblId" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" text="ID :">
-                           <HBox.margin>
-                              <Insets right="50.0" />
-                           </HBox.margin>
-                        </Label>
-                            <JFXTextField fx:id="txtNome" labelFloat="true" prefHeight="31.0" prefWidth="529.0" promptText="Nome" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" />
+                            <JFXTextField fx:id="txtNome" labelFloat="true" onKeyReleased="#txtNomeOnKeyReleased" prefHeight="31.0" prefWidth="529.0" promptText="Nome" styleClass="textField" stylesheets="@css/fxmlcadastrousuario.css" />
+                        <Label fx:id="lblId" text="ID :" />
                      </children>
                      <VBox.margin>
                         <Insets bottom="15.0" />
