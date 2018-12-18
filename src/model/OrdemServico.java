@@ -23,8 +23,7 @@ public class OrdemServico {
     private double valor;
     
     
-    public OrdemServico(){
-        
+    public OrdemServico(){  
     }
 
     public OrdemServico(Integer idOS, Integer idUsuario, String nomeUsuario, 
@@ -42,7 +41,7 @@ public class OrdemServico {
         this.descricao = descricao;
         this.valor = valor;
     }
-    
+
     public Integer getIdOS(){
        return idOS;
     }
@@ -134,7 +133,8 @@ public class OrdemServico {
     @Override
     public String toString(){
         return "["+idOS+"] ["+idUsuario+" | "+nomeUsuario+"] ["+idCliente+" | "+nomeCliente+"] ["+dataOS+"] ["+tipo+"] ["+situacao+"] ["+produto+"] ["+descricao+"] ["+valor+"]"; 
-    }  
+    }
+    
     
 //==============================================================================
     // Padrão de projeto DAO
@@ -148,6 +148,7 @@ public class OrdemServico {
             this.idCliente = generatedKey;
         }
     }
+    
 //------------------------------------------------------------------------------
     //public void delete() {
     //    if (dao.find(idCliente) != null) {
