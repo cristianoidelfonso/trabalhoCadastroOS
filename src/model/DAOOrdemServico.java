@@ -94,13 +94,13 @@ public class DAOOrdemServico extends ConnectionFactory {
         }
     }
 //------------------------------------------------------------------------------  
-    public OrdemServico find(int pk) {
+    public OrdemServico find(Integer idOS) {
         OrdemServico resultado = null;
         getConexao();
         try {
             String sql = "SELECT * FROM tbl_os WHERE idOS = ?";
             pst = conn.prepareStatement(sql);
-            pst.setInt(1, pk);
+            pst.setInt(1, idOS);
 
             rs = pst.executeQuery();
 
