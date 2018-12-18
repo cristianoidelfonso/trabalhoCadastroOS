@@ -292,6 +292,7 @@ public class FXMLCadastroOSController implements Initializable {
 //------------------------------------------------------------------------------
     @FXML
     private void onActionEditar(ActionEvent event) {
+        
     }
 //------------------------------------------------------------------------------
     @FXML

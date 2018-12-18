@@ -105,17 +105,18 @@ public class DAOOrdemServico extends ConnectionFactory {
             rs = pst.executeQuery();
 
             if (rs.next()) {
-                OrdemServico os = new OrdemServico();
-                        rs.getInt("idOS");
-                        rs.getInt("idUsuario");
-                        rs.getString("nomeUsuario");
-                        rs.getInt("idCliente");
-                        rs.getDate("dataOS").toLocalDate();
-                        rs.getString("tipo");
-                        rs.getString("situacao");
-                        rs.getString("produto");
-                        rs.getString("descricao");
-                        rs.getDouble("valor");
+                OrdemServico os = new OrdemServico(
+                        rs.getInt("idOS"),
+                        rs.getInt("idUsuario"),
+                        rs.getString("nomeUsuario"),
+                        rs.getInt("idCliente"),
+                        rs.getString("nomeCliente"),
+                        rs.getDate("dataOS").toLocalDate(),
+                        rs.getString("tipo"),
+                        rs.getString("situacao"),
+                        rs.getString("produto"),
+                        rs.getString("descricao"),
+                        rs.getDouble("valor"));
                         
                 resultado = os;
             }

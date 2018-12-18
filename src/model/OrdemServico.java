@@ -27,7 +27,9 @@ public class OrdemServico {
         
     }
 
-    public OrdemServico(Integer idOS, Integer idUsuario, String nomeUsuario, Integer idCliente, String nomeCliente, LocalDate dataOS, String tipo, String situacao, String produto, String descricao, double valor) {
+    public OrdemServico(Integer idOS, Integer idUsuario, String nomeUsuario, 
+                        Integer idCliente, String nomeCliente, LocalDate dataOS, 
+                        String tipo, String situacao, String produto, String descricao, double valor) {
         this.idOS = idOS;
         this.idUsuario = idUsuario;
         this.nomeUsuario = nomeUsuario;
@@ -131,7 +133,7 @@ public class OrdemServico {
    
     @Override
     public String toString(){
-        return "["+idOS+"] ["+idUsuario+" | "+nomeUsuario+"] ["+idCliente+" | "+nomeCliente+"] ["+tipo+"] ["+situacao+"] ["+produto+"] ["+descricao+"] ["+valor+"] ["+dataOS+"]"; 
+        return "["+idOS+"] ["+idUsuario+" | "+nomeUsuario+"] ["+idCliente+" | "+nomeCliente+"] ["+dataOS+"] ["+tipo+"] ["+situacao+"] ["+produto+"] ["+descricao+"] ["+valor+"]"; 
     }  
     
 //==============================================================================
@@ -161,9 +163,9 @@ public class OrdemServico {
     //     return dao.find(nome);
     // }
  //------------------------------------------------------------------------------   
-    //public static Cliente find(int pk) {
-    //    return dao.find(pk);
-    //}
+    public static OrdemServico find(int pk) {
+        return dao.find(pk);
+    }
 //------------------------------------------------------------------------------   
     public static ArrayList<OrdemServico> findOS(int numero){
         return dao.findOS(numero);
