@@ -98,7 +98,7 @@
                         <Insets right="10.0" />
                      </HBox.margin>
                   </JFXTextField>
-                  <JFXComboBox fx:id="cbEndEstado" editable="true" labelFloat="true" prefHeight="25.0" prefWidth="255.0" promptText="Estado">
+                  <JFXComboBox fx:id="cbEndEstado" labelFloat="true" prefHeight="25.0" prefWidth="71.0" promptText="Estado">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>

@@ -84,7 +84,7 @@ public class FXMLCadastroUsuarioController implements Initializable {
         MascarasFX.mascaraCPF(txtCpf);
         MascarasFX.mascaraData(dtDataNasc);
 
-        lblId.setText("ID:" + Usuario.proximoId().toString());
+        //lblId.setText("ID:" + Usuario.proximoId().toString());
 
         carregarCombo();
         cbPerfil.setValue("Admin");
@@ -242,8 +242,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
             }
 
             if (usuarioAtual != null) {
-                lblId.setText(usuarioAtual.getId().toString());
-                lblId.setVisible(true);
                 usuarioAtual.setNome(txtNome.getText());
                 usuarioAtual.setDataNasc(dtDataNasc.getValue());
                 usuarioAtual.setCpf(txtCpf.getText());
@@ -541,7 +539,6 @@ public class FXMLCadastroUsuarioController implements Initializable {
         cbPerfil.setValue(usuarioAtual.getPerfil());
     }
 //------------------------------------------------------------------------------
-
     @FXML
     private void txtNomeOnKeyReleased(KeyEvent event) {
         

@@ -33,6 +33,9 @@ create table if not exists tbl_cliente
     cep varchar(10) not null
 );
 
+alter table tbl_cliente modify estado varchar(5) not null;
+alter table tbl_cliente modify dataNasc date not null;
+
 create table if not exists tbl_os
 (
 	idOS integer not null primary key auto_increment,

@@ -106,8 +106,23 @@ public class ClienteController implements Initializable {
         MascarasFX.mascaraRG(txtRgCliente);
         MascarasFX.mascaraCEP(txtEndCep);
 
+        carregarCombo();
         configurarTabela();
         carregarTableView();
+    }
+//==============================================================================
+    
+    /**
+     * Cria a lista de perfis e povoa o comboBox.
+     */
+    private void carregarCombo() {
+
+        //Criar uma lista
+        ObservableList<String> lista = FXCollections.observableArrayList("MG", 
+                "SP", "RJ", "ES", "BA", "GO", "MT", "PR", "PB");
+
+        //Jogar a lista no combo
+        cbEndEstado.getItems().addAll(lista);
     }
 //==============================================================================
     /**
@@ -148,14 +163,14 @@ public class ClienteController implements Initializable {
         colId.setMaxWidth(1f * Integer.MAX_VALUE * 5); // 5% width
         colNome.setMaxWidth(1f * Integer.MAX_VALUE * 15); // 15% width
         colDataNasc.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 8% width
-        colCpf.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 8% width
+        colCpf.setMaxWidth(1f * Integer.MAX_VALUE * 10); // 8% width
         colRg.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 8% width
-        colTelefone.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 8% width
+        colTelefone.setMaxWidth(1f * Integer.MAX_VALUE * 10); // 8% width
         colRua.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 8% width
-        colNumero.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 8% width
+        colNumero.setMaxWidth(1f * Integer.MAX_VALUE * 5); // 5% width
         colBairro.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 8% width
-        colCidade.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 8% width
-        colEstado.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 8% width
+        colCidade.setMaxWidth(1f * Integer.MAX_VALUE * 10); // 8% width
+        colEstado.setMaxWidth(1f * Integer.MAX_VALUE * 5); // 5% width
         colCep.setMaxWidth(1f * Integer.MAX_VALUE * 8); // 8% width
 
         //Adiciona as colunas na tabela na ordem que devem aparecer
