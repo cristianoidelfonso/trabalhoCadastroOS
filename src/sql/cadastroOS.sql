@@ -76,8 +76,9 @@ desc tbl_os;
 select * from tbl_usuario;
 select * from tbl_cliente;
 select * from tbl_os;
+select * from tbl_os where idOS = 1;
 
-select * from tbl_os where idCliente = 2;
+select * from tbl_os where idCliente = 3;
 
 select sum(valor) from tbl_os;
 
@@ -87,3 +88,9 @@ select * from tbl_usuario where login like binary 'admin' and senha like binary 
 select idCliente, nome, telefone from tbl_cliente where nome like binary "C%";
 
 select * from tbl_usuario where id = (select max(id) from tbl_usuario);
+
+select tbl_os.* , tbl_cliente.nome NOME, tbl_cliente.idCliente IDCLIENTE
+from tbl_os 
+inner join tbl_cliente 
+on (tbl_os.idCliente = tbl_cliente.idCliente)
+where idOs = 3;

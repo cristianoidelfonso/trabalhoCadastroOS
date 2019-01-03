@@ -1,3 +1,4 @@
+
 package model;
 
 import java.time.LocalDate;
@@ -132,7 +133,13 @@ public class OrdemServico {
    
     @Override
     public String toString(){
-        return "["+idOS+"] ["+idUsuario+" | "+nomeUsuario+"] ["+idCliente+" | "+nomeCliente+"] ["+dataOS+"] ["+tipo+"] ["+situacao+"] ["+produto+"] ["+descricao+"] ["+valor+"]"; 
+        return "[Numero da OS: "+idOS+"]\n"
+                + "Usuario\n"
+                + "[Id: "+idUsuario+" | Nome: "+nomeUsuario+"]\n"
+                + "Cliente\n"
+                + "[Id: "+idCliente+" | Nome: "+nomeCliente+"]\n"
+                + "[Data: "+dataOS+"] | [Tipo: "+tipo+"] | [Situação: "+situacao+"]\n"
+                + "[Produto: "+produto+"] | [Descrição: "+descricao+"] | [Valor: R$ "+valor+"]"; 
     }
     
     
@@ -141,7 +148,7 @@ public class OrdemServico {
     private static DAOOrdemServico dao = new DAOOrdemServico();
 
     public void save() {
-        if (idOS != null && dao.find(idOS) != null) {
+        if (idOS != null && dao.buscarOS(idOS) != null) {
             dao.update(this);
         } else {
             Integer generatedKey = dao.create(this);
@@ -164,8 +171,8 @@ public class OrdemServico {
     //     return dao.find(nome);
     // }
  //------------------------------------------------------------------------------   
-    public static OrdemServico find(int pk) {
-        return dao.find(pk);
+    public static OrdemServico buscarOS(Integer pk) {
+        return dao.buscarOS(pk);
     }
 //------------------------------------------------------------------------------   
     public static ArrayList<OrdemServico> findOS(int numero){

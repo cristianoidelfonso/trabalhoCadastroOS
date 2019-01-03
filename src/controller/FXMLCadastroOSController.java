@@ -1,3 +1,4 @@
+
 package controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -22,6 +23,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 import model.Cliente;
 import model.DAOOrdemServico;
 import model.OrdemServico;
@@ -36,7 +38,7 @@ public class FXMLCadastroOSController implements Initializable {
 
     private Usuario usuarioLogado = null;
     private Cliente clienteSelecionado = null;
-    private OrdemServico osAtual;
+    private OrdemServico osAtual = null;
     private DAOOrdemServico dao;
 
     @FXML
@@ -89,6 +91,8 @@ public class FXMLCadastroOSController implements Initializable {
     private String tipo;
     @FXML
     private TableView<OrdemServico> tableViewOS;
+    
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 //==============================================================================
     /**
@@ -114,7 +118,6 @@ public class FXMLCadastroOSController implements Initializable {
         configurarTabela();
 
         // Carregando a data de emissão da OS
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         txtDtaEmissao.setText(LocalDate.now().format(dtf));
 
     }
@@ -146,6 +149,7 @@ public class FXMLCadastroOSController implements Initializable {
         TableColumn<OrdemServico, String> colNumOS = new TableColumn("Num OS");
         TableColumn<OrdemServico, String> colProduto = new TableColumn("Produto");
         TableColumn<OrdemServico, LocalDate> colData = new TableColumn("Emissão");
+        TableColumn<OrdemServico, LocalDate> colValor = new TableColumn("Valor");
 
         //Configurar como os valores serão lidos (nome dos atributos)
         colId.setCellValueFactory(new PropertyValueFactory<>("idCliente"));
@@ -155,6 +159,7 @@ public class FXMLCadastroOSController implements Initializable {
         colNumOS.setCellValueFactory(new PropertyValueFactory<>("idOS"));
         colProduto.setCellValueFactory(new PropertyValueFactory<>("produto"));
         colData.setCellValueFactory(new PropertyValueFactory<>("dataOS"));
+        colValor.setCellValueFactory(new PropertyValueFactory<>("valor"));
 
         //Configurando a largura das colunas da tabela
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -164,13 +169,14 @@ public class FXMLCadastroOSController implements Initializable {
         colNome.setMaxWidth(1f * Integer.MAX_VALUE * 60); // 15% width
         colTelefone.setMaxWidth(1f * Integer.MAX_VALUE * 33); // 8% width
 
-        colNumOS.setMaxWidth(1f * Integer.MAX_VALUE * 15);
-        colProduto.setMaxWidth(1f * Integer.MAX_VALUE * 55);
-        colData.setMaxWidth(1f * Integer.MAX_VALUE * 30);
+        colNumOS.setMaxWidth(1f * Integer.MAX_VALUE * 11);
+        colProduto.setMaxWidth(1f * Integer.MAX_VALUE * 50);
+        colData.setMaxWidth(1f * Integer.MAX_VALUE * 25);
+        colValor.setMaxWidth(1f * Integer.MAX_VALUE * 14);
 
         //Adiciona as colunas na tabela na ordem que devem aparecer
         tableView.getColumns().addAll(colId, colNome, colTelefone);
-        tableViewOS.getColumns().addAll(colNumOS, colProduto, colData);
+        tableViewOS.getColumns().addAll(colNumOS, colProduto, colData, colValor);
     }
 
     /**
@@ -215,11 +221,13 @@ public class FXMLCadastroOSController implements Initializable {
         });
     }
 //--------------------------------------------------------------------------
+
     @FXML
     private void txtNomeClienteOnKeyReleased(KeyEvent event) {
         updateList();
     }
 //------------------------------------------------------------------------------
+
     @FXML
     private void onMouseClickedSairOS(MouseEvent event) {
         // Recuperando o stage atual
@@ -228,46 +236,58 @@ public class FXMLCadastroOSController implements Initializable {
         stageAtual.close();
     }
 //------------------------------------------------------------------------------
+
     @FXML
     private void onActionSalvar(ActionEvent event) {
 
-        if (osAtual != null) {
-            //osAtual.setIdOS(Integer.parseInt(txtNumOS.getText()));
-            osAtual.setIdCliente(Integer.parseInt(txtIdCliente.getText()));
-            osAtual.setIdUsuario(Integer.parseInt(txtIdUsuario.getText()));
-            osAtual.setNomeUsuario(txtNomeUsuario.getText());
-            osAtual.setDataOS(LocalDate.now());
-            osAtual.setTipo(radioButtonSelected());
-            osAtual.setSituacao(cbSituacaoOS.getValue());
-            osAtual.setProduto(txtProduto.getText());
-            osAtual.setDescricao(txtDescricao.getText());
-            osAtual.setValor(Double.parseDouble(txtValor.getText()));
+        try {
+            
+            if (osAtual != null) {
+                osAtual.setIdOS(Integer.parseInt(txtNumOS.getText()));
+                osAtual.setIdCliente(Integer.parseInt(txtIdCliente.getText()));
+                osAtual.setNomeCliente(txtNomeCliente.getText());
+                osAtual.setIdUsuario(Integer.parseInt(txtIdUsuario.getText()));
+                osAtual.setNomeUsuario(txtNomeUsuario.getText());
+                osAtual.setDataOS(LocalDate.now());
+                osAtual.setTipo(radioButtonSelected());
+                osAtual.setSituacao(cbSituacaoOS.getValue());
+                osAtual.setProduto(txtProduto.getText());
+                osAtual.setDescricao(txtDescricao.getText());
+                osAtual.setValor(Double.parseDouble(txtValor.getText()));
 
-            osAtual.save();
-            limparCampos();
+                osAtual.save();
+                osAtual = null;
+                limparCampos();
 
-        } else {
-            osAtual = new OrdemServico();
-            //osAtual.setIdOS(Integer.parseInt(txtNumOS.getText()));
-            osAtual.setIdCliente(Integer.parseInt(txtIdCliente.getText()));
-            osAtual.setIdUsuario(Integer.parseInt(txtIdUsuario.getText()));
-            osAtual.setNomeUsuario(txtNomeUsuario.getText());
-            osAtual.setDataOS(LocalDate.now());
-            osAtual.setTipo(radioButtonSelected());
-            osAtual.setSituacao(cbSituacaoOS.getValue());
-            osAtual.setProduto(txtProduto.getText());
-            osAtual.setDescricao(txtDescricao.getText());
-            osAtual.setValor(Double.parseDouble(txtValor.getText()));
+            } else {
+                osAtual = new OrdemServico();
+                //osAtual.setIdOS(Integer.parseInt(txtNumOS.getText()));
+                osAtual.setIdCliente(Integer.parseInt(txtIdCliente.getText()));
+                osAtual.setNomeCliente(txtNomeCliente.getText());
+                osAtual.setIdUsuario(Integer.parseInt(txtIdUsuario.getText()));
+                osAtual.setNomeUsuario(txtNomeUsuario.getText());
+                osAtual.setDataOS(LocalDate.now());
+                osAtual.setTipo(radioButtonSelected());
+                osAtual.setSituacao(cbSituacaoOS.getValue());
+                osAtual.setProduto(txtProduto.getText());
+                osAtual.setDescricao(txtDescricao.getText());
+                osAtual.setValor(Double.parseDouble(txtValor.getText()));
 
-            System.out.println(osAtual);
+                System.out.println(osAtual);
 
-            osAtual.save();
-            limparCampos();
+                osAtual.save();
+                osAtual = null;
+                limparCampos();
 
-            System.out.println("Criado com sucesso!!!");
-        }
+                System.out.println("Criado com sucesso!!!");
+            }
+            
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("", e);
+        }   
     }
 //------------------------------------------------------------------------------
+
     private String radioButtonSelected() {
         if (rbOrcamento.isSelected()) {
             tipo = "Orçamento";
@@ -278,6 +298,7 @@ public class FXMLCadastroOSController implements Initializable {
         return tipo;
     }
 //------------------------------------------------------------------------------
+
     private void limparCampos() {
         txtNumOS.setText("");
         cbSituacaoOS.setValue("");
@@ -290,15 +311,39 @@ public class FXMLCadastroOSController implements Initializable {
         tableView.getItems().clear();
     }
 //------------------------------------------------------------------------------
+
     @FXML
     private void onActionEditar(ActionEvent event) {
-        
+        try {
+            if (tableViewOS.getSelectionModel().getSelectedItem() != null) {
+              
+                osAtual = OrdemServico.buscarOS(tableViewOS.getSelectionModel().getSelectedItem().getIdOS());
+                
+                txtNumOS.setText(osAtual.getIdOS().toString());
+                cbSituacaoOS.setValue(osAtual.getSituacao());
+                txtNomeCliente.setText(osAtual.getNomeCliente());
+                txtIdCliente.setText(osAtual.getIdCliente().toString());
+                txtDtaEmissao.setText(String.valueOf(osAtual.getDataOS().format(dtf)));
+                txtProduto.setText(osAtual.getProduto());
+                txtDescricao.setText(osAtual.getDescricao());
+                txtValor.setText(String.valueOf(osAtual.getValor()));
+
+            }else{
+                throw new RuntimeException("Nenhuma OS selecionada");
+            }
+            
+        } catch (RuntimeException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
     }
 //------------------------------------------------------------------------------
+
     @FXML
     private void onActionApagar(ActionEvent event) {
     }
 //------------------------------------------------------------------------------
+
     @FXML
     private void sairComEnter(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER) {
@@ -307,12 +352,14 @@ public class FXMLCadastroOSController implements Initializable {
         }
     }
 //------------------------------------------------------------------------------
+
     @FXML
     private void onActionSair(ActionEvent event) {
         Stage stageAtual = (Stage) btnSair.getScene().getWindow();
         stageAtual.close();
     }
 //------------------------------------------------------------------------------
+
     @FXML
     private void tableViewOnMouseClicked(MouseEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {

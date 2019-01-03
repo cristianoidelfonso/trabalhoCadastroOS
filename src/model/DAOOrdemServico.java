@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model;
 
 import conexao.ConnectionFactory;
@@ -82,11 +78,6 @@ public class DAOOrdemServico extends ConnectionFactory {
             pst.executeUpdate();
 
         } catch (SQLException e) {
-//            Alert alerta = new Alert(Alert.AlertType.WARNING);
-//            alerta.setTitle("WARNING");
-//            alerta.setHeaderText("Não foi possivel alterar os dados desse usuário no banco de dados.");
-//            alerta.setContentText(e.getMessage());
-//            alerta.show();
             throw new RuntimeException(e.getMessage());
 
         } finally {
@@ -94,31 +85,34 @@ public class DAOOrdemServico extends ConnectionFactory {
         }
     }
 //------------------------------------------------------------------------------  
-    public OrdemServico find(Integer idOS) {
-        OrdemServico resultado = null;
+    public OrdemServico buscarOS(int idOS) {
+        OrdemServico resultado = new OrdemServico();
         getConexao();
         try {
-            String sql = "SELECT * FROM tbl_os WHERE idOS = ?";
+            
+            String sql = "SELECT tbl_os.* , tbl_cliente.nome NOME "
+                        + "FROM tbl_os INNER JOIN tbl_cliente "
+                        + "ON (tbl_os.idCliente = tbl_cliente.idCliente)"
+                        + "WHERE idOS = ?";
+            
+            //String sql = "SELECT * FROM tbl_os WHERE idOS = ?";
             pst = conn.prepareStatement(sql);
             pst.setInt(1, idOS);
 
             rs = pst.executeQuery();
 
             if (rs.next()) {
-                OrdemServico os = new OrdemServico(
-                        rs.getInt("idOS"),
-                        rs.getInt("idUsuario"),
-                        rs.getString("nomeUsuario"),
-                        rs.getInt("idCliente"),
-                        rs.getString("nomeCliente"),
-                        rs.getDate("dataOS").toLocalDate(),
-                        rs.getString("tipo"),
-                        rs.getString("situacao"),
-                        rs.getString("produto"),
-                        rs.getString("descricao"),
-                        rs.getDouble("valor"));
-                        
-                resultado = os;
+                resultado.setIdOS(rs.getInt("idOS"));
+                resultado.setIdUsuario(rs.getInt("idUsuario"));
+                resultado.setNomeUsuario(rs.getString("nomeUsuario"));
+                resultado.setIdCliente(rs.getInt("idCliente"));
+                resultado.setNomeCliente(rs.getString("NOME"));
+                resultado.setDataOS(rs.getDate("dataOS").toLocalDate());
+                resultado.setTipo(rs.getString("tipo"));
+                resultado.setSituacao(rs.getString("situacao"));
+                resultado.setProduto(rs.getString("produto"));
+                resultado.setDescricao(rs.getString("descricao"));
+                resultado.setValor(rs.getDouble("valor"));                              
             }
         } catch (SQLException e) {
         } finally {
