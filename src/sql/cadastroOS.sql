@@ -80,6 +80,8 @@ select * from tbl_os where idOS = 1;
 
 select * from tbl_os where idCliente = 3;
 
+update tbl_usuario set login = 'simples', senha = 'simples' where id = 11;
+
 select sum(valor) from tbl_os;
 
 delete from tbl_usuario where id = 1;

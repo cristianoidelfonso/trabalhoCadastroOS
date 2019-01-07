@@ -157,11 +157,11 @@ public class OrdemServico {
     }
     
 //------------------------------------------------------------------------------
-    //public void delete() {
-    //    if (dao.find(idCliente) != null) {
-    //        dao.delete(this);
-    //    }
-    //}
+    public void delete() {
+        if (dao.buscarOS(idOS) != null) {
+            dao.delete(this);
+        }
+    }
 //------------------------------------------------------------------------------
     //public static ArrayList<OrdemServico> listar(){
     //    return dao.listar();

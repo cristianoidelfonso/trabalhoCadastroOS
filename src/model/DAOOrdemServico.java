@@ -156,4 +156,19 @@ public class DAOOrdemServico extends ConnectionFactory {
         return lista;
     }
 //------------------------------------------------------------------------------
+    
+     public void delete(OrdemServico os) {
+        getConexao();
+        try {
+            String sql = "DELETE FROM tbl_os WHERE idOS = ?";
+            pst = conn.prepareStatement(sql);
+            pst.setInt(1, os.getIdOS());
+
+            pst.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+//------------------------------------------------------------------------------     
 }

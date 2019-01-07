@@ -8,12 +8,15 @@ import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -353,6 +356,43 @@ public class FXMLCadastroOSController implements Initializable {
 
     @FXML
     private void onActionApagar(ActionEvent event) {
+        if (tableViewOS.getSelectionModel().getSelectedItem() != null) {
+            osAtual = OrdemServico.buscarOS(tableViewOS.getSelectionModel().getSelectedItem().getIdOS());
+            System.out.println(osAtual);
+            
+            if (osAtual != null) {
+                System.out.println(osAtual + "Botao Apagar");
+                //Pegando o botao que foi pressionado
+                Alert conf = new Alert(Alert.AlertType.CONFIRMATION);
+                conf.setTitle("EXCLUIR");
+                conf.setHeaderText(null);
+                conf.setContentText("Deseja excluir essa Ordem de Serviço?");
+                Optional<ButtonType> btn = conf.showAndWait();
+                //Verificar qual botão foi pressionado
+                if (btn.get() == ButtonType.OK) { //Manda a classe de negocio excluir
+                    osAtual.delete();
+                    //Atualizar a tabela
+                    updateList();
+                    //Mensagem de excluído com sucesso
+                    Alert sucesso = new Alert(Alert.AlertType.INFORMATION);
+                    sucesso.setTitle("SUCESSO");
+                    sucesso.setHeaderText("Concluido com sucesso!");
+                    sucesso.setContentText("A Ordem de Serviço foi excluida.");
+                    sucesso.showAndWait();
+                    //clienteAtual = null;
+                }
+                
+                updateListOS();
+            }
+        } else {
+            System.out.println("Usuario nao selecionado");
+            Alert a = new Alert(Alert.AlertType.INFORMATION);
+            a.setTitle("INFORMAÇÂO");
+            a.setHeaderText(null);
+            a.setContentText("Selecione o usuário a ser excluído.");
+            a.showAndWait();
+        }
+        
     }
 //------------------------------------------------------------------------------
 
@@ -390,7 +430,7 @@ public class FXMLCadastroOSController implements Initializable {
 	LocalDate localDate = LocalDate.parse(data, dtf);
         //txtDataEntrega.setText(localDate.plusDays(30).toString());
         
-        txtDataEntrega.setText(String.valueOf(localDate.plusDays(30).format(dtf)));
-        
+        txtDataEntrega.setText(String.valueOf(localDate.plusDays(30).format(dtf)));    
     }
+//------------------------------------------------------------------------------    
 }

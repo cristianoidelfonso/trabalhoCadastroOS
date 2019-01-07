@@ -150,8 +150,8 @@ public class FXMLTelaPrincipalController implements Initializable {
         Parent cadCliente = FXMLLoader.load(getClass().getResource("/view/Cliente.fxml"));
 
         Scene cenaCadCli = new Scene(cadCliente);
-        //Stage stage = new Stage(StageStyle.UNDECORATED);
-        Stage stage = new Stage();
+        Stage stage = new Stage(StageStyle.UNDECORATED);
+        //Stage stage = new Stage();
         stage.setTitle("Clientes");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(cenaCadCli);
