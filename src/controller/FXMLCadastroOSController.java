@@ -110,6 +110,8 @@ public class FXMLCadastroOSController implements Initializable {
                 usuarioLogado = (Usuario) userData;
                 txtIdUsuario.setText(usuarioLogado.getId().toString());
                 txtNomeUsuario.setText(usuarioLogado.getNome());
+                
+                testaPerfil();
             }
         });
         // Carregando o combobox da situação da OS
@@ -119,10 +121,18 @@ public class FXMLCadastroOSController implements Initializable {
 
         // Carregando a data de emissão da OS
         txtDtaEmissao.setText(LocalDate.now().format(dtf));
+        dataEntrega(txtDtaEmissao.getText());
 
     }
 //==============================================================================
-
+    private void testaPerfil(){
+        if(usuarioLogado.getPerfil().equals("Admin")){  
+            btnApagar.setVisible(true);
+        }else{
+            btnApagar.setVisible(false);
+        }
+    }
+        
     /**
      * Cria a lista de perfis e povoa o comboBox.
      */
@@ -327,6 +337,8 @@ public class FXMLCadastroOSController implements Initializable {
                 txtProduto.setText(osAtual.getProduto());
                 txtDescricao.setText(osAtual.getDescricao());
                 txtValor.setText(String.valueOf(osAtual.getValor()));
+                
+                dataEntrega(txtDtaEmissao.getText());
 
             }else{
                 throw new RuntimeException("Nenhuma OS selecionada");
@@ -372,4 +384,13 @@ public class FXMLCadastroOSController implements Initializable {
         }
     }
 //------------------------------------------------------------------------------
+    
+    private void dataEntrega(String data){
+        //convert String to LocalDate
+	LocalDate localDate = LocalDate.parse(data, dtf);
+        //txtDataEntrega.setText(localDate.plusDays(30).toString());
+        
+        txtDataEntrega.setText(String.valueOf(localDate.plusDays(30).format(dtf)));
+        
+    }
 }
