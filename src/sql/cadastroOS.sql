@@ -91,8 +91,15 @@ select idCliente, nome, telefone from tbl_cliente where nome like binary "C%";
 
 select * from tbl_usuario where id = (select max(id) from tbl_usuario);
 
-select tbl_os.* , tbl_cliente.nome NOME, tbl_cliente.idCliente IDCLIENTE
+select tbl_os.idOS, tbl_cliente.nome NOME, tbl_os.dataOS, tipo, situacao, produto, descricao, valor
 from tbl_os 
-inner join tbl_cliente 
-on (tbl_os.idCliente = tbl_cliente.idCliente)
-where idOs = 3;
+inner join tbl_cliente order by tbl_cliente.nome;
+-- on (tbl_os.idCliente = tbl_cliente.idCliente);
+-- where idOs = 3;
+
+
+SELECT 
+tbl_os.idOS, 
+tbl_cliente.nome NOME, tbl_cliente.idCliente ID_Cliente, 
+tbl_os.dataOS, tipo, situacao, produto, descricao, valor, idUsuario, nomeUsuario
+FROM tbl_os INNER JOIN tbl_cliente ORDER BY tbl_cliente.nome;

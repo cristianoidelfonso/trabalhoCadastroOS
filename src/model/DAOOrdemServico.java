@@ -155,6 +155,48 @@ public class DAOOrdemServico extends ConnectionFactory {
         }
         return lista;
     }
+    
+//------------------------------------------------------------------------------
+    public ArrayList<OrdemServico> buscaTodas() {
+        ArrayList<OrdemServico> lista = new ArrayList<>();
+        getConexao();
+        try {
+            //Comando
+            //String sql = "SELECT * FROM tbl_os";
+            String sql = "SELECT tbl_os.idOS, tbl_cliente.nome NOME, tbl_cliente.idCliente ID_Cliente, tbl_os.dataOS, "
+                    + "tipo, situacao, produto, descricao, valor, idUsuario, nomeUsuario "
+                    + "FROM tbl_os INNER JOIN tbl_cliente ORDER BY tbl_cliente.nome;";
+            //Preparar o SQL
+            pst = conn.prepareStatement(sql);
+
+            //Executa consulta no bd
+            rs = pst.executeQuery();
+
+            //Enquanto tiver resultado no BD
+            while (rs.next()) {
+                OrdemServico os = new OrdemServico();
+                    os.setIdOS(rs.getInt("idOS"));
+                    os.setIdUsuario(rs.getInt("idUsuario"));
+                    os.setNomeUsuario(rs.getString("nomeUsuario"));
+                    os.setIdCliente(rs.getInt("idCliente"));
+                    os.setNomeCliente(rs.getString("NOME"));
+                    os.setDataOS(rs.getDate("dataOS").toLocalDate());
+                    os.setTipo(rs.getString("tipo"));
+                    os.setSituacao(rs.getString("situacao"));
+                    os.setProduto(rs.getString("produto"));
+                    os.setDescricao(rs.getString("descricao"));
+                    os.setValor(rs.getDouble("valor"));
+                
+                //adiciona o resultado na lista
+                lista.add(os);
+
+            }//while
+        } catch (SQLException e) {
+
+        }
+        return lista;
+    }
+    
 //------------------------------------------------------------------------------
     
      public void delete(OrdemServico os) {

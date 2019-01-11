@@ -175,6 +175,10 @@ public class OrdemServico {
         return dao.buscarOS(pk);
     }
 //------------------------------------------------------------------------------   
+    public static ArrayList<OrdemServico> buscaTodas() {
+        return dao.buscaTodas();
+    }    
+//------------------------------------------------------------------------------   
     public static ArrayList<OrdemServico> findOS(int numero){
         return dao.findOS(numero);
     }
