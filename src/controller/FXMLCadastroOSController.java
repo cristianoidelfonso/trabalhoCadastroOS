@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
@@ -118,13 +119,15 @@ public class FXMLCadastroOSController implements Initializable {
                 
                 btnImprimir.setVisible(false);
                 btnApagar.setVisible(false);
+                
             }
         });
         // Carregando o combobox da situação da OS
         carregarCombo();
-
+        
         configurarTabela();
-
+        
+     
         // Carregando a data de emissão da OS
         txtDtaEmissao.setText(LocalDate.now().format(dtf));
         dataEntrega(txtDtaEmissao.getText());
@@ -149,6 +152,7 @@ public class FXMLCadastroOSController implements Initializable {
                 "Na oficina", "Abandonado pelo Cliente", "Garantia", "Orçamento reprovado");
         //Jogar a lista no combo
         cbSituacaoOS.getItems().addAll(lista);
+        cbSituacaoOS.getSelectionModel().selectFirst();
     }
 
 //==============================================================================
