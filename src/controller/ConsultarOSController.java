@@ -54,7 +54,7 @@ public class ConsultarOSController implements Initializable {
         configurarTabela();
         carregarTableViewOS();
         
-        System.out.println(OrdemServico.buscaTodas());
+        //System.out.println(OrdemServico.buscaTodas());
 
     }    
 
