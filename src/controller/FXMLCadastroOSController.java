@@ -145,7 +145,7 @@ public class FXMLCadastroOSController implements Initializable {
     private void carregarCombo() {
         //Criar uma lista
         ObservableList<String> lista = FXCollections.observableArrayList(
-                "", "Entrega OK", "Aguardando aprovação", "Aguardando material",
+                "Aguardando aprovação", "Entrega OK", "Aguardando material",
                 "Na oficina", "Abandonado pelo Cliente", "Garantia", "Orçamento reprovado");
         //Jogar a lista no combo
         cbSituacaoOS.getItems().addAll(lista);

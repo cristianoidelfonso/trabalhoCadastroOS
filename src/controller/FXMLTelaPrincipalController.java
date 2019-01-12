@@ -224,7 +224,7 @@ public class FXMLTelaPrincipalController implements Initializable {
         Parent telaSobre = FXMLLoader.load(getClass().getResource("/view/ConsultarOS.fxml"));
 
         Scene cenaTelaSobre = new Scene(telaSobre);
-        Stage stage = new Stage(StageStyle.UTILITY);
+        Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.setTitle("Ordem de Serviço");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(cenaTelaSobre);

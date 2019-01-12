@@ -64,15 +64,9 @@ create table if not exists tbl_os
 
 -- alter table tbl_os add tipo varchar(20) not null after dataOS;
 
-insert into tbl_os(idUsuario, idCliente, tipo, situacao, produto, descricao, valor)
-values
-(1, 1, 'orçamento', 'entrega ok', 'Jogo de Sofá 2 e 3 Lugares', 'Fabricação do jogo de sofá, com tecido tal, na cor tal, etc...', 2340.00),
-(1, 2, 'orçamento', 'aguardando aprovação', 'Jogo de Sofá de canto, 3x5 lugares', 'Fabricação do jogo de sofá, com tecido tal, na cor tal, etc...', 4180.00),
-(2, 3, 'orçamento', 'orçamento', 'Jogo de Sofá Bicama ', 'Fabricação do jogo de sofá, com tecido tal, na cor tal, etc...', 1890.00);
-
 -- drop table tbl_usuario;
 -- drop table tbl_cliente;
- drop table tbl_os;
+-- drop table tbl_os;
 
 desc tbl_usuario;
 desc tbl_cliente;
@@ -82,6 +76,7 @@ select * from tbl_usuario;
 select * from tbl_cliente;
 select * from tbl_os;
 select * from tbl_os where idOS = 1;
+
 
 select * from tbl_os where idCliente = 3;
 
@@ -101,7 +96,7 @@ from tbl_os
 inner join tbl_cliente order by tbl_cliente.nome;
 -- on (tbl_os.idCliente = tbl_cliente.idCliente);
 -- where idOs = 3;
- update tbl_os set nomeCLiente = 'Jose da Silva' where idOS = 1;
+ 
 
 SELECT 
 tbl_os.idOS, 
