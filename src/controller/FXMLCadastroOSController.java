@@ -115,6 +115,9 @@ public class FXMLCadastroOSController implements Initializable {
                 txtNomeUsuario.setText(usuarioLogado.getNome());
                 
                 testaPerfil();
+                
+                btnImprimir.setVisible(false);
+                btnApagar.setVisible(false);
             }
         });
         // Carregando o combobox da situação da OS

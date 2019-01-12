@@ -4,7 +4,6 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -26,7 +25,6 @@
    <center>
       <VBox fx:id="vb" alignment="BOTTOM_CENTER" prefHeight="348.0" prefWidth="300.0" spacing="25.0" styleClass="vb" stylesheets="@css/fxmllogin.css" BorderPane.alignment="TOP_CENTER">
          <children>
-            <Label alignment="TOP_CENTER" stylesheets="@css/fxmllogin.css" text="Label" />
             <JFXTextField fx:id="txtLogin" labelFloat="true" promptText="Login" styleClass="txtField" stylesheets="@css/fxmllogin.css">
                <font>
                   <Font size="14.0" />

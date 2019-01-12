@@ -106,6 +106,7 @@ public class ClienteController implements Initializable {
         MascarasFX.mascaraData(dtNascimento);
         MascarasFX.mascaraRG(txtRgCliente);
         MascarasFX.mascaraCEP(txtEndCep);
+        MascarasFX.mascaraNumero(txtEndNum);
 
         carregarCombo();
         configurarTabela();
