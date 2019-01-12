@@ -162,10 +162,10 @@ public class DAOOrdemServico extends ConnectionFactory {
         getConexao();
         try {
             //Comando
-            //String sql = "SELECT * FROM tbl_os";
-            String sql = "SELECT tbl_os.idOS, tbl_cliente.nome NOME, tbl_cliente.idCliente ID_Cliente, tbl_os.dataOS, "
-                    + "tipo, situacao, produto, descricao, valor, idUsuario, nomeUsuario "
-                    + "FROM tbl_os INNER JOIN tbl_cliente ORDER BY tbl_cliente.nome;";
+            String sql = "SELECT * FROM tbl_os";
+            //String sql = "SELECT tbl_os.idOS, tbl_cliente.nome NOME, tbl_cliente.idCliente ID_Cliente, tbl_os.dataOS, "
+            //        + "tipo, situacao, produto, descricao, valor, idUsuario, nomeUsuario "
+            //        + "FROM tbl_os INNER JOIN tbl_cliente ORDER BY tbl_cliente.nome;";
             //Preparar o SQL
             pst = conn.prepareStatement(sql);
 

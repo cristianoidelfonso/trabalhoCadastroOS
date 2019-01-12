@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import model.Cliente;
 import model.OrdemServico;
 import model.Usuario;
@@ -47,14 +48,11 @@ public class ConsultarOSController implements Initializable {
             @Override
             public void onScreenChanged(String newScreen, Object userData) {
                 usuarioLogado = (Usuario) userData;
-                //txtIdUsuario.setText(usuarioLogado.getId().toString());
-                //txtNomeUsuario.setText(usuarioLogado.getNome());
-                
-                //testaPerfil();
             }
         });
 
         configurarTabela();
+        carregarTableViewOS();
 
         // Carregando a data de emissão da OS
         //txtDtaEmissao.setText(LocalDate.now().format(dtf));
@@ -64,6 +62,12 @@ public class ConsultarOSController implements Initializable {
 
     @FXML
     private void lblSairOnMouseClicked(MouseEvent event) {
+        usuarioLogado = null;
+
+        // Recuperando o stage atual
+        Stage stageAtual = (Stage) lblSair.getScene().getWindow();
+        // Fecha o stage atual
+        stageAtual.close();
     }
     
     //==============================================================================
@@ -111,7 +115,7 @@ public class ConsultarOSController implements Initializable {
         colValor.setMaxWidth(1f * Integer.MAX_VALUE * 14);
 
         //Adiciona as colunas na tabela na ordem que devem aparecer
-        tableViewOS.getColumns().addAll(colNumOS, colNome, colData, colTipo, colSituacao, colProduto, colValor);
+        tableViewOS.getColumns().addAll(colNumOS, colData, colTipo, colSituacao, colProduto, colValor);
     }
 
     // carrega a tabela de OS
@@ -125,23 +129,5 @@ public class ConsultarOSController implements Initializable {
 
         }
     }
-/*
-    //Atualiza a tabela de clientes
-    private void updateList() {
-        tableView.getItems().clear();
-        Cliente.findName(txtNomeCliente.getText() + "%").forEach((c) -> {
-            tableView.getItems().add(c);
-        });
-    }
-
-    //Atualiza a tabela OS
-    private void updateListOS() {
-        tableViewOS.getItems().clear();
-        OrdemServico.findOS(Integer.parseInt(txtNumOS.getText())).forEach((os) -> {
-            tableViewOS.getItems().add(os);
-        });
-    }
-*/
-//--------------------------------------------------------------------------
     
 }
