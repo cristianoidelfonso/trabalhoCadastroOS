@@ -53,10 +53,8 @@ public class ConsultarOSController implements Initializable {
 
         configurarTabela();
         carregarTableViewOS();
-
-        // Carregando a data de emissão da OS
-        //txtDtaEmissao.setText(LocalDate.now().format(dtf));
-        //dataEntrega(txtDtaEmissao.getText());
+        
+        System.out.println(OrdemServico.buscaTodas());
 
     }    
 
@@ -76,9 +74,17 @@ public class ConsultarOSController implements Initializable {
      */
     private void configurarTabela() {
         
-        //idOS,nome,idCliente,dataOS, "
-        //tipo,situacao,produto,descricao,valor,
-        //idUsuario,nomeUsuario
+        //idOS;
+        //idUsuario;
+        //nomeUsuario;
+        //idCliente;
+        //nomeCliente;
+        //dataOS;
+        //tipo;
+        //situacao;
+        //produto;
+        //descricao;
+        //valor;
 
         //Configurando as colunas da tabela
         TableColumn<OrdemServico, String> colNumOS = new TableColumn("Num_OS:");
@@ -93,7 +99,7 @@ public class ConsultarOSController implements Initializable {
 
         //Configurar como os valores serão lidos (nome dos atributos)
         colNumOS.setCellValueFactory(new PropertyValueFactory<>("idOS"));
-        colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        colNome.setCellValueFactory(new PropertyValueFactory<>("nomeCliente"));
         colData.setCellValueFactory(new PropertyValueFactory<>("dataOS"));
         
         colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
@@ -115,7 +121,7 @@ public class ConsultarOSController implements Initializable {
         colValor.setMaxWidth(1f * Integer.MAX_VALUE * 14);
 
         //Adiciona as colunas na tabela na ordem que devem aparecer
-        tableViewOS.getColumns().addAll(colNumOS, colData, colTipo, colSituacao, colProduto, colValor);
+        tableViewOS.getColumns().addAll(colNumOS, colNome, colData, colTipo, colSituacao, colProduto, colValor);
     }
 
     // carrega a tabela de OS

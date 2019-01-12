@@ -27,20 +27,22 @@ public class DAOOrdemServico extends ConnectionFactory {
         getConexao();
         try {
             //insert into tbl_os(idUsuario, idCliente, tipo, situacao, produto, descricao, valor)
-            String sql = "INSERT INTO tbl_os (idUsuario, nomeUsuario, idCliente, dataOS, tipo, situacao, produto, descricao, valor)"
-                    + "VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO tbl_os (idUsuario, nomeUsuario, idCliente, "
+                    + "nomeCliente, dataOS, tipo, situacao, produto, descricao, valor)"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?)";
 
             pst = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             pst.setInt(1, os.getIdUsuario());
             pst.setString(2, os.getNomeUsuario());
             pst.setInt(3, os.getIdCliente());
-            pst.setDate(4, java.sql.Date.valueOf(os.getDataOS()));
-            pst.setString(5, os.getTipo());
-            pst.setString(6, os.getSituacao());
-            pst.setString(7, os.getProduto());
-            pst.setString(8, os.getDescricao());
-            pst.setDouble(9, os.getValor());
+            pst.setString(4, os.getNomeCliente());
+            pst.setDate(5, java.sql.Date.valueOf(os.getDataOS()));
+            pst.setString(6, os.getTipo());
+            pst.setString(7, os.getSituacao());
+            pst.setString(8, os.getProduto());
+            pst.setString(9, os.getDescricao());
+            pst.setDouble(10, os.getValor());
             
             if (pst.executeUpdate() != 0) {
                 System.out.println("Salvo com sucesso");
@@ -163,10 +165,7 @@ public class DAOOrdemServico extends ConnectionFactory {
         try {
             //Comando
             String sql = "SELECT * FROM tbl_os";
-            //String sql = "SELECT tbl_os.idOS, tbl_cliente.nome NOME, tbl_cliente.idCliente ID_Cliente, tbl_os.dataOS, "
-            //        + "tipo, situacao, produto, descricao, valor, idUsuario, nomeUsuario "
-            //        + "FROM tbl_os INNER JOIN tbl_cliente ORDER BY tbl_cliente.nome;";
-            //Preparar o SQL
+           
             pst = conn.prepareStatement(sql);
 
             //Executa consulta no bd
@@ -179,7 +178,7 @@ public class DAOOrdemServico extends ConnectionFactory {
                     os.setIdUsuario(rs.getInt("idUsuario"));
                     os.setNomeUsuario(rs.getString("nomeUsuario"));
                     os.setIdCliente(rs.getInt("idCliente"));
-                    os.setNomeCliente(rs.getString("NOME"));
+                    os.setNomeCliente(rs.getString("nomeCliente"));
                     os.setDataOS(rs.getDate("dataOS").toLocalDate());
                     os.setTipo(rs.getString("tipo"));
                     os.setSituacao(rs.getString("situacao"));

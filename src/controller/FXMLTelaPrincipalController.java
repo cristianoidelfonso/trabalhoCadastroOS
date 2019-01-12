@@ -16,10 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -100,7 +98,6 @@ public class FXMLTelaPrincipalController implements Initializable {
                 lblData.setText(dataHora());
             }
         });
-        lblRelogio.setEffect(new DropShadow(10, Color.RED));
 
     }
 //==============================================================================

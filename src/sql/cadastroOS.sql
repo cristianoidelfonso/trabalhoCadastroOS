@@ -51,6 +51,11 @@ create table if not exists tbl_os
     foreign key (idCliente) references tbl_cliente(idCliente)
 );
 
+
+-- ALTER TABLE tbl_cliente DROP nomeCliente; 
+
+-- ALTER TABLE tbl_os ADD nomeCliente char(100) not null AFTER idCliente; 
+
 -- ALTER TABLE child_table_name ADD CONSTRAINT fk_name FOREIGN KEY (child_column_name) 
 -- REFERENCES parent_table_name(parent_column_name) ON DELETE CASCADE;
 
@@ -96,7 +101,7 @@ from tbl_os
 inner join tbl_cliente order by tbl_cliente.nome;
 -- on (tbl_os.idCliente = tbl_cliente.idCliente);
 -- where idOs = 3;
-
+ update tbl_os set nomeCLiente = 'Jose da Silva' where idOS = 1;
 
 SELECT 
 tbl_os.idOS, 
